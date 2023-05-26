@@ -5,6 +5,7 @@ import com.grupo16.techchallenge.domain.Endereco;
 import com.grupo16.techchallenge.domain.Estado;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class EnderecoForm {
     @JsonProperty
@@ -21,6 +22,7 @@ public class EnderecoForm {
     private String cidade;
     @JsonProperty
     @NotNull(message = "Estado é obrigatório")
+    @Size(max = 2)
     private Estado estado;
 
     public Endereco toEndereco() {
