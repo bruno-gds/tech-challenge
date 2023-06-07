@@ -1,7 +1,7 @@
-package com.grupo16.techchallenge.controller.form;
+package com.grupo16.techchallenge.address.controller.form;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.grupo16.techchallenge.domain.Endereco;
+import com.grupo16.techchallenge.address.domain.Endereco;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

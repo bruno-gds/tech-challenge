@@ -1,8 +1,8 @@
-package com.grupo16.techchallenge.controller;
+package com.grupo16.techchallenge.address.controller;
 
-import com.grupo16.techchallenge.controller.form.EnderecoJson;
-import com.grupo16.techchallenge.domain.Endereco;
-import com.grupo16.techchallenge.repository.EnderecoRepository;
+import com.grupo16.techchallenge.address.controller.form.EnderecoJson;
+import com.grupo16.techchallenge.address.domain.Endereco;
+import com.grupo16.techchallenge.address.repository.EnderecoRepository;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Path;
 import jakarta.validation.Validator;

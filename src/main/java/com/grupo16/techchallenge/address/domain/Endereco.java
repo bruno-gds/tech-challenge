@@ -1,4 +1,4 @@
-package com.grupo16.techchallenge.domain;
+package com.grupo16.techchallenge.address.domain;
 
 import lombok.AllArgsConstructor;
 

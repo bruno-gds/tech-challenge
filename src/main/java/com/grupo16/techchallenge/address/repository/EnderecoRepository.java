@@ -1,6 +1,6 @@
-package com.grupo16.techchallenge.repository;
+package com.grupo16.techchallenge.address.repository;
 
-import com.grupo16.techchallenge.domain.Endereco;
+import com.grupo16.techchallenge.address.domain.Endereco;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
