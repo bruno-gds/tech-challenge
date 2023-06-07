@@ -1,6 +1,6 @@
 package com.grupo16.techchallenge.controller;
 
-import com.grupo16.techchallenge.controller.form.EnderecoForm;
+import com.grupo16.techchallenge.controller.form.EnderecoJson;
 import com.grupo16.techchallenge.domain.Endereco;
 import com.grupo16.techchallenge.repository.EnderecoRepository;
 import jakarta.validation.ConstraintViolation;
@@ -27,16 +27,16 @@ public class EnderecoController {
     private Validator validator;
 
     @PostMapping
-    public ResponseEntity createAddress(@RequestBody EnderecoForm enderecoForm) {
-        Set<ConstraintViolation<EnderecoForm>> violacoes = validator.validate(enderecoForm);
+    public ResponseEntity createAddress(@RequestBody EnderecoJson enderecoJson) {
+        Set<ConstraintViolation<EnderecoJson>> violacoes = validator.validate(enderecoJson);
         Map<Path, String> violacoesToMap = violacoes
                 .stream()
                 .collect(Collectors.toMap(ConstraintViolation::getPropertyPath, ConstraintViolation::getMessage));
 
         if (!violacoesToMap.isEmpty()) return ResponseEntity.badRequest().body(violacoesToMap);
 
-        Endereco endereco = enderecoForm.toEndereco();
+        Endereco endereco = enderecoJson.toEndereco();
         enderecoRepository.save(endereco);
-        return ResponseEntity.status(HttpStatus.CREATED).body(endereco);
+        return ResponseEntity.status(HttpStatus.CREATED).body(enderecoJson);
     }
 }
