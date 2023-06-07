@@ -1,12 +1,12 @@
-package com.grupo16.techchallenge.address.controller.form;
+package com.grupo16.techchallenge.address.controller.json;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.grupo16.techchallenge.address.domain.Endereco;
+import com.grupo16.techchallenge.address.domain.Address;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class EnderecoJson {
+public class AddressJson {
     @JsonProperty
     @NotBlank(message = "Rua é um campo obrigatótio e não pode estar em branco")
     private String rua;
@@ -24,7 +24,7 @@ public class EnderecoJson {
     @Size(min = 2, max = 2, message = "Estado deve ter 2 caracteres")
     private String estado;
 
-    public Endereco toEndereco() {
-        return new Endereco(rua, numero, bairro, cidade, estado);
+    public Address toEndereco() {
+        return new Address(rua, numero, bairro, cidade, estado);
     }
 }

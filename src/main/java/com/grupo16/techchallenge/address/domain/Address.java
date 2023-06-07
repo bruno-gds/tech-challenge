@@ -3,7 +3,7 @@ package com.grupo16.techchallenge.address.domain;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class Endereco {
+public class Address {
     private String rua;
     private String numero;
     private String bairro;

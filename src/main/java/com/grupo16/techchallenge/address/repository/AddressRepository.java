@@ -1,21 +1,21 @@
 package com.grupo16.techchallenge.address.repository;
 
-import com.grupo16.techchallenge.address.domain.Endereco;
+import com.grupo16.techchallenge.address.domain.Address;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Repository
-public class EnderecoRepository {
+public class AddressRepository {
 
-    private Set<Endereco> enderecos;
+    private Set<Address> enderecos;
 
-    public EnderecoRepository() {
+    public AddressRepository() {
         enderecos = new HashSet<>();
     }
 
-    public void save(Endereco endereco) {
+    public void save(Address endereco) {
         enderecos.add(endereco);
     }
 }

@@ -1,8 +1,8 @@
 package com.grupo16.techchallenge.address.controller;
 
-import com.grupo16.techchallenge.address.controller.form.EnderecoJson;
-import com.grupo16.techchallenge.address.domain.Endereco;
-import com.grupo16.techchallenge.address.repository.EnderecoRepository;
+import com.grupo16.techchallenge.address.controller.json.AddressJson;
+import com.grupo16.techchallenge.address.domain.Address;
+import com.grupo16.techchallenge.address.repository.AddressRepository;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Path;
 import jakarta.validation.Validator;
@@ -21,21 +21,21 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/enderecos")
 @AllArgsConstructor
-public class EnderecoController {
+public class AddressController {
 
-    private EnderecoRepository enderecoRepository;
+    private AddressRepository enderecoRepository;
     private Validator validator;
 
     @PostMapping
-    public ResponseEntity createAddress(@RequestBody EnderecoJson enderecoJson) {
-        Set<ConstraintViolation<EnderecoJson>> violacoes = validator.validate(enderecoJson);
+    public ResponseEntity createAddress(@RequestBody AddressJson enderecoJson) {
+        Set<ConstraintViolation<AddressJson>> violacoes = validator.validate(enderecoJson);
         Map<Path, String> violacoesToMap = violacoes
                 .stream()
                 .collect(Collectors.toMap(ConstraintViolation::getPropertyPath, ConstraintViolation::getMessage));
 
         if (!violacoesToMap.isEmpty()) return ResponseEntity.badRequest().body(violacoesToMap);
 
-        Endereco endereco = enderecoJson.toEndereco();
+        Address endereco = enderecoJson.toEndereco();
         enderecoRepository.save(endereco);
         return ResponseEntity.status(HttpStatus.CREATED).body(enderecoJson);
     }
