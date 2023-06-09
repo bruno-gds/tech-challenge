@@ -9,13 +9,13 @@ import java.util.Set;
 @Repository
 public class AddressRepository {
 
-    private Set<Address> enderecos;
+    private Set<Address> adresses;
 
     public AddressRepository() {
-        enderecos = new HashSet<>();
+        adresses = new HashSet<>();
     }
 
-    public void save(Address endereco) {
-        enderecos.add(endereco);
+    public void save(Address address) {
+        adresses.add(address);
     }
 }
