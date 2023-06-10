@@ -13,7 +13,7 @@ public class AddressJson {
 	@NotBlank(message = "Rua é um campo obrigatótio e não pode estar em branco")
     private String street;
 
-	@NotBlank(message = "Numero é obrigatório e não pode estar em branco")
+	@NotNull(message = "Numero é obrigatório e não pode estar em branco")
     private Long number;
 
 	@NotBlank(message = "Bairro é um campo obrigatótio e não pode estar em branco")
