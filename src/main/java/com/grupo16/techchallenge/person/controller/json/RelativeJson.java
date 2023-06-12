@@ -3,8 +3,10 @@ package com.grupo16.techchallenge.person.controller.json;
 import com.grupo16.techchallenge.person.domain.Relative;
 
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class RelativeJson {
 	
 	private String name;

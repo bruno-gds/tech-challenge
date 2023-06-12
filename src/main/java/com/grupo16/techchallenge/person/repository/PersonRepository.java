@@ -9,6 +9,7 @@ import com.grupo16.techchallenge.person.domain.Person;
 
 @Repository
 public class PersonRepository {
+	private Long sequenceId = 1L;
 	
 	Set<Person> people;
 
@@ -17,7 +18,22 @@ public class PersonRepository {
 	}
 	
 	public void create(Person person) {
-		people.add(person);
+		
+		person.setId(sequenceId++); 
+		
+//		if(people.isEmpty()) {
+//			person.setId(sequenceId);
+//		} 
+//		else {
+//			int id = people.size();
+//			person.setId(sequenceId + id);
+//		}
+		
+		boolean isCreated = people.add(person);
+		if(!isCreated) {
+			sequenceId--;
+		}
 	}
+	
 
 }
