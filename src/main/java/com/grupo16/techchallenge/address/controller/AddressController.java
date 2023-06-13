@@ -11,8 +11,9 @@ import com.grupo16.techchallenge.address.domain.Address;
 import com.grupo16.techchallenge.address.usecase.AddressUseCase;
 
 import jakarta.validation.Valid;
-import jakarta.validation.Validator;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("/adresses")
 public class AddressController {
@@ -20,24 +21,14 @@ public class AddressController {
 	@Autowired	
     private AddressUseCase addressUseCase;
 
-	@Autowired	
-    private Validator validator;
-
     @PostMapping
     public Long create(@Valid @RequestBody AddressJson addressJson) {
-//        Set<ConstraintViolation<AddressJson>> violacoes = validator.validate(addressJson);
-//        Map<Path, String> violacoesToMap = violacoes
-//                .stream()
-//                .collect(Collectors.toMap(ConstraintViolation::getPropertyPath, ConstraintViolation::getMessage));
-//
-//        if (!violacoesToMap.isEmpty()) return ResponseEntity.badRequest().body(violacoesToMap);
+    	log.trace("Start addressJson={}", addressJson);
 
-        Address address = addressJson.toAddress();
-        
-        
-        
+    	Address address = addressJson.toAddress();
         Long addressId = addressUseCase.create(address);
-//        return ResponseEntity.status(HttpStatus.CREATED).body(addressJson);
-        return null;
+        
+        log.trace("End addressId={}", addressId);
+        return addressId;
     }
 }
