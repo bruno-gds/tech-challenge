@@ -28,11 +28,8 @@ public class PersonController {
 		
 		Person person = personJson.toPerson();
 		
-		personUseCase.create(person);
-		
-//		personRepository.create(person);
+		Long personId = personUseCase.create(person);
 
-		Long personId = person.getId(); 
 		log.trace("End personId={}", personId);
 		return personId;
 	}
