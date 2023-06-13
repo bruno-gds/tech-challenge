@@ -16,7 +16,7 @@ public class AddressJson {
     private String street;
 
 	@NotNull
-    private Long number;
+    private String number;
 
 	@NotBlank
     private String neighborhood;
