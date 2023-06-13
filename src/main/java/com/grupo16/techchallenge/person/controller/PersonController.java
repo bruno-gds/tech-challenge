@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo16.techchallenge.person.controller.json.PersonJson;
 import com.grupo16.techchallenge.person.domain.Person;
-import com.grupo16.techchallenge.person.repository.PersonRepository;
+import com.grupo16.techchallenge.person.usecase.PersonUseCase;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class PersonController {
 	
 	@Autowired
-	private PersonRepository personRepository;
+	private PersonUseCase personUseCase;
 
 	@PostMapping
 	public Long create(
@@ -27,7 +27,10 @@ public class PersonController {
 		log.trace("Start personJson={}", personJson);
 		
 		Person person = personJson.toPerson();
-		personRepository.create(person);
+		
+		personUseCase.create(person);
+		
+//		personRepository.create(person);
 
 		Long personId = person.getId(); 
 		log.trace("End personId={}", personId);
