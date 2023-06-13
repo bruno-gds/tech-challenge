@@ -4,26 +4,28 @@ import com.grupo16.techchallenge.address.domain.Address;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
+@ToString
 public class AddressJson {
 
-	@NotBlank(message = "Rua é um campo obrigatótio e não pode estar em branco")
+	@NotBlank
     private String street;
 
-	@NotNull(message = "Numero é obrigatório e não pode estar em branco")
+	@NotNull
     private Long number;
 
-	@NotBlank(message = "Bairro é um campo obrigatótio e não pode estar em branco")
+	@NotBlank
     private String neighborhood;
 
-	@NotBlank(message = "Cidade é um campo obrigatótio e não pode estar em branco")
+	@NotBlank
     private String city;
 
-	@NotNull(message = "Estado é obrigatório")
-    @Size(min = 2, max = 2, message = "Estado deve ter 2 caracteres")
+	@NotNull
+	@Pattern(regexp = "^[A-Z]{2}$", message = "O estado deve estar no formato 'SP'")
     private String state;
 
     public Address toAddress() {
