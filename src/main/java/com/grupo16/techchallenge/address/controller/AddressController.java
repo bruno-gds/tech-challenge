@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo16.techchallenge.address.controller.json.AddressJson;
 import com.grupo16.techchallenge.address.domain.Address;
-import com.grupo16.techchallenge.address.repository.AddressRepository;
+import com.grupo16.techchallenge.address.usecase.AddressUseCase;
 
 import jakarta.validation.Valid;
 import jakarta.validation.Validator;
@@ -18,7 +18,7 @@ import jakarta.validation.Validator;
 public class AddressController {
 	
 	@Autowired	
-    private AddressRepository addressRepository;
+    private AddressUseCase addressUseCase;
 
 	@Autowired	
     private Validator validator;
@@ -33,7 +33,10 @@ public class AddressController {
 //        if (!violacoesToMap.isEmpty()) return ResponseEntity.badRequest().body(violacoesToMap);
 
         Address address = addressJson.toAddress();
-        addressRepository.save(address);
+        
+        
+        
+        Long addressId = addressUseCase.create(address);
 //        return ResponseEntity.status(HttpStatus.CREATED).body(addressJson);
         return null;
     }
