@@ -41,10 +41,14 @@ public class PersonJson {
 		
 		return Person.builder()
 				.name(name)
-				.cpf(cpf)
+				.cpf(removeMask(cpf))
 				.birthDate(birthDate)
 				.gender(gender)
 				.relatives(relativesDomain) 
 				.build();
-	}	
+	}
+	
+	private String removeMask(String cpf) {
+		return cpf.replace(".", "").replace("-", "").replace(" ", "");
+	}
 }
