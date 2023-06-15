@@ -28,11 +28,6 @@ public class PersonLocalRepositoryGateway implements PersonRepositoryGateway {
 		person.setId(sequenceId++);
 		
 		people.add(person);
-//		boolean isCreated = people.add(person);
-//		if(!isCreated) {
-//			log.info("Pessoa já existe na base. CPF {}", person.getCpf());
-//			sequenceId--;
-//		}
 		
 		Long personId = person.getId();
 		
@@ -42,7 +37,7 @@ public class PersonLocalRepositoryGateway implements PersonRepositoryGateway {
 
 	@Override
 	public Optional<Person> getByCpf(String cpf) {
-		return people.stream().filter(p -> p.exist(cpf)).findFirst();
+		return people.stream().filter(p -> p.getCpf().equals(cpf)).findFirst();
 	}
 
 }
