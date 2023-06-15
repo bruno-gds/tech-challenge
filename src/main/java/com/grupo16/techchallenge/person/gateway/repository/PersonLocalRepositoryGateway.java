@@ -1,6 +1,7 @@
 package com.grupo16.techchallenge.person.gateway.repository;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.stereotype.Repository;
@@ -26,16 +27,22 @@ public class PersonLocalRepositoryGateway implements PersonRepositoryGateway {
 		log.trace("Start person={}", person);
 		person.setId(sequenceId++);
 		
-		boolean isCreated = people.add(person);
-		if(!isCreated) {
-			log.info("Pessoa já existe na base. CPF {}", person.getCpf());
-			sequenceId--;
-		}
+		people.add(person);
+//		boolean isCreated = people.add(person);
+//		if(!isCreated) {
+//			log.info("Pessoa já existe na base. CPF {}", person.getCpf());
+//			sequenceId--;
+//		}
 		
 		Long personId = person.getId();
 		
 		log.trace("End personId={}", personId);
 		return personId;
+	}
+
+	@Override
+	public Optional<Person> getByCpf(String cpf) {
+		return people.stream().filter(p -> p.exist(cpf)).findFirst();
 	}
 
 }

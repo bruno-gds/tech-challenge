@@ -23,5 +23,9 @@ public class Person {
 	private LocalDate birthDate;
 	private String gender;	
 	private List<Relative> relatives;
+	
+	public boolean exist(String cpf) {
+		return this.cpf.equals(cpf);
+	}
 
 }
