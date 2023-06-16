@@ -2,6 +2,7 @@ package com.grupo16.techchallenge.address.gateway.repository;
 
 import com.grupo16.techchallenge.address.domain.Address;
 import com.grupo16.techchallenge.address.gateway.AddressRepositoryGateway;
+import com.grupo16.techchallenge.address.gateway.exception.ErrorToAccessDatabaseException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,14 +23,19 @@ public class AddressLocalRepositoryGateway implements AddressRepositoryGateway {
     }
 
 	@Override
-	public Long create(Address address) {
-		log.trace("Start address={}", address);
-		address.setId(sequenceId++);
-		
-		adresses.add(address);		
-		Long addressId = address.getId();
-		
-		log.trace("End addressId={}", addressId);
-		return addressId;
+	public Long create(Address address) {		
+		try {
+			log.trace("Start address={}", address);
+			address.setId(sequenceId++);
+			
+			adresses.add(address);		
+			Long addressId = address.getId();
+			
+			log.trace("End addressId={}", addressId);
+			return addressId;
+			
+		} catch (Exception e) {
+			throw new ErrorToAccessDatabaseException();
+		}
 	}
 }
