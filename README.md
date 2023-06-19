@@ -12,6 +12,26 @@
 -   Maven: para build do projeto. Para buildar: mvn clean install
 -   Foi utilizado Lombok, portanto é necessário adicionar o plugin na IDE
 
+### POST - Cadastro de Endereço
+
+http://localhost:8080/adresses
+
+O Cadastro de Endereço, tem como objetivo permitir o gerenciamento de informações sobre os endereços que serão cadastrados. Nesse endpoint, é OBRIGATÓRIO informar os dados: rua, número, bairro, cidade e estado. 
+
+_Exemplo Request:_
+
+```
+curl --location 'http://localhost:8080/adresses' \
+--header 'Content-Type: application/json' \
+--data '{
+"street": "Av dos devs",
+"number": "30",
+"neighborhood": "Jardins",
+"city": "São Paulo",
+"state": "SP"
+}'
+```
+
 ### POST - Cadastro de Pessoa
 http://localhost:8080/people
 
