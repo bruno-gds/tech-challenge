@@ -37,6 +37,7 @@ public class PersonLocalRepositoryGateway implements PersonRepositoryGateway {
 			return personId;
 			
 		} catch (Exception e) {
+			log.error(e.getMessage(), e);
 			throw new ErrorToAccessDatabaseException();
 		}		
 	}
@@ -47,6 +48,7 @@ public class PersonLocalRepositoryGateway implements PersonRepositoryGateway {
 			return people.stream().filter(p -> p.getCpf().equals(cpf)).findFirst();
 
 		} catch (Exception e) {
+			log.error(e.getMessage(), e);
 			throw new ErrorToAccessDatabaseException();
 		}
 		

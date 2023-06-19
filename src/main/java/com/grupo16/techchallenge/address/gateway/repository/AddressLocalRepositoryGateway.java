@@ -35,6 +35,7 @@ public class AddressLocalRepositoryGateway implements AddressRepositoryGateway {
 			return addressId;
 			
 		} catch (Exception e) {
+			log.error(e.getMessage(), e);
 			throw new ErrorToAccessDatabaseException();
 		}
 	}
