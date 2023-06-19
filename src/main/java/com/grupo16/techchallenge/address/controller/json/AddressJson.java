@@ -15,7 +15,7 @@ public class AddressJson {
 	@NotBlank
     private String street;
 
-	@NotNull // TODO: ajustar para NotBlank
+	@NotBlank
     private String number;
 
 	@NotBlank
