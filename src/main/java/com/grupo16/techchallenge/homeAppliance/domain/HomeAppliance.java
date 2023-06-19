@@ -14,6 +14,7 @@ public class HomeAppliance {
     private Long id;
     private String name;
     private String model;
+    private String brand;
     private String color;
     private Long power;
     private Long voltage;

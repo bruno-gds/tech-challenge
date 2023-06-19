@@ -18,6 +18,9 @@ public class HomeApplianceJson {
     private String model;
 
     @NotBlank
+    private String brand;
+
+    @NotBlank
     private String color;
 
     @NotNull
