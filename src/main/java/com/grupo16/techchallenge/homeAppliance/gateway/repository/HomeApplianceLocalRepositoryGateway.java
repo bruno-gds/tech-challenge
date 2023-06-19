@@ -12,6 +12,8 @@ import java.util.Set;
 @Repository
 public class HomeApplianceLocalRepositoryGateway implements HomeApplianceRepositoryGateway {
 
+    private Long sequenceId = 1L;
+
     private Set<HomeAppliance> homeAppliances;
 
     public HomeApplianceLocalRepositoryGateway() {
@@ -21,6 +23,7 @@ public class HomeApplianceLocalRepositoryGateway implements HomeApplianceReposit
     @Override
     public Long create(HomeAppliance homeAppliance) {
         log.trace("Start homeAppliance={}", homeAppliance);
+        homeAppliance.setId(sequenceId++);
 
         homeAppliances.add(homeAppliance);
         Long homeApplianceId = homeAppliance.getId();
