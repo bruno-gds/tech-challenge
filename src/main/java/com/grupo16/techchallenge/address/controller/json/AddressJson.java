@@ -1,30 +1,40 @@
 package com.grupo16.techchallenge.address.controller.json;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.grupo16.techchallenge.address.domain.Address;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Pattern;
+import lombok.Getter;
+import lombok.ToString;
 
+@Getter
+@ToString
 public class AddressJson {
-    @JsonProperty
-    @NotBlank(message = "Rua é um campo obrigatótio e não pode estar em branco")
-    private String rua;
-    @JsonProperty
-    @NotBlank(message = "Numero é obrigatório e não pode estar em branco")
-    private String numero;
-    @JsonProperty
-    @NotBlank(message = "Bairro é um campo obrigatótio e não pode estar em branco")
-    private String bairro;
-    @JsonProperty
-    @NotBlank(message = "Cidade é um campo obrigatótio e não pode estar em branco")
-    private String cidade;
-    @JsonProperty
-    @NotNull(message = "Estado é obrigatório")
-    @Size(min = 2, max = 2, message = "Estado deve ter 2 caracteres")
-    private String estado;
 
-    public Address toEndereco() {
-        return new Address(rua, numero, bairro, cidade, estado);
+	@NotBlank
+    private String street;
+
+	@NotBlank
+    private String number;
+
+	@NotBlank
+    private String neighborhood;
+
+	@NotBlank
+    private String city;
+
+	@NotNull
+	@Pattern(regexp = "^[A-Z]{2}$", message = "O estado deve estar no formato 'SP'")
+    private String state;
+
+    public Address toAddress() {
+        return Address.builder()
+        		.street(street)
+				.number(number)
+				.neighborhood(neighborhood)
+				.city(city)
+				.state(state)
+        		.build();
     }
 }

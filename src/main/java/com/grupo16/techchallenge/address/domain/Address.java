@@ -1,12 +1,20 @@
 package com.grupo16.techchallenge.address.domain;
 
-import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@AllArgsConstructor
+@Builder
+@Getter
+@ToString
 public class Address {
-    private String rua;
-    private String numero;
-    private String bairro;
-    private String cidade;
-    private String estado;
+
+	@Setter
+	private Long id;
+	private String street;
+	private String number;
+	private String neighborhood;
+	private String city;
+	private String state;
 }
