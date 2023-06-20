@@ -46,15 +46,15 @@ _Exemplo Request:_
 ```
 curl --location 'http://localhost:8080/people' \
 --data '{
-    "name": "Fulano de Tal",
+    "name": "string",
     "cpf": "143.162.450-07",
     "birthDate": "2000-10-02",
-    "gender": "Masculino",
+    "gender": "string",
     "relatives":[
         {
-            "name": "Ciclano",
-            "parentage": "tio",
-            "gender": "Masculino"
+            "name": "string",
+            "parentage": "string",
+            "gender": "string"
         }
     ]
 }
