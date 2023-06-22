@@ -34,15 +34,15 @@ curl --location 'http://localhost:8080/adresses' \
 
 ### Cadastro de Pessoa
 
-[ Base URL: localhost:8080/ ]
+>[ Base URL: localhost:8080/ ]
 
-O Cadastro de Pessoa tem como objetivo permitir o cadastro e gerenciamento de informações sobre os usuários cadastrados e as pessoas relacionadas aos mesmos.
-Nesse endpoint o usuário irá se cadastrar informando seus dados: nome, cpf, data nascimento, gênero. 
-Além do seu próprio cadastro, o usuário poderá incluir as demais pessoas relacionadas à ele, informando os campos: nome,  grau de parentesco e gênero.
+O Cadastro de Pessoa tem como objetivo possibilitar o registro e gerenciamento das informações dos usuários cadastrados, bem como das pessoas relacionadas a eles. 
+Neste endpoint, o usuário pode se cadastrar fornecendo os seguintes dados: nome, CPF, data de nascimento e gênero. 
+Além do próprio cadastro, o usuário tem a opção de incluir outras pessoas relacionadas a ele, informando os campos: nome, grau de parentesco e gênero.
 
-Não é obrigatório o cadastro de pessoas relacionadas (parentes) ao usuário.
+É importante ressaltar que o cadastro de pessoas relacionadas (parentes) ao usuário não é obrigatório.
 
-> POST
+### ``POST``
 
 ```
 	/people
