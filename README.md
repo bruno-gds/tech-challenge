@@ -32,8 +32,9 @@ curl --location 'http://localhost:8080/adresses' \
 }'
 ```
 
-### POST - Cadastro de Pessoa
-http://localhost:8080/people
+### Cadastro de Pessoa
+
+[ Base URL: localhost:8080/ ]
 
 O Cadastro de Pessoa tem como objetivo permitir o cadastro e gerenciamento de informações sobre os usuários cadastrados e as pessoas relacionadas aos mesmos.
 Nesse endpoint o usuário irá se cadastrar informando seus dados: nome, cpf, data nascimento, gênero. 
@@ -41,32 +42,66 @@ Além do seu próprio cadastro, o usuário poderá incluir as demais pessoas rel
 
 Não é obrigatório o cadastro de pessoas relacionadas (parentes) ao usuário.
 
-_Exemplo Request:_
+> POST
+
+```
+	/people
+```
+
+**Body** raw (json)
+
+```
+{
+    "name": String,
+    "cpf": String,
+    "birthDate": String,
+    "gender": String",
+    "relatives":[
+        {
+            "name": String,
+            "parentage": String,
+            "gender": String
+        }
+    ]
+}
+```
+
+
+<details>
+  <summary>Exemplo Request Body:</summary>
+
 
 ```
 curl --location 'http://localhost:8080/people' \
 --data '{
-    "name": "string",
-    "cpf": "143.162.450-07",
-    "birthDate": "2000-10-02",
-    "gender": "string",
+    "name": "Stwart Litle",
+    "cpf": "123.456.789-00",
+    "birthDate": "1990-10-02",
+    "gender": "Masculino",
     "relatives":[
         {
-            "name": "string",
-            "parentage": "string",
-            "gender": "string"
+            "name": "Lili Litle",
+            "parentage": "Mãe",
+            "gender": "Feminino"
         }
     ]
 }
 '
 ```
+</details>
 
 
-_Exemplo Response:_
-- 201 - Created:
-	* Será retornado o id do registro criado.
 
-- 500 - Internal Server Error:
+<details>
+  <summary>Responses:</summary>
+
+201	 _Created_
+
+```
+ Será retornado o id do registro criado.
+```
+
+500  _Internal Server Error_
 
 ```
 {
@@ -75,8 +110,8 @@ _Exemplo Response:_
 }
 ```
 
-- 400 - Bad Request:
-_(Caso o usuário já possua cadastro)_
+400  _Bad Request_
+``(Caso o CPF já esteja cadastrado)``
 
 ```
 {
@@ -84,3 +119,4 @@ _(Caso o usuário já possua cadastro)_
 	"message": "CPF já cadastrado."
 }
 ```
+</details>
