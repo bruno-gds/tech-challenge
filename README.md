@@ -1,46 +1,25 @@
-# Conteúdo
+# Tech Challenge - Fase 1
 
--   A API construída em Java 17 utilizando Spring Framework 3.1.0
--   Padrões REST na construção das rotas e retornos
--   Utilização de código limpo e princípios  **SOLID**
--   Boas práticas da Linguagem/Framework
--   Clean architecture
+Na primeira fase do desafio técnico, desenvolvemos as APIs iniciais com foco na integridade dos dados. 
+São três APIs principais: Pessoa, Endereço e Eletrodoméstico. O objetivo dessas APIs é gerenciar as informações pertinentes a cada uma delas, que serão cadastradas em nosso sistema.
 
 
-# Instruções
+## Sumário Documentação de APIs
+* [Instruções](#instruções)
+* [Funcionalidades do projeto](#funcionalidades-do-projeto)
+* [Tecnologias](#tecnologias)
+* [Desafios](#desafios)
 
--   Maven: para build do projeto. Para buildar: mvn clean install
--   Foi utilizado Lombok, portanto é necessário adicionar o plugin na IDE
 
-### POST - Cadastro de Endereço
+### API Pessoa
 
-http://localhost:8080/adresses
+>[ Base URL: http://localhost:8080 ]
 
-O Cadastro de Endereço, tem como objetivo permitir o gerenciamento de informações sobre os endereços que serão cadastrados. Nesse endpoint, é OBRIGATÓRIO informar os dados: rua, número, bairro, cidade e estado. 
 
-_Exemplo Request:_
-
-```
-curl --location 'http://localhost:8080/adresses' \
---header 'Content-Type: application/json' \
---data '{
-"street": "Av dos devs",
-"number": "30",
-"neighborhood": "Jardins",
-"city": "São Paulo",
-"state": "SP"
-}'
-```
-
-### Cadastro de Pessoa
-
->[ Base URL: localhost:8080/ ]
-
-O Cadastro de Pessoa tem como objetivo possibilitar o registro e gerenciamento das informações dos usuários cadastrados, bem como das pessoas relacionadas a eles. 
-Neste endpoint, o usuário pode se cadastrar fornecendo os seguintes dados: nome, CPF, data de nascimento e gênero. 
-Além do próprio cadastro, o usuário tem a opção de incluir outras pessoas relacionadas a ele, informando os campos: nome, grau de parentesco e gênero.
-
+A API Pessoa tem como objetivo permitir o registro e gerenciamento das informações dos usuários cadastrados.
+Além do cadastro principal, o usuário tem a opção de incluir outras pessoas relacionadas a ele, informando o grau de parentesco.
 É importante ressaltar que o cadastro de pessoas relacionadas (parentes) ao usuário não é obrigatório.
+
 
 ### ``POST``
 
