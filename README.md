@@ -261,3 +261,36 @@ curl --location 'http://localhost:8080/homeAppliances' \
 </details>
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
+
+---------
+
+<a name="tecnologias"></a>
+## 📍️ Tecnologias
+
+- As API's foram construídas em Java 17 utilizando Spring Framework 3.1.0
+- Padrão REST na construção das rotas e retornos
+- SLF4J para registro de logs
+- Utilização de código limpo e princípios **SOLID**
+- Boas práticas da Linguagem/Framework
+- Clean architecture
+
+<p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
+
+---------
+
+<a name="desafios"></a>
+## 📍️ Desafios
+
+No desenvolvimento deste projeto, nosso principal desafio foi criar uma estrutura que refletisse as melhores práticas utilizadas atualmente no mercado de desenvolvimento de software, indo além do foco acadêmico abordado nas aulas.
+
+Adotamos o Clean Achitecture. 
+Seguimos o princípio de separação de responsabilidades, como a divisão em camadas(Controller, UseCase, Gateway) para facilitar a manutenção e escalabilidade do sistema.
+
+Utilizamos um interceptador de exceptions para garantir maior confiabilidade do sistema. Essa funcionalidade permite capturar e tratar exceções que ocorrem durante a execução, fornecendo respostas adequadas ao cliente e registrando informações úteis para análise posterior.
+
+Incluímos logs nas classes utilizando a biblioteca de logging SLF4J. A utilização de logs nos permite registrar informações relevantes em diferentes níveis. Isso nos possibilita melhor visibilidade do comportamento do fluxo do sistema durante a execução. O que também facilita identificar e resolver problemas.
+
+Adotamos o padrão Rest para expor os recursos da aplicação através da utilização de verbos HTTP apropriados. Estrutura adequada das URLs e retorno das respostas no formato JSON.
+
+
+<p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
