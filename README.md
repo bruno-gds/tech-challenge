@@ -20,6 +20,8 @@ São três APIs principais: Pessoa, Endereço e Eletrodoméstico. O objetivo des
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
 
+<a name="funcionalidades-do-projeto"></a>
+## 🔨  Funcionalidades do projeto
 
 ### API Pessoa
 
@@ -112,6 +114,15 @@ curl --location 'http://localhost:8080/people' \
 {
 	"code": "tc.person.CpfAlreadyRegistered",
 	"message": "CPF já cadastrado."
+}
+```
+
+400 - Bad Request:
+
+```
+{
+  "code": "tc.argumentNotValid",
+  "message": "birthDate:deve ser uma data passada;"
 }
 ```
 </details>
@@ -264,6 +275,13 @@ curl --location 'http://localhost:8080/homeAppliances' \
 ```
 
 400  _Bad Request_
+
+```
+{
+  "code": "tc.argumentNotValid",
+  "message": "voltage:não deve ser nulo;"
+}
+```
 
 </details>
 
