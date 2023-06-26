@@ -105,7 +105,7 @@ curl --location 'http://localhost:8080/people' \
 }
 ```
 
-400  _Bad Request_
+422  _Unprocessable_Entity_
 ``(Caso o CPF já esteja cadastrado)``
 
 ```
@@ -186,6 +186,13 @@ curl --location 'http://localhost:8080/adresses' \
 ```
 
 400  _Bad Request_
+
+```
+{
+  "code": "tc.argumentNotValid",
+  "message": "state:O estado deve estar no formato 'SP';"
+}
+```
 
 </details>
 
