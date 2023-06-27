@@ -213,6 +213,9 @@ curl --location 'http://localhost:8080/adresses' \
 ---------
 ### API Eletrodoméstico
 
+>[ Base URL: http://localhost:8080 ]
+
+
 A API Eletrodoméstico oferece a funcionalidade de cadastro das informações dos eletrodomésticos utilizados pelos usuários registrados. 
 É imprescindível fornecer obrigatoriamente os seguintes dados: tipo, marca, modelo, potência e voltagem. 
 Com essa API, é possível simplificar o processo de gerenciamento e manutenção dos dados dos eletrodomésticos, garantindo a correta identificação e utilização desses equipamentos. 
