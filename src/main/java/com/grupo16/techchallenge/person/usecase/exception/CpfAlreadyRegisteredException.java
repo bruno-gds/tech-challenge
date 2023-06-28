@@ -10,6 +10,6 @@ public class CpfAlreadyRegisteredException extends SystemBaseException {
 
 	private final String code = "tc.person.CpfAlreadyRegistered";
 	private final String message = "CPF já cadastrado.";
-	private final Integer httpStatus = 400;
+	private final Integer httpStatus = 422;
 	
 }

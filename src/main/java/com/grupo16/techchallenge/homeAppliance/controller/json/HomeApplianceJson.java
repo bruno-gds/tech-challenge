@@ -20,7 +20,6 @@ public class HomeApplianceJson {
     @NotBlank
     private String brand;
 
-    @NotBlank
     private String color;
 
     @NotNull
@@ -33,6 +32,7 @@ public class HomeApplianceJson {
         return HomeAppliance.builder()
                 .name(name)
                 .model(model)
+                .brand(brand)
                 .color(color)
                 .power(power)
                 .voltage(voltage)
