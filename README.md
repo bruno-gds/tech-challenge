@@ -93,23 +93,24 @@ curl --location 'http://localhost:8080/people' \
 <details>
   <summary>Responses:</summary>
 
-201	 _Created_
+201 - _Created_
+- Será retornado o id do registro criado
 
 ```
- Será retornado o id do registro criado.
+1
 ```
 
-500  _Internal Server Error_
+400 - _Bad Request_
 
 ```
 {
-	"code": "tc.person.errorToAccessDatabase",
-	"message": "Ocorreu um erro ao acessar o banco de dados."
+  "code": "tc.argumentNotValid",
+  "message": "birthDate:deve ser uma data passada;"
 }
 ```
 
-422  _Unprocessable_Entity_
-``(Caso o CPF já esteja cadastrado)``
+422 - _Unprocessable_Entity_
+- Caso o CPF já esteja cadastrado
 
 ```
 {
@@ -118,12 +119,12 @@ curl --location 'http://localhost:8080/people' \
 }
 ```
 
-400 - Bad Request:
+500 - _Internal Server Error_
 
 ```
 {
-  "code": "tc.argumentNotValid",
-  "message": "birthDate:deve ser uma data passada;"
+	"code": "tc.person.errorToAccessDatabase",
+	"message": "Ocorreu um erro ao acessar o banco de dados."
 }
 ```
 </details>
@@ -182,22 +183,14 @@ curl --location 'http://localhost:8080/adresses' \
 <details>
   <summary>Responses:</summary>
 
-201	 _Created_
+201 - _Created_
+- Será retornado o id do registro criado
 
 ```
- Será retornado o id do registro criado.
+1
 ```
 
-500  _Internal Server Error_
-
-```
-{
-	"code": "tc.address.errorToAccessDatabase",
-	"message": "Ocorreu um erro ao acessar o banco de dados."
-}
-```
-
-400  _Bad Request_
+400 - _Bad Request_
 
 ```
 {
@@ -206,6 +199,14 @@ curl --location 'http://localhost:8080/adresses' \
 }
 ```
 
+500 - _Internal Server Error_
+
+```
+{
+	"code": "tc.address.errorToAccessDatabase",
+	"message": "Ocorreu um erro ao acessar o banco de dados."
+}
+```
 </details>
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
@@ -263,22 +264,14 @@ curl --location 'http://localhost:8080/homeAppliances' \
 <details>
   <summary>Responses:</summary>
 
-201	 _Created_
+201 - _Created_
+- Será retornado o id do registro criado
 
 ```
- Será retornado o id do registro criado.
+1
 ```
 
-500  _Internal Server Error_
-
-```
-{
-	"code": "tc.homeAppliance.errorToAccessDatabase",
-	"message": "Ocorreu um erro ao acessar o banco de dados."
-}
-```
-
-400  _Bad Request_
+400 - _Bad Request_
 
 ```
 {
@@ -287,6 +280,14 @@ curl --location 'http://localhost:8080/homeAppliances' \
 }
 ```
 
+500 - _Internal Server Error_
+
+```
+{
+	"code": "tc.homeAppliance.errorToAccessDatabase",
+	"message": "Ocorreu um erro ao acessar o banco de dados."
+}
+```
 </details>
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
