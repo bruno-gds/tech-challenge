@@ -109,7 +109,7 @@ curl --location 'http://localhost:8080/people' \
 }
 ```
 
-422 - _Unprocessable_Entity_
+422 - _Unprocessable Entity_
 - Caso o CPF já esteja cadastrado
 
 ```
@@ -277,6 +277,15 @@ curl --location 'http://localhost:8080/homeAppliances' \
 {
   "code": "tc.argumentNotValid",
   "message": "voltage:não deve ser nulo;"
+}
+```
+
+422 - _Unprocessable Entity_
+
+```
+{
+    "code": "tc.homeAppliance.IllegalArgumentVoltage",
+    "message": "Voltagem inválida, aceito apenas '110' e '220'."
 }
 ```
 
