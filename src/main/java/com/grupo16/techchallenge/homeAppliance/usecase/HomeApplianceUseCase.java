@@ -17,7 +17,7 @@ public class HomeApplianceUseCase {
     public Long create(HomeAppliance homeAppliance) {
         log.trace("Start homeAppliance={}", homeAppliance);
 
-        if (homeAppliance.getVoltage() != 110 && homeAppliance.getVoltage() != 220) {
+        if (!homeAppliance.getVoltage().equals(110L) && !homeAppliance.getVoltage().equals(220L)) {
             log.warn("Voltagem inválida: {}", homeAppliance.getVoltage());
             throw new IllegalArgumentVoltageException();
         }
