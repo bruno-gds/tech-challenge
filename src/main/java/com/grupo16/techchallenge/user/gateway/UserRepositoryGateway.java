@@ -1,8 +1,8 @@
-package com.grupo16.techchallenge.person.gateway;
+package com.grupo16.techchallenge.user.gateway;
 
 import java.util.Optional;
 
-import com.grupo16.techchallenge.person.domain.User;
+import com.grupo16.techchallenge.user.domain.User;
 
 public interface UserRepositoryGateway {
 	

@@ -1,4 +1,4 @@
-package com.grupo16.techchallenge.person.controller.json;
+package com.grupo16.techchallenge.user.controller.json;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -6,9 +6,9 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import com.grupo16.techchallenge.person.domain.User;
-import com.grupo16.techchallenge.person.domain.RelatedUser;
-import com.grupo16.techchallenge.person.domain.UserGender;
+import com.grupo16.techchallenge.user.domain.RelatedUser;
+import com.grupo16.techchallenge.user.domain.User;
+import com.grupo16.techchallenge.user.domain.UserGender;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

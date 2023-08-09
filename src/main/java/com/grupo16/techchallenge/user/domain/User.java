@@ -1,4 +1,4 @@
-package com.grupo16.techchallenge.person.domain;
+package com.grupo16.techchallenge.user.domain;
 
 import java.time.LocalDate;
 import java.util.List;

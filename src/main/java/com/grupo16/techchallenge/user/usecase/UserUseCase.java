@@ -1,13 +1,13 @@
-package com.grupo16.techchallenge.person.usecase;
+package com.grupo16.techchallenge.user.usecase;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.grupo16.techchallenge.person.domain.User;
-import com.grupo16.techchallenge.person.gateway.UserRepositoryGateway;
-import com.grupo16.techchallenge.person.usecase.exception.CpfAlreadyRegisteredException;
+import com.grupo16.techchallenge.user.domain.User;
+import com.grupo16.techchallenge.user.gateway.UserRepositoryGateway;
+import com.grupo16.techchallenge.user.usecase.exception.CpfAlreadyRegisteredException;
 
 import lombok.extern.slf4j.Slf4j;
 

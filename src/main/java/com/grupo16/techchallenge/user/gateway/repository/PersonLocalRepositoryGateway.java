@@ -1,4 +1,4 @@
-package com.grupo16.techchallenge.person.gateway.repository;
+package com.grupo16.techchallenge.user.gateway.repository;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -6,9 +6,9 @@ import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
-import com.grupo16.techchallenge.person.domain.User;
-import com.grupo16.techchallenge.person.gateway.UserRepositoryGateway;
-import com.grupo16.techchallenge.person.gateway.exception.ErrorToAccessDatabaseException;
+import com.grupo16.techchallenge.user.domain.User;
+import com.grupo16.techchallenge.user.gateway.UserRepositoryGateway;
+import com.grupo16.techchallenge.user.gateway.exception.ErrorToAccessDatabaseException;
 
 import lombok.extern.slf4j.Slf4j;
 

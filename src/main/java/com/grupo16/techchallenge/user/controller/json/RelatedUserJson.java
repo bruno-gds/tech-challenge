@@ -1,7 +1,7 @@
-package com.grupo16.techchallenge.person.controller.json;
+package com.grupo16.techchallenge.user.controller.json;
 
-import com.grupo16.techchallenge.person.domain.RelatedUser;
-import com.grupo16.techchallenge.person.domain.UserGender;
+import com.grupo16.techchallenge.user.domain.RelatedUser;
+import com.grupo16.techchallenge.user.domain.UserGender;
 
 import lombok.Getter;
 import lombok.ToString;

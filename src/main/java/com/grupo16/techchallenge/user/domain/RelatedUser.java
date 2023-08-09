@@ -1,4 +1,4 @@
-package com.grupo16.techchallenge.person.domain;
+package com.grupo16.techchallenge.user.domain;
 
 import lombok.Builder;
 import lombok.Getter;
