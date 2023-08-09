@@ -1,6 +1,7 @@
 package com.grupo16.techchallenge.address.controller.json;
 
 import com.grupo16.techchallenge.address.domain.Address;
+import com.grupo16.techchallenge.address.domain.State;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -34,7 +35,7 @@ public class AddressJson {
 				.number(number)
 				.neighborhood(neighborhood)
 				.city(city)
-				.state(state)
+				.state(State.valueOf(state))
         		.build();
     }
 }

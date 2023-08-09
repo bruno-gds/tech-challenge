@@ -8,32 +8,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.grupo16.techchallenge.person.controller.json.PersonJson;
-import com.grupo16.techchallenge.person.domain.Person;
-import com.grupo16.techchallenge.person.usecase.PersonUseCase;
+import com.grupo16.techchallenge.person.controller.json.UserJson;
+import com.grupo16.techchallenge.person.domain.User;
+import com.grupo16.techchallenge.person.usecase.UserUseCase;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RequestMapping("/people")
+@RequestMapping("/users")
 @RestController
-public class PersonController {
+public class UserController {
 	
 	@Autowired
-	private PersonUseCase personUseCase;
+	private UserUseCase personUseCase;
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
 	public Long create(
-			@Valid @RequestBody PersonJson personJson) {
-		log.trace("Start personJson={}", personJson);
+			@Valid @RequestBody UserJson userJson) {
+		log.trace("Start userJson={}", userJson);
 		
-		Person person = personJson.toPerson();
+		User user = userJson.toUser();
 		
-		Long personId = personUseCase.create(person);
+		Long userId = personUseCase.create(user);
 
-		log.trace("End personId={}", personId);
-		return personId;
+		log.trace("End userId={}", userId);
+		return userId;
 	}
 }

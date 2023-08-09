@@ -13,7 +13,7 @@ import lombok.ToString;
 @Builder
 @ToString
 @EqualsAndHashCode(of = {"cpf"})
-public class Person {
+public class User {
 	
 	@Setter //TODO remover assim que estiver usando banco de dados para salvar.
 	private Long id;
@@ -21,7 +21,7 @@ public class Person {
 	private String name;
 	private String cpf;
 	private LocalDate birthDate;
-	private String gender;	
-	private List<Relative> relatives;
+	private UserGender gender;	
+	private List<RelatedUser> relatedUsers;
 	
 }

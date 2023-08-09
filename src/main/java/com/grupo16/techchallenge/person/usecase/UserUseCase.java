@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.grupo16.techchallenge.person.domain.Person;
+import com.grupo16.techchallenge.person.domain.User;
 import com.grupo16.techchallenge.person.gateway.PersonRepositoryGateway;
 import com.grupo16.techchallenge.person.usecase.exception.CpfAlreadyRegisteredException;
 
@@ -13,23 +13,23 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class PersonUseCase {
+public class UserUseCase {
 	
 	@Autowired
 	private PersonRepositoryGateway personRepository;
 
-	public Long create(Person person) {
-		log.trace("Start person={}", person);
+	public Long create(User user) {
+		log.trace("Start user={}", user);
 		
-		Optional<Person> personOp = personRepository.getByCpf(person.getCpf());
-		if(personOp.isPresent()) {
-			log.warn("CPF já cadastrado: {}", person.getCpf());
+		Optional<User> userOp = personRepository.getByCpf(user.getCpf());
+		if(userOp.isPresent()) {
+			log.warn("CPF já cadastrado: {}", user.getCpf());
 			throw new CpfAlreadyRegisteredException();
 		}
 		
-		Long personId = personRepository.create(person);
+		Long userId = personRepository.create(user);
 		
-		log.trace("End personId={}", personId);
-		return personId;
+		log.trace("End userId={}", userId);
+		return userId;
 	}
 }

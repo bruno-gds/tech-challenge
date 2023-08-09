@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Builder
 @ToString
-public class Relative {
+public class RelatedUser {
 	
 	private String name;
 	private String parentage;

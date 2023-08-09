@@ -6,8 +6,9 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import com.grupo16.techchallenge.person.domain.Person;
-import com.grupo16.techchallenge.person.domain.Relative;
+import com.grupo16.techchallenge.person.domain.User;
+import com.grupo16.techchallenge.person.domain.RelatedUser;
+import com.grupo16.techchallenge.person.domain.UserGender;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -17,7 +18,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class PersonJson {
+public class UserJson {
 	
 	@NotBlank
 	private String name;
@@ -31,21 +32,22 @@ public class PersonJson {
 
 	@NotBlank
 	private String gender;
-	private List<RelativeJson> relatives;
+	private List<RelatedUserJson> relatives;
 	
-	public Person toPerson() {
-		List<Relative> relativesDomain = new ArrayList<>();
+	public User toUser() {
+		List<RelatedUser> relatedUsers = new ArrayList<>();
 		if(relatives != null) {
-			relativesDomain = relatives.stream().map(r -> r.toRelative()).toList();
+			relatedUsers = relatives.stream().map(r -> r.toRelative()).toList();
 		}
 		
-		return Person.builder()
+		return User.builder()
 				.name(name)
 				.cpf(removeMask(cpf))
 				.birthDate(birthDate)
-				.gender(gender)
-				.relatives(relativesDomain) 
+				.gender(UserGender.valueOf(gender))
+				.relatedUsers(relatedUsers)
 				.build();
+		
 	}
 	
 	private String removeMask(String cpf) {

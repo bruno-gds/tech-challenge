@@ -6,7 +6,7 @@ import java.util.Set;
 
 import org.springframework.stereotype.Repository;
 
-import com.grupo16.techchallenge.person.domain.Person;
+import com.grupo16.techchallenge.person.domain.User;
 import com.grupo16.techchallenge.person.gateway.PersonRepositoryGateway;
 import com.grupo16.techchallenge.person.gateway.exception.ErrorToAccessDatabaseException;
 
@@ -17,14 +17,14 @@ import lombok.extern.slf4j.Slf4j;
 public class PersonLocalRepositoryGateway implements PersonRepositoryGateway {
 	private Long sequenceId = 1L;
 	
-	Set<Person> people;
+	Set<User> people;
 
 	public PersonLocalRepositoryGateway() {
 		this.people = new HashSet<>();
 	}
 
 	@Override
-	public Long create(Person person) {
+	public Long create(User person) {
 		try {
 			log.trace("Start person={}", person);
 			person.setId(sequenceId++);
@@ -43,7 +43,7 @@ public class PersonLocalRepositoryGateway implements PersonRepositoryGateway {
 	}
 
 	@Override
-	public Optional<Person> getByCpf(String cpf) {
+	public Optional<User> getByCpf(String cpf) {
 		try {
 			return people.stream().filter(p -> p.getCpf().equals(cpf)).findFirst();
 
