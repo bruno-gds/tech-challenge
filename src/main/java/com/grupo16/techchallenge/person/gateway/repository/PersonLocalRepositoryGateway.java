@@ -7,14 +7,14 @@ import java.util.Set;
 import org.springframework.stereotype.Repository;
 
 import com.grupo16.techchallenge.person.domain.User;
-import com.grupo16.techchallenge.person.gateway.PersonRepositoryGateway;
+import com.grupo16.techchallenge.person.gateway.UserRepositoryGateway;
 import com.grupo16.techchallenge.person.gateway.exception.ErrorToAccessDatabaseException;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Repository
-public class PersonLocalRepositoryGateway implements PersonRepositoryGateway {
+public class PersonLocalRepositoryGateway implements UserRepositoryGateway {
 	private Long sequenceId = 1L;
 	
 	Set<User> people;
