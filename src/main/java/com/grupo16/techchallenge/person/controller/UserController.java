@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UserController {
 	
 	@Autowired
-	private UserUseCase personUseCase;
+	private UserUseCase userUseCase;
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
@@ -31,7 +31,7 @@ public class UserController {
 		
 		User user = userJson.toUser();
 		
-		Long userId = personUseCase.create(user);
+		Long userId = userUseCase.create(user);
 
 		log.trace("End userId={}", userId);
 		return userId;

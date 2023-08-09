@@ -1,10 +1,34 @@
 package com.grupo16.techchallenge.address.domain;
 
 public enum State {
-	
+
+	AC,
+	AL,
+	AP,
+	AM,
+	BA,
+	CE,
 	ES,
-	SP,
+	GO,
+	MA,
+	MT,
+	MS,
 	MG,
-	RJ;
+	PA,
+	PB,
+	PR,
+	PE,
+	PI,
+	RJ,
+	RN,
+	RS,
+	RO,
+	RR,
+	SC,
+	SP,
+	SE,
+	TO,
+	DF;
+
 
 }

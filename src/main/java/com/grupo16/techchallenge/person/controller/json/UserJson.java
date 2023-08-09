@@ -37,7 +37,7 @@ public class UserJson {
 	public User toUser() {
 		List<RelatedUser> relatedUsers = new ArrayList<>();
 		if(relatives != null) {
-			relatedUsers = relatives.stream().map(r -> r.toRelative()).toList();
+			relatedUsers = relatives.stream().map(r -> r.toRelatedUser()).toList();
 		}
 		
 		return User.builder()

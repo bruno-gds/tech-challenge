@@ -11,5 +11,5 @@ public class RelatedUser {
 	
 	private String name;
 	private String parentage;
-	private String gender;	
+	private UserGender gender;	
 }
