@@ -2,8 +2,8 @@ package com.grupo16.techchallenge.endereco.gateway;
 
 import com.grupo16.techchallenge.endereco.domain.Endereco;
 
-public interface AddressRepositoryGateway {
+public interface EnderecoRepositoryGateway {
 	
-	public Long create(Endereco address);
+	public Long criar(Endereco endereco);
 
 }

@@ -11,7 +11,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class AddressJson {
+public class EnderecoJson {
 
 	@NotBlank
     private String street;
@@ -29,7 +29,7 @@ public class AddressJson {
 	@Pattern(regexp = "^[A-Z]{2}$", message = "O estado deve estar no formato 'SP'")
     private String state;
 
-    public Endereco toAddress() {
+    public Endereco toEndereco() {
         return Endereco.builder()
         		
         		.build();

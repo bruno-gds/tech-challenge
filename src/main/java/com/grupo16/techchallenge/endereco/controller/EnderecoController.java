@@ -8,30 +8,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.grupo16.techchallenge.endereco.controller.json.AddressJson;
+import com.grupo16.techchallenge.endereco.controller.json.EnderecoJson;
 import com.grupo16.techchallenge.endereco.domain.Endereco;
-import com.grupo16.techchallenge.endereco.usecase.AddressUseCase;
+import com.grupo16.techchallenge.endereco.usecase.CriarAlterarEnderecoUseCase;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/adresses")
-public class AddressController {
+@RequestMapping("/enderecos")
+public class EnderecoController {
 	
 	@Autowired	
-    private AddressUseCase addressUseCase;
+    private CriarAlterarEnderecoUseCase criarAlterarEnderecoUseCase;
 
 	@ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Long create(@Valid @RequestBody AddressJson addressJson) {
-    	log.trace("Start addressJson={}", addressJson);
+    public Long criar(@Valid @RequestBody EnderecoJson enderecoJson) {
+    	log.trace("Start enderecoJson={}", enderecoJson);
 
-    	Endereco address = addressJson.toAddress();
-        Long addressId = addressUseCase.create(address);
+    	Endereco endereco = enderecoJson.toEndereco();
+        Long id = criarAlterarEnderecoUseCase.criar(endereco);
         
-        log.trace("End addressId={}", addressId);
-        return addressId;
+        log.trace("End id={}", id);
+        return id;
     }
 }
