@@ -1,7 +1,7 @@
 package com.grupo16.techchallenge.user.controller.json;
 
-import com.grupo16.techchallenge.user.domain.RelatedUser;
-import com.grupo16.techchallenge.user.domain.UserGender;
+import com.grupo16.techchallenge.user.domain.Parentesco;
+import com.grupo16.techchallenge.user.domain.Genero;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -14,11 +14,8 @@ public class RelatedUserJson {
 	private String parentage;
 	private String gender;
 
-	public RelatedUser toRelatedUser() {
-		return RelatedUser.builder()
-				.name(name)
-				.parentage(parentage)
-				.gender(UserGender.valueOf(gender))
+	public Parentesco toRelatedUser() {
+		return Parentesco.builder()
 				.build();
 	}
 }

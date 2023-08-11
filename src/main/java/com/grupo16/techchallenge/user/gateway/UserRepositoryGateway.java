@@ -2,12 +2,12 @@ package com.grupo16.techchallenge.user.gateway;
 
 import java.util.Optional;
 
-import com.grupo16.techchallenge.user.domain.User;
+import com.grupo16.techchallenge.user.domain.Usuario;
 
 public interface UserRepositoryGateway {
 	
-	public Long create(User user);
+	public Long create(Usuario user);
 
-	public Optional<User> getByCpf(String cpf);
+	public Optional<Usuario> getByCpf(String cpf);
 
 }

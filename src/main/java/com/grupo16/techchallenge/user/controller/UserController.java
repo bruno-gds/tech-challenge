@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo16.techchallenge.user.controller.json.UserJson;
-import com.grupo16.techchallenge.user.domain.User;
+import com.grupo16.techchallenge.user.domain.Usuario;
 import com.grupo16.techchallenge.user.usecase.UserUseCase;
 
 import jakarta.validation.Valid;
@@ -29,7 +29,7 @@ public class UserController {
 			@Valid @RequestBody UserJson userJson) {
 		log.trace("Start userJson={}", userJson);
 		
-		User user = userJson.toUser();
+		Usuario user = userJson.toUser();
 		
 		Long userId = userUseCase.create(user);
 

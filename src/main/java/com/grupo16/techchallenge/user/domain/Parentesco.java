@@ -7,9 +7,11 @@ import lombok.ToString;
 @Getter
 @Builder
 @ToString
-public class RelatedUser {
+public class Parentesco {
 	
-	private String name;
-	private String parentage;
-	private UserGender gender;	
+	private Long id;
+	private Usuario usuario;
+	private Usuario usuarioParente;
+	private String tipoParentesco;
+	
 }

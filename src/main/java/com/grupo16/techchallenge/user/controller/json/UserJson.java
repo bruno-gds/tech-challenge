@@ -6,9 +6,9 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.br.CPF;
 
-import com.grupo16.techchallenge.user.domain.RelatedUser;
-import com.grupo16.techchallenge.user.domain.User;
-import com.grupo16.techchallenge.user.domain.UserGender;
+import com.grupo16.techchallenge.user.domain.Parentesco;
+import com.grupo16.techchallenge.user.domain.Usuario;
+import com.grupo16.techchallenge.user.domain.Genero;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -34,18 +34,18 @@ public class UserJson {
 	private String gender;
 	private List<RelatedUserJson> relatives;
 	
-	public User toUser() {
-		List<RelatedUser> relatedUsers = new ArrayList<>();
+	public Usuario toUser() {
+		List<Parentesco> relatedUsers = new ArrayList<>();
 		if(relatives != null) {
 			relatedUsers = relatives.stream().map(r -> r.toRelatedUser()).toList();
 		}
 		
-		return User.builder()
-				.name(name)
+		return Usuario.builder()
+				.nome(name)
 				.cpf(removeMask(cpf))
-				.birthDate(birthDate)
-				.gender(UserGender.valueOf(gender))
-				.relatedUsers(relatedUsers)
+				.dataNascimento(birthDate)
+				.genero(Genero.valueOf(gender))
+				.parentes(relatedUsers)
 				.build();
 		
 	}
