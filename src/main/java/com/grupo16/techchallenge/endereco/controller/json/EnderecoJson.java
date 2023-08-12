@@ -14,7 +14,7 @@ import lombok.ToString;
 public class EnderecoJson {
 
 	@NotBlank
-    private String street;
+    private String rua;
 
 	@NotBlank
     private String number;
@@ -31,7 +31,7 @@ public class EnderecoJson {
 
     public Endereco toEndereco() {
         return Endereco.builder()
-        		
+        		.rua(rua)
         		.build();
     }
 }

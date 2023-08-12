@@ -1,5 +1,7 @@
 package com.grupo16.techchallenge.endereco.gateway.repository.jpa.entity;
 
+import com.grupo16.techchallenge.endereco.domain.Endereco;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,5 +23,13 @@ public class EnderecoEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	private String rua;
 
+	
+	public EnderecoEntity(Endereco endereco) {
+		this.id = endereco.getId();
+		this.rua = endereco.getRua();
+	}
+	
 }
