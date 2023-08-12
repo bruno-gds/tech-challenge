@@ -1,7 +1,8 @@
 package com.grupo16.techchallenge.endereco.controller.json;
 
 import com.grupo16.techchallenge.endereco.domain.Endereco;
-import com.grupo16.techchallenge.endereco.domain.State;
+import com.grupo16.techchallenge.endereco.domain.Estado;
+import com.grupo16.techchallenge.user.domain.Usuario;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -17,21 +18,31 @@ public class EnderecoJson {
     private String rua;
 
 	@NotBlank
-    private String number;
+    private String numero;
 
 	@NotBlank
-    private String neighborhood;
+    private String bairro;
 
 	@NotBlank
-    private String city;
+    private String cidade;
 
 	@NotNull
 	@Pattern(regexp = "^[A-Z]{2}$", message = "O estado deve estar no formato 'SP'")
-    private String state;
+    private String estado;
+	
+//	private UsuarioJson usuario;
 
-    public Endereco toEndereco() {
+    public Endereco mapToEnderecoDomain() {
+    	//inserir o id usuario assim q a classe UsuarioJson estiver concluída.
+    	Usuario usuario = Usuario.builder().id(null).build();    	
+    	
         return Endereco.builder()
         		.rua(rua)
+        		.numero(numero)
+        		.bairro(bairro)
+        		.cidade(cidade)
+        		.estado(Estado.valueOf(estado))
+//        		.usuario(usuario)
         		.build();
     }
 }

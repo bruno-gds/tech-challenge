@@ -28,7 +28,7 @@ public class EnderecoController {
     public Long criar(@Valid @RequestBody EnderecoJson enderecoJson) {
     	log.trace("Start enderecoJson={}", enderecoJson);
 
-    	Endereco endereco = enderecoJson.toEndereco();
+    	Endereco endereco = enderecoJson.mapToEnderecoDomain();
         Long id = criarAlterarEnderecoUseCase.criar(endereco);
         
         log.trace("End id={}", id);

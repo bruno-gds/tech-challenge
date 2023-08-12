@@ -21,7 +21,7 @@ public class Endereco {
 	private String numero;
 	private String bairro;
 	private String cidade;
-	private State estado;
+	private Estado estado;
 	private Usuario usuario;
 	private List<Eletrodomestico> eletrodomesticos;
 }

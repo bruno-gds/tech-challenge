@@ -1,6 +1,6 @@
 package com.grupo16.techchallenge.endereco.domain;
 
-public enum State {
+public enum Estado {
 
 	AC,
 	AL,
