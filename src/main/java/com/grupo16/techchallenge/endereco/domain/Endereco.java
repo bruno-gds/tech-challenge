@@ -7,7 +7,6 @@ import com.grupo16.techchallenge.user.domain.Usuario;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 @Builder
@@ -15,7 +14,6 @@ import lombok.ToString;
 @ToString
 public class Endereco {
 
-	@Setter
 	private Long id;
 	private String rua;
 	private String numero;

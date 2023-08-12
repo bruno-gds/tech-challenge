@@ -7,11 +7,17 @@ import com.grupo16.techchallenge.user.domain.Usuario;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Getter
 @ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class EnderecoJson {
 
 	@NotBlank
@@ -32,7 +38,13 @@ public class EnderecoJson {
 	
 //	private UsuarioJson usuario;
 
-    public Endereco mapToEnderecoDomain() {
+	
+//	public EnderecoJson(Endereco endereco) {
+//		return EnderecoJson.
+//	}
+	
+	
+    public Endereco mapToDomain() {
     	//inserir o id usuario assim q a classe UsuarioJson estiver concluída.
     	Usuario usuario = Usuario.builder().id(null).build();    	
     	
@@ -45,4 +57,14 @@ public class EnderecoJson {
 //        		.usuario(usuario)
         		.build();
     }
+
+	public EnderecoJson(Endereco endereco) {
+		rua = endereco.getRua();
+		numero = endereco.getNumero();
+		bairro = endereco.getBairro();
+		cidade = endereco.getCidade();
+		estado = String.valueOf(endereco.getEstado());
+//		usuario = endereco.getUsuario();
+		
+	}
 }

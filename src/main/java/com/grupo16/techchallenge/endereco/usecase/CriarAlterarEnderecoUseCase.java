@@ -23,4 +23,9 @@ public class CriarAlterarEnderecoUseCase {
 		log.trace("End id={}", id);
 		return id;
 	}
+
+	public void alterar(Endereco endereco) {
+		// TODO implementar
+		
+	}
 }
