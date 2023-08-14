@@ -9,7 +9,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class HomeApplianceJson {
+public class EletrodomesticoJson {
 
     @NotBlank
     private String name;

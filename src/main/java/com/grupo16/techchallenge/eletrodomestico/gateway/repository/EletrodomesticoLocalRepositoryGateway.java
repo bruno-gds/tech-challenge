@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
-import com.grupo16.techchallenge.eletrodomestico.gateway.HomeApplianceRepositoryGateway;
+import com.grupo16.techchallenge.eletrodomestico.gateway.EletrodomesticoRepositoryGateway;
 import com.grupo16.techchallenge.eletrodomestico.gateway.exception.ErrorToAccessDatabaseException;
 
 import java.util.HashSet;
@@ -12,18 +12,18 @@ import java.util.Set;
 
 @Slf4j
 @Repository
-public class HomeApplianceLocalRepositoryGateway implements HomeApplianceRepositoryGateway {
+public class EletrodomesticoLocalRepositoryGateway implements EletrodomesticoRepositoryGateway {
 
     private Long sequenceId = 1L;
 
     private Set<Eletrodomestico> homeAppliances;
 
-    public HomeApplianceLocalRepositoryGateway() {
+    public EletrodomesticoLocalRepositoryGateway() {
         homeAppliances = new HashSet<>();
     }
 
     @Override
-    public Long create(Eletrodomestico homeAppliance) {
+    public Long criar(Eletrodomestico homeAppliance) {
     	try {
     		log.trace("Start homeAppliance={}", homeAppliance);
     		homeAppliance.setId(sequenceId++);
