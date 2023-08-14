@@ -43,12 +43,13 @@ public class EnderecoMySQLGateway implements EnderecoRepositoryGateway {
 	public List<Endereco> obterTodosByIdUsuario(Long idUsuario) {
 		try {
 			log.trace("Start idUsuario={}", idUsuario);
-			List<Endereco> enderecos = new ArrayList<>();
 			
-			List<EnderecoEntity> entities = enderecoRepository.findAllByUsuarioId(idUsuario);
+			List<EnderecoEntity> entities = enderecoRepository.findByUsuarioId(idUsuario);
 			
-			log.trace("End enderecos={}");
-			return null;
+			List<Endereco> enderecos = entities.stream().map(EnderecoEntity::obterEndereco).toList();
+			
+			log.trace("End enderecos={}", enderecos);
+			return enderecos;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw new ErrorToAccessDatabaseException();

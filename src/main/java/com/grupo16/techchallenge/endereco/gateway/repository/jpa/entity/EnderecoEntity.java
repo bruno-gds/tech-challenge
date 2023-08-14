@@ -36,7 +36,7 @@ public class EnderecoEntity {
 	private String cep;
 
 	@ManyToOne
-	@JoinColumn(name = "usuarioId")
+	@JoinColumn(name = "Usuario_id")
 	private UsuarioEntity usuario;
 	//	private List<Eletrodomestico> eletrodomesticos;
 
@@ -58,7 +58,7 @@ public class EnderecoEntity {
 				.numero(numero)
 				.bairro(bairro)
 				.cidade(cidade)
-				.estado(Estado.valueOf(Long.toString(estado)))				
+				.estado(Estado.getByOrdinal(estado.intValue()))
 				.cep(cep)
 				.build();
 	}

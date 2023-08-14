@@ -32,5 +32,8 @@ public enum Estado {
 	TO,
 	DF;
 
-
+	public static Estado getByOrdinal(int ordinal){
+		Estado[] values = values();
+		return values[ordinal];
+	}
 }

@@ -8,6 +8,6 @@ import com.grupo16.techchallenge.endereco.gateway.repository.jpa.entity.Endereco
 
 public interface EnderecoRepository extends JpaRepository<EnderecoEntity, Long> {
 
-	List<EnderecoEntity> findAllByUsuarioId(Long idUsuario);
+	List<EnderecoEntity> findByUsuarioId(Long idUsuario);
 
 }
