@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,12 +46,12 @@ public class EnderecoController {
         return id;
     }
 	
-	@GetMapping
+	@GetMapping("{idUsuario}")
 	public List<EnderecoJson> obterTodos(
 			@PathVariable(name = "idUsuario") Long idUsuario) {
 		log.trace("Start idUsuario={}", idUsuario);
 		
-		List<Endereco> enderecos = obterEnderecoUseCase.obterTodosPorIdUsuario(idUsuario);
+		List<Endereco> enderecos = obterEnderecoUseCase.obterTodos(idUsuario);
 		
 		List<EnderecoJson> enderecosJson = enderecos.stream().map(EnderecoJson::new).toList();
 		
@@ -69,5 +70,10 @@ public class EnderecoController {
 		criarAlterarEnderecoUseCase.alterar(endereco);
 		
 		log.trace("End");
+	}
+	
+	@DeleteMapping
+	public void delete() {
+		
 	}
 }
