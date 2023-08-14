@@ -1,5 +1,6 @@
 package com.grupo16.techchallenge.endereco.gateway.repository.mysql;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,18 @@ public class EnderecoMySQLGateway implements EnderecoRepositoryGateway {
 
 	@Override
 	public List<Endereco> obterTodosByIdUsuario(Long idUsuario) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			log.trace("Start idUsuario={}", idUsuario);
+			List<Endereco> enderecos = new ArrayList<>();
+			
+			List<EnderecoEntity> entities = enderecoRepository.findAllByUsuarioId(idUsuario);
+			
+			log.trace("End enderecos={}");
+			return null;
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ErrorToAccessDatabaseException();
+		}
+		
 	}
 }
