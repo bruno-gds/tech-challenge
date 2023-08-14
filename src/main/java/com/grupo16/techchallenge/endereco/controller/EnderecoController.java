@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,22 +46,8 @@ public class EnderecoController {
     }
 	
 	@GetMapping
-	public EnderecoJson obterPorIdUsuario(
-			@RequestParam(name = "idUsuario") Long idUsuario) {
-		log.trace("Start idUsuario={}", idUsuario);
-		
-		Endereco endereco = obterEnderecoUseCase.obterPorIdUsuario(idUsuario);
-		
-		EnderecoJson enderecoJson = new EnderecoJson(endereco);
-		
-		log.trace("End endereço={}", enderecoJson);
-		return enderecoJson;
-		
-	}
-	
-	@GetMapping
 	public List<EnderecoJson> obterTodos(
-			@RequestParam(name = "idUsuario") Long idUsuario) {
+			@PathVariable(name = "idUsuario") Long idUsuario) {
 		log.trace("Start idUsuario={}", idUsuario);
 		
 		List<Endereco> enderecos = obterEnderecoUseCase.obterTodosPorIdUsuario(idUsuario);

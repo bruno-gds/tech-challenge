@@ -2,6 +2,8 @@ package com.grupo16.techchallenge.endereco.domain;
 
 public enum Estado {
 
+	//ATENÇÃO: a posição dos estados não deve ser alterada, pois irá afetar no banco.  
+
 	AC,
 	AL,
 	AP,

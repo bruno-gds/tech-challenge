@@ -25,11 +25,22 @@ public class EnderecoEntity {
 	private Long id;
 	
 	private String rua;
+	private String numero;
+	private String bairro;
+	private String cidade;
+	private Long estado;
+	
+//	private Usuario usuario;
+//	private List<Eletrodomestico> eletrodomesticos;
 
 	
 	public EnderecoEntity(Endereco endereco) {
 		this.id = endereco.getId();
 		this.rua = endereco.getRua();
+		this.numero = endereco.getNumero();
+		this.bairro = endereco.getBairro();
+		this.cidade = endereco.getCidade();
+		this.estado = (long) endereco.getEstado().ordinal();
 	}
 	
 }
