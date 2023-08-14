@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,7 +36,9 @@ public class EnderecoController {
 
 	@ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Long criar(@Valid @RequestBody EnderecoJson enderecoJson) {
+    public Long criar(
+    		@Valid 
+    		@RequestBody(required = true) EnderecoJson enderecoJson) {
     	log.trace("Start enderecoJson={}", enderecoJson);
 
     	Endereco endereco = enderecoJson.mapToDomain();
@@ -47,7 +50,7 @@ public class EnderecoController {
 	
 	@GetMapping("{idUsuario}")
 	public List<EnderecoJson> obterTodos(
-			@PathVariable(name = "idUsuario") Long idUsuario) {
+			@PathVariable(name = "idUsuario", required = true) Long idUsuario) {
 		log.trace("Start idUsuario={}", idUsuario);
 		
 		List<Endereco> enderecos = obterEnderecoUseCase.obterTodos(idUsuario);
@@ -71,8 +74,14 @@ public class EnderecoController {
 		log.trace("End");
 	}
 	
-	@DeleteMapping
-	public void delete() {
+	@DeleteMapping("{id}")
+	public void delete(
+			@PathVariable(name = "id", required = true) Long idEndereco,
+			@RequestHeader(name = "id-usuario", required = true) Long idUsuario) {
+		log.trace("Start idEndereco={}, idUsuario={}", idEndereco, idUsuario);
 		
+		//TODO implementar
+		
+		log.trace("End");
 	}
 }
