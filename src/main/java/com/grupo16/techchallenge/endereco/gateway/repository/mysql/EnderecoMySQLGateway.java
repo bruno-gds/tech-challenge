@@ -1,6 +1,5 @@
 package com.grupo16.techchallenge.endereco.gateway.repository.mysql;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
