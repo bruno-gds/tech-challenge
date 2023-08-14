@@ -5,8 +5,8 @@ import com.grupo16.techchallenge.endereco.domain.Estado;
 import com.grupo16.techchallenge.user.domain.Usuario;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,9 +32,13 @@ public class EnderecoJson {
 	@NotBlank
     private String cidade;
 
-	@NotNull
+	@NotBlank
 	@Pattern(regexp = "^[A-Z]{2}$", message = "O estado deve estar no formato 'SP'")
     private String estado;
+
+	@NotBlank
+	@Size(min = 8, max = 8)
+	private String cep;
 	
 //	private UsuarioJson usuario;
 
@@ -54,6 +58,7 @@ public class EnderecoJson {
         		.bairro(bairro)
         		.cidade(cidade)
         		.estado(Estado.valueOf(estado))
+        		.cep(cep)
 //        		.usuario(usuario)
         		.build();
     }
@@ -64,6 +69,7 @@ public class EnderecoJson {
 		bairro = endereco.getBairro();
 		cidade = endereco.getCidade();
 		estado = String.valueOf(endereco.getEstado());
+		cep = endereco.getCep();
 //		usuario = endereco.getUsuario();
 		
 	}

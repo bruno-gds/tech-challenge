@@ -29,6 +29,7 @@ public class EnderecoEntity {
 	private String bairro;
 	private String cidade;
 	private Long estado;
+	private String cep;
 	
 //	private Usuario usuario;
 //	private List<Eletrodomestico> eletrodomesticos;
@@ -41,6 +42,7 @@ public class EnderecoEntity {
 		this.bairro = endereco.getBairro();
 		this.cidade = endereco.getCidade();
 		this.estado = (long) endereco.getEstado().ordinal();
+		this.cep = endereco.getCep();
 	}
 	
 }

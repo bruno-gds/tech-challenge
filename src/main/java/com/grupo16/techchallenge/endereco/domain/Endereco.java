@@ -20,6 +20,7 @@ public class Endereco {
 	private String bairro;
 	private String cidade;
 	private Estado estado;
+	private String cep;
 	private Usuario usuario;
 	private List<Eletrodomestico> eletrodomesticos;
 }
