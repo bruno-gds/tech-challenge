@@ -1,6 +1,7 @@
 package com.grupo16.techchallenge.endereco.gateway.repository.mysql;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -54,5 +55,11 @@ public class EnderecoMySQLGateway implements EnderecoRepositoryGateway {
 			throw new ErrorToAccessDatabaseException();
 		}
 		
+	}
+
+	@Override
+	public Optional<Endereco> obterByIdAndIdUsuario(Long id, Long idUsuario) {
+		// TODO Auto-generated method stub
+		return Optional.empty();
 	}
 }
