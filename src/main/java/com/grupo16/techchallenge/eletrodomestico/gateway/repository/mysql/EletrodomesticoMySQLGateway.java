@@ -1,5 +1,7 @@
 package com.grupo16.techchallenge.eletrodomestico.gateway.repository.mysql;
 
+import org.springframework.stereotype.Repository;
+
 import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
 import com.grupo16.techchallenge.eletrodomestico.gateway.EletrodomesticoRepositoryGateway;
 
@@ -9,6 +11,7 @@ import com.grupo16.techchallenge.eletrodomestico.gateway.EletrodomesticoReposito
  * Project Name: tech-challenge
  */
 
+@Repository
 public class EletrodomesticoMySQLGateway implements EletrodomesticoRepositoryGateway {
 
     @Override
