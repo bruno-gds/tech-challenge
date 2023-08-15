@@ -1,6 +1,8 @@
 package com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.entity;
 
+import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
 import com.grupo16.techchallenge.endereco.gateway.repository.jpa.entity.EnderecoEntity;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,4 +38,15 @@ public class EletrodomesticoEntity {
     @JoinColumn(name = "Eletrodomestico_id")
     private EnderecoEntity endereco;
 //    private List<MedicaoConsumo> medicoesConsumo;
+
+
+    public EletrodomesticoEntity(Eletrodomestico eletrodomestico) {
+        this.id = eletrodomestico.getId();
+        this.nome = eletrodomestico.getNome();
+        this.modelo = eletrodomestico.getModelo();
+        this.marca = eletrodomestico.getMarca();
+        this.cor = eletrodomestico.getCor();
+        this.potencia = eletrodomestico.getPotencia();
+        this.voltagem = eletrodomestico.getVoltagem();
+    }
 }
