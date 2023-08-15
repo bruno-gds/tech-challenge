@@ -6,7 +6,6 @@ import com.grupo16.techchallenge.endereco.domain.Endereco;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 @Builder
@@ -14,7 +13,6 @@ import lombok.ToString;
 @ToString
 public class Eletrodomestico {
 
-    @Setter
     private Long id;
     private String nome;
     private String modelo;
