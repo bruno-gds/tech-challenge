@@ -49,11 +49,11 @@ public class EnderecoController {
     }
 	
 	@GetMapping("{idUsuario}")
-	public List<EnderecoJson> obterTodos(
+	public List<EnderecoJson> obterTodosByIdUsuario(
 			@PathVariable(name = "idUsuario", required = true) Long idUsuario) {
 		log.trace("Start idUsuario={}", idUsuario);
 		
-		List<Endereco> enderecos = obterEnderecoUseCase.obterTodos(idUsuario);
+		List<Endereco> enderecos = obterEnderecoUseCase.obterTodosByIdUsuario(idUsuario);
 		
 		List<EnderecoJson> enderecosJson = enderecos.stream().map(EnderecoJson::new).toList();
 		

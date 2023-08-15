@@ -17,7 +17,7 @@ public class ObterEnderecoUseCase {
 	@Autowired
 	private EnderecoRepositoryGateway enderecoRepository;
 
-	public List<Endereco> obterTodos(Long idUsuario) {
+	public List<Endereco> obterTodosByIdUsuario(Long idUsuario) {
 		log.trace("Start idUsuario={}", idUsuario);
 		
 		List<Endereco> enderecos = enderecoRepository.obterTodosByIdUsuario(idUsuario);
