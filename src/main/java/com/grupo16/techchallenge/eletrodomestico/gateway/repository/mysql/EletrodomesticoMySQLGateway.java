@@ -1,13 +1,15 @@
 package com.grupo16.techchallenge.eletrodomestico.gateway.repository.mysql;
 
 import com.grupo16.techchallenge.eletrodomestico.gateway.exception.ErrorToAccessDatabaseException;
+import com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.entity.EletrodomesticoEntity;
 import com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.repository.EletrodomesticoRepository;
+import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
+import com.grupo16.techchallenge.eletrodomestico.gateway.EletrodomesticoRepositoryGateway;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
-import com.grupo16.techchallenge.eletrodomestico.gateway.EletrodomesticoRepositoryGateway;
 
 /**
  * @author Bruno Gomes Damascena dos santos (bruno-gds) < brunog.damascena@gmail.com >
@@ -27,7 +29,9 @@ public class EletrodomesticoMySQLGateway implements EletrodomesticoRepositoryGat
         try {
             log.trace("Start eletrodomestico={}", eletrodomestico);
 
-            eletrodomesticoRepository.save(eletrodomestico);
+            EletrodomesticoEntity eletrodomesticoEntity = new EletrodomesticoEntity(eletrodomestico);
+
+            eletrodomesticoRepository.save(eletrodomesticoEntity);
 
             log.trace("End id={}", eletrodomestico.getId());
             return eletrodomestico.getId();
