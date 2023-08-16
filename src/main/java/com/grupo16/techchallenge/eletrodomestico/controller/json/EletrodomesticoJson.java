@@ -4,32 +4,44 @@ import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class EletrodomesticoJson {
 
     @NotBlank
-    private String name;
+    private String nome;
 
     @NotBlank
-    private String model;
+    private String modelo;
 
     @NotBlank
-    private String brand;
+    private String marca;
 
-    private String color;
-
-    @NotNull
-    private Long power;
+    private String cor;
 
     @NotNull
-    private Long voltage;
+    private Long potencia;
 
-    public Eletrodomestico toHomeAppliance() {
+    @NotNull
+    private Long voltagem;
+
+    // TODO: BRUNO = Implementar endereco e medicoes consumo
+
+
+    public Eletrodomestico mapeandoParaEletrodomestico() {
+
         return Eletrodomestico.builder()
+                .nome(nome)
+                .modelo(modelo)
+                .marca(marca)
+                .cor(cor)
+                .potencia(potencia)
+                .voltagem(voltagem)
                 .build();
     }
 }
