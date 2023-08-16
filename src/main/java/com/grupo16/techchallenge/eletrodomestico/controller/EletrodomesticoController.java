@@ -1,18 +1,19 @@
 package com.grupo16.techchallenge.eletrodomestico.controller;
 
+import com.grupo16.techchallenge.eletrodomestico.controller.json.EletrodomesticoJson;
+import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
+import com.grupo16.techchallenge.eletrodomestico.usecase.EletrodomesticoUseCase;
+
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import com.grupo16.techchallenge.eletrodomestico.controller.json.EletrodomesticoJson;
-import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
-import com.grupo16.techchallenge.eletrodomestico.usecase.EletrodomesticoUseCase;
 
 @Slf4j
 @RestController
-@RequestMapping("/homeAppliances")
+@RequestMapping("/eletrodomesticos")
 public class EletrodomesticoController {
 
     @Autowired
@@ -20,14 +21,16 @@ public class EletrodomesticoController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Long create(@Valid @RequestBody EletrodomesticoJson eletrodomesticoJson) {
-        log.trace("Start homeApplianceJson={}", eletrodomesticoJson);
+    public Long create(
+            @Valid
+            @RequestBody
+            EletrodomesticoJson eletrodomesticoJson) {
+        log.trace("Start eletrodomesticoJson={}", eletrodomesticoJson);
 
-        Eletrodomestico homeAppliance = eletrodomesticoJson.toHomeAppliance();
+        Eletrodomestico eletrodomestico = eletrodomesticoJson.mapeandoParaEletrodomestico();
+        Long eletrodomesticoId = eletrodomesticoUseCase.criar(eletrodomestico);
 
-        Long homeApplianceId = eletrodomesticoUseCase.create(homeAppliance);
-
-        log.trace("End homeApplianceId={}", homeApplianceId);
-        return homeApplianceId;
+        log.trace("End eletrodomesticoId={}", eletrodomesticoId);
+        return eletrodomesticoId;
     }
 }
