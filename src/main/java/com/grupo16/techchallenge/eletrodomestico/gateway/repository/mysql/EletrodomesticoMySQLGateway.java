@@ -33,8 +33,8 @@ public class EletrodomesticoMySQLGateway implements EletrodomesticoRepositoryGat
 
             eletrodomesticoRepository.save(eletrodomesticoEntity);
 
-            log.trace("End id={}", eletrodomestico.getId());
-            return eletrodomestico.getId();
+            log.trace("End id={}", eletrodomesticoEntity.getId());
+            return eletrodomesticoEntity.getId();
 
         } catch (Exception e) {
             log.error(e.getMessage(), e);

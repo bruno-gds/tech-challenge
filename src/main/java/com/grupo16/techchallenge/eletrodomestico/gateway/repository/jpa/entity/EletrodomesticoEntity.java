@@ -9,8 +9,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 /**
  * @author Bruno Gomes Damascena dos santos (bruno-gds) < brunog.damascena@gmail.com >
  * Date: 15/08/2023
@@ -37,7 +35,7 @@ public class EletrodomesticoEntity {
     private Long voltagem;
 
     @ManyToOne
-    @JoinColumn(name = "Eletrodomestico_id")
+    @JoinColumn(name = "Endereco_id")
     private EnderecoEntity endereco;
 
 //    private List<MedicaoConsumo> medicoesConsumo;
