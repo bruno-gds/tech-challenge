@@ -10,12 +10,12 @@ import com.grupo16.techchallenge.eletrodomestico.usecase.exception.IllegalArgume
 
 @Slf4j
 @Service
-public class EletrodomesticoUseCase {
+public class CriarAlterarEletrodomesticoUseCase {
 
     @Autowired
-    private EletrodomesticoRepositoryGateway homeApplianceRepository;
+    private EletrodomesticoRepositoryGateway eletrodomesticoRepository;
 
-    public Long create(Eletrodomestico eletrodomestico) {
+    public Long criar(Eletrodomestico eletrodomestico) {
         log.trace("Start eletrodomestico={}", eletrodomestico);
 
         if (!eletrodomestico.getVoltagem().equals(110L) && !eletrodomestico.getVoltagem().equals(220L)) {
@@ -23,9 +23,17 @@ public class EletrodomesticoUseCase {
             throw new IllegalArgumentVoltageException();
         }
 
-        Long eletrodomesticoId = homeApplianceRepository.criar(eletrodomestico);
+        Long eletrodomesticoId = eletrodomesticoRepository.criar(eletrodomestico);
 
         log.trace("End eletrodomesticoId={}", eletrodomesticoId);
         return eletrodomesticoId;
+    }
+
+    public void alterar(Eletrodomestico eletrodomestico) {
+        log.trace("Start eletrodomestico={}", eletrodomestico);
+
+
+
+        log.trace("End");
     }
 }
