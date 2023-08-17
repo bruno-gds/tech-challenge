@@ -1,20 +1,17 @@
 package com.grupo16.techchallenge.endereco.gateway.repository.jpa.entity;
 
+import com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.entity.EletrodomesticoEntity;
 import com.grupo16.techchallenge.endereco.domain.Endereco;
 import com.grupo16.techchallenge.endereco.domain.Estado;
 import com.grupo16.techchallenge.user.gateway.repository.jpa.entity.UsuarioEntity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Builder
 @Getter
@@ -38,7 +35,9 @@ public class EnderecoEntity {
 	@ManyToOne
 	@JoinColumn(name = "Usuario_id")
 	private UsuarioEntity usuario;
-	//	private List<Eletrodomestico> eletrodomesticos;
+
+	@OneToMany(mappedBy = "endereco")
+	private List<EletrodomesticoEntity> eletrodomesticos;
 
 
 	public EnderecoEntity(Endereco endereco) {
