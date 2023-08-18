@@ -1,19 +1,25 @@
 package com.grupo16.techchallenge.endereco.gateway.repository.jpa.entity;
 
+import java.util.List;
+
 import com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.entity.EletrodomesticoEntity;
 import com.grupo16.techchallenge.endereco.domain.Endereco;
 import com.grupo16.techchallenge.endereco.domain.Estado;
-import com.grupo16.techchallenge.usuario.domain.Genero;
 import com.grupo16.techchallenge.usuario.domain.Usuario;
 import com.grupo16.techchallenge.usuario.gateway.repository.jpa.entity.UsuarioEntity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Builder
 @Getter
@@ -55,7 +61,7 @@ public class EnderecoEntity {
 				.build();
 	}
 
-	public Endereco obterEndereco() {
+	public Endereco mapToDomain() {
 		return Endereco.builder()
 				.id(id)
 				.rua(rua)

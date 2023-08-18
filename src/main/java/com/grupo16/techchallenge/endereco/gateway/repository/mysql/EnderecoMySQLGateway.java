@@ -22,7 +22,7 @@ public class EnderecoMySQLGateway implements EnderecoRepositoryGateway {
 	private EnderecoRepository enderecoRepository;
 	
 	@Override
-	public Long criar(Endereco endereco) {		
+	public Long salvar(Endereco endereco) {		
 		try {
 			log.trace("Start endereco={}", endereco);
 			
@@ -40,13 +40,13 @@ public class EnderecoMySQLGateway implements EnderecoRepositoryGateway {
 	}
 
 	@Override
-	public List<Endereco> obterTodosByIdUsuario(Long idUsuario) {
+	public List<Endereco> obterTodosByUsuarioId(Long idUsuario) {
 		try {
 			log.trace("Start idUsuario={}", idUsuario);
 			
 			List<EnderecoEntity> entities = enderecoRepository.findByUsuarioId(idUsuario);
 			
-			List<Endereco> enderecos = entities.stream().map(EnderecoEntity::obterEndereco).toList();
+			List<Endereco> enderecos = entities.stream().map(EnderecoEntity::mapToDomain).toList();
 			
 			log.trace("End enderecos={}", enderecos);
 			return enderecos;
@@ -58,8 +58,26 @@ public class EnderecoMySQLGateway implements EnderecoRepositoryGateway {
 	}
 
 	@Override
-	public Optional<Endereco> obterByIdAndIdUsuario(Long id, Long idUsuario) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+	public Optional<Endereco> obterByIdAndUsuarioId(Long id, Long usuarioId) {
+		try {
+			log.trace("Start enderecoId={}, usuarioId={}", id, usuarioId);
+			
+			Optional<EnderecoEntity> entityOp = enderecoRepository.findByIdAndUsuarioId(id, usuarioId);
+			Optional<Endereco> enderecoOp = Optional.empty(); 
+			
+			if(entityOp.isEmpty()) {
+				log.trace("End endereco={}");
+				return enderecoOp; 
+			}
+			
+			Endereco endereco = entityOp.get().mapToDomain();
+			
+			log.trace("End endereco={}", endereco);
+			return Optional.of(endereco);
+			
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ErrorToAccessDatabaseException();
+		}
 	}
 }

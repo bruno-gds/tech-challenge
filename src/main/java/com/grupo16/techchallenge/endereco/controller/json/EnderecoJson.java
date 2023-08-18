@@ -3,7 +3,6 @@ package com.grupo16.techchallenge.endereco.controller.json;
 import com.grupo16.techchallenge.endereco.domain.Endereco;
 import com.grupo16.techchallenge.endereco.domain.Estado;
 import com.grupo16.techchallenge.usuario.controller.json.UsuarioJson;
-import com.grupo16.techchallenge.usuario.domain.Genero;
 import com.grupo16.techchallenge.usuario.domain.Usuario;
 
 import jakarta.validation.constraints.NotBlank;
@@ -21,6 +20,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EnderecoJson {
+	
+	private Long id;
 
 	@NotBlank
     private String rua;
@@ -43,12 +44,6 @@ public class EnderecoJson {
 	private String cep;
 	
 	private UsuarioJson usuario;
-
-	
-//	public EnderecoJson(Endereco endereco) {
-//		return EnderecoJson.
-//	}
-	
 	
     public Endereco mapToDomain() {
     	Usuario usuario = Usuario.builder()
@@ -56,6 +51,7 @@ public class EnderecoJson {
     			.build();
     	
         return Endereco.builder()
+        		.id(id)
         		.rua(rua)
         		.numero(numero)
         		.bairro(bairro)

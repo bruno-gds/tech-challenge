@@ -7,10 +7,10 @@ import com.grupo16.techchallenge.endereco.domain.Endereco;
 
 public interface EnderecoRepositoryGateway {
 	
-	public Long criar(Endereco endereco);
+	public Long salvar(Endereco endereco);
 
-	public List<Endereco> obterTodosByIdUsuario(Long idUsuario);
+	public List<Endereco> obterTodosByUsuarioId(Long idUsuario);
 
-	public Optional<Endereco> obterByIdAndIdUsuario(Long id, Long idUsuario);
+	public Optional<Endereco> obterByIdAndUsuarioId(Long id, Long idUsuario);
 
 }
