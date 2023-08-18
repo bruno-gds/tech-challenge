@@ -75,6 +75,7 @@ public class EnderecoJson {
 		this.cep = endereco.getCep();
 		this.usuario = UsuarioJson.builder()
 				.id(endereco.getUsuario().getId())
+				.nome(endereco.getUsuario().getNome())
 				.cpf(endereco.getUsuario().getCpf())
 				.dataNascimento(endereco.getUsuario().getDataNascimento())
 				.build();

@@ -1,5 +1,6 @@
 package com.grupo16.techchallenge.usuario.gateway.repository.jpa.entity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.grupo16.techchallenge.endereco.gateway.repository.jpa.entity.EnderecoEntity;
@@ -26,6 +27,11 @@ public class UsuarioEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	private String nome;
+	private String cpf;
+	private LocalDate dataNascimento;
+	private int genero;
 	
 	@OneToMany(mappedBy = "usuario")
 	private List<EnderecoEntity> enderecos;
