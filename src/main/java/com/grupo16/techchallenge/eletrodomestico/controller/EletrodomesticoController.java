@@ -21,7 +21,7 @@ public class EletrodomesticoController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Long create(
+    public Long criar(
             @Valid
             @RequestBody
             EletrodomesticoJson eletrodomesticoJson) {
@@ -32,5 +32,18 @@ public class EletrodomesticoController {
 
         log.trace("End eletrodomesticoId={}", eletrodomesticoId);
         return eletrodomesticoId;
+    }
+
+    @PatchMapping
+    public void alterar(
+        @RequestBody EletrodomesticoJson eletrodomesticoJson
+    ) {
+        log.trace("Start eletrodomesticoJson={}", eletrodomesticoJson);
+
+        Eletrodomestico eletrodomestico = eletrodomesticoJson.mapeandoParaEletrodomestico();
+
+        criarAlterarEletrodomesticoUseCase.alterar(eletrodomestico);
+
+        log.trace("End");
     }
 }

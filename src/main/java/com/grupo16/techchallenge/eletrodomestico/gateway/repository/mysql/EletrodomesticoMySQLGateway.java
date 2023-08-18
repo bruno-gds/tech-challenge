@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 
 /**
  * @author Bruno Gomes Damascena dos santos (bruno-gds) < brunog.damascena@gmail.com >
@@ -40,5 +42,10 @@ public class EletrodomesticoMySQLGateway implements EletrodomesticoRepositoryGat
             log.error(e.getMessage(), e);
             throw new ErrorToAccessDatabaseException();
         }
+    }
+
+    @Override
+    public Optional<Eletrodomestico> obterIdEIdEndereco(Long id, Long idEndereco) {
+        return Optional.empty();
     }
 }

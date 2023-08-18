@@ -2,6 +2,7 @@ package com.grupo16.techchallenge.eletrodomestico.controller.json;
 
 import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
 
+import com.grupo16.techchallenge.endereco.controller.json.EnderecoJson;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -30,7 +31,9 @@ public class EletrodomesticoJson {
     @NotNull
     private Long voltagem;
 
-    // TODO: BRUNO = Implementar endereco e medicoes consumo
+    private EnderecoJson endereco;
+
+    // TODO: BRUNO = Implementar medicoes consumo
 
 
     public Eletrodomestico mapeandoParaEletrodomestico() {

@@ -1,6 +1,8 @@
 package com.grupo16.techchallenge.eletrodomestico.usecase;
 
+import com.grupo16.techchallenge.eletrodomestico.usecase.exception.EletrodomesticoNaoEncontradoException;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +34,13 @@ public class CriarAlterarEletrodomesticoUseCase {
     public void alterar(Eletrodomestico eletrodomestico) {
         log.trace("Start eletrodomestico={}", eletrodomestico);
 
+        val eletrodomesticoOp = eletrodomesticoRepository
+                .obterIdEIdEndereco(
+                        eletrodomestico.getId(),
+                        eletrodomestico.getEndereco().getId()
+                );
 
+        if(eletrodomesticoOp.isEmpty()) throw new EletrodomesticoNaoEncontradoException();
 
         log.trace("End");
     }

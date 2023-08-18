@@ -49,5 +49,8 @@ public class EletrodomesticoEntity {
         this.cor = eletrodomestico.getCor();
         this.potencia = eletrodomestico.getPotencia();
         this.voltagem = eletrodomestico.getVoltagem();
+        this.endereco = EnderecoEntity.builder()
+                .id(eletrodomestico.getEndereco().getId())
+                .build();
     }
 }
