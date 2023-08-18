@@ -1,4 +1,4 @@
-package com.grupo16.techchallenge.user.gateway.exception;
+package com.grupo16.techchallenge.usuario.gateway.exception;
 
 import com.grupo16.techchallenge.common.exception.SystemBaseException;
 

@@ -1,4 +1,4 @@
-package com.grupo16.techchallenge.user.gateway.repository.jpa.entity;
+package com.grupo16.techchallenge.usuario.gateway.repository.jpa.entity;
 
 import java.util.List;
 

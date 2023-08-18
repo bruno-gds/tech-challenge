@@ -1,4 +1,4 @@
-package com.grupo16.techchallenge.user.controller;
+package com.grupo16.techchallenge.usuario.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.grupo16.techchallenge.user.controller.json.UserJson;
-import com.grupo16.techchallenge.user.domain.Usuario;
-import com.grupo16.techchallenge.user.usecase.UserUseCase;
+import com.grupo16.techchallenge.usuario.controller.json.UsuarioJson;
+import com.grupo16.techchallenge.usuario.domain.Usuario;
+import com.grupo16.techchallenge.usuario.usecase.UserUseCase;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -26,10 +26,10 @@ public class UserController {
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
 	public Long create(
-			@Valid @RequestBody UserJson userJson) {
+			@Valid @RequestBody UsuarioJson userJson) {
 		log.trace("Start userJson={}", userJson);
 		
-		Usuario user = userJson.toUser();
+		Usuario user = userJson.toUsuario();
 		
 		Long userId = userUseCase.create(user);
 

@@ -1,4 +1,4 @@
-package com.grupo16.techchallenge.user.usecase.exception;
+package com.grupo16.techchallenge.usuario.usecase.exception;
 
 import com.grupo16.techchallenge.common.exception.SystemBaseException;
 

@@ -1,4 +1,4 @@
-package com.grupo16.techchallenge.user.domain;
+package com.grupo16.techchallenge.usuario.domain;
 
 public enum TipoParentesco {
 	

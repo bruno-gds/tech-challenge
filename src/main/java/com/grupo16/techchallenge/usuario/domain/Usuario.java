@@ -1,4 +1,4 @@
-package com.grupo16.techchallenge.user.domain;
+package com.grupo16.techchallenge.usuario.domain;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,7 +21,7 @@ public class Usuario {
 	private String cpf;
 	private LocalDate dataNascimento;
 	private Genero genero;	
-	private List<Parentesco> parentes;
+	private List<Parente> parentes;
 	private List<Endereco> enderecos;
 	
 }

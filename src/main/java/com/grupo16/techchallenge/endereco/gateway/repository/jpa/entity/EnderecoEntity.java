@@ -3,7 +3,8 @@ package com.grupo16.techchallenge.endereco.gateway.repository.jpa.entity;
 import com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.entity.EletrodomesticoEntity;
 import com.grupo16.techchallenge.endereco.domain.Endereco;
 import com.grupo16.techchallenge.endereco.domain.Estado;
-import com.grupo16.techchallenge.user.gateway.repository.jpa.entity.UsuarioEntity;
+import com.grupo16.techchallenge.usuario.domain.Usuario;
+import com.grupo16.techchallenge.usuario.gateway.repository.jpa.entity.UsuarioEntity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -48,6 +49,9 @@ public class EnderecoEntity {
 		this.cidade = endereco.getCidade();
 		this.estado = (long) endereco.getEstado().ordinal();
 		this.cep = endereco.getCep();
+		this.usuario = UsuarioEntity.builder()
+				.id(endereco.getUsuario().getId())
+				.build();
 	}
 
 	public Endereco obterEndereco() {
@@ -59,6 +63,9 @@ public class EnderecoEntity {
 				.cidade(cidade)
 				.estado(Estado.getByOrdinal(estado.intValue()))
 				.cep(cep)
+				.usuario(Usuario.builder()
+						.id(this.usuario.getId())
+						.build())
 				.build();
 	}
 

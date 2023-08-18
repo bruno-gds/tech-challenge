@@ -3,7 +3,7 @@ package com.grupo16.techchallenge.endereco.domain;
 import java.util.List;
 
 import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
-import com.grupo16.techchallenge.user.domain.Usuario;
+import com.grupo16.techchallenge.usuario.domain.Usuario;
 
 import lombok.Builder;
 import lombok.Getter;
