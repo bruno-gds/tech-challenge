@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.grupo16.techchallenge.usuario.domain.Usuario;
-import com.grupo16.techchallenge.usuario.gateway.UserRepositoryGateway;
-import com.grupo16.techchallenge.usuario.usecase.exception.CpfAlreadyRegisteredException;
+import com.grupo16.techchallenge.usuario.gateway.UsuarioRepositoryGateway;
+import com.grupo16.techchallenge.usuario.usecase.exception.CpfJaCadastradoException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,18 +16,18 @@ import lombok.extern.slf4j.Slf4j;
 public class CriarAlterarUsuarioUseCase {
 	
 	@Autowired
-	private UserRepositoryGateway userRepository;
+	private UsuarioRepositoryGateway usuarioRepository;
 
 	public Long criar(Usuario usuario) {
 		log.trace("Start usuario={}", usuario);
 		
-		Optional<Usuario> usuarioOp = userRepository.getByCpf(usuario.getCpf());
+		Optional<Usuario> usuarioOp = usuarioRepository.obterByCpf(usuario.getCpf());
 		if(usuarioOp.isPresent()) {
 			log.warn("CPF já cadastrado: {}", usuario.getCpf());
-			throw new CpfAlreadyRegisteredException();
+			throw new CpfJaCadastradoException();
 		}
 		
-		Long usuarioId = userRepository.create(usuario);
+		Long usuarioId = usuarioRepository.salvar(usuario);
 		
 		log.trace("End usuarioId={}", usuarioId);
 		return usuarioId;

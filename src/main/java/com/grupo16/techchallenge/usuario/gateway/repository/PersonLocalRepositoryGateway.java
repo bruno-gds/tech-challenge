@@ -7,14 +7,14 @@ import java.util.Set;
 import org.springframework.stereotype.Repository;
 
 import com.grupo16.techchallenge.usuario.domain.Usuario;
-import com.grupo16.techchallenge.usuario.gateway.UserRepositoryGateway;
+import com.grupo16.techchallenge.usuario.gateway.UsuarioRepositoryGateway;
 import com.grupo16.techchallenge.usuario.gateway.exception.ErrorToAccessDatabaseException;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Repository
-public class PersonLocalRepositoryGateway implements UserRepositoryGateway {
+public class PersonLocalRepositoryGateway implements UsuarioRepositoryGateway {
 	private Long sequenceId = 1L;
 	
 	Set<Usuario> people;
@@ -24,7 +24,7 @@ public class PersonLocalRepositoryGateway implements UserRepositoryGateway {
 	}
 
 	@Override
-	public Long create(Usuario person) {
+	public Long salvar(Usuario person) {
 		try {
 			log.trace("Start person={}", person);
 			person.setId(sequenceId++);
@@ -43,7 +43,7 @@ public class PersonLocalRepositoryGateway implements UserRepositoryGateway {
 	}
 
 	@Override
-	public Optional<Usuario> getByCpf(String cpf) {
+	public Optional<Usuario> obterByCpf(String cpf) {
 		try {
 			return people.stream().filter(p -> p.getCpf().equals(cpf)).findFirst();
 
