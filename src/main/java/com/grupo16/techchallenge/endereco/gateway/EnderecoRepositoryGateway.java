@@ -15,4 +15,6 @@ public interface EnderecoRepositoryGateway {
 
 	public Optional<Endereco> obter(Long id);
 
+	public void remover(Long id);
+
 }

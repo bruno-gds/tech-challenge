@@ -86,4 +86,10 @@ public class EnderecoMySQLGateway implements EnderecoRepositoryGateway {
 		// TODO Auto-generated method stub
 		return Optional.empty();
 	}
+
+	@Override
+	public void remover(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
 }
