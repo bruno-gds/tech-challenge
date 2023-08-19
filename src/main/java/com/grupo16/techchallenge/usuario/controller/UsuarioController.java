@@ -30,7 +30,7 @@ public class UsuarioController {
 			@RequestBody UsuarioJson usuarioJson) {
 		log.trace("Start usuarioJson={}", usuarioJson);
 		
-		Usuario usuario = usuarioJson.mapearParaDomain();
+		Usuario usuario = usuarioJson.mapearParaUsuarioDomain();
 		
 		Long usuarioId = userUseCase.criar(usuario);
 

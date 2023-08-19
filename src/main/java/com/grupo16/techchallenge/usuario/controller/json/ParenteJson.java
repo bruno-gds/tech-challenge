@@ -11,12 +11,11 @@ import lombok.ToString;
 @ToString
 public class ParenteJson {
 	
-	private Long id;
 	private UsuarioJson usuario;
 	private UsuarioJson usuarioParente;
 	private String tipoParentesco;
 	
-	public Parente toParente() {
+	public Parente mapearParaParenteDomain() {
 		return Parente.builder()
 				.usuarioParente(Usuario.builder()
 						.nome(usuarioParente.getNome())

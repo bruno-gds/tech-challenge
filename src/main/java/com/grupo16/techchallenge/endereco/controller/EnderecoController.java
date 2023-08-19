@@ -45,7 +45,7 @@ public class EnderecoController {
     		@RequestBody(required = true) EnderecoJson enderecoJson) {
     	log.trace("Start enderecoJson={}", enderecoJson);
 
-    	Endereco endereco = enderecoJson.mapToDomain();
+    	Endereco endereco = enderecoJson.mapearParaEnderecoDomain();
         Long id = criarAlterarEnderecoUseCase.criar(endereco);
         
         log.trace("End id={}", id);
@@ -71,7 +71,7 @@ public class EnderecoController {
 			@RequestBody(required = true) EnderecoJson enderecoJson) {
 		log.trace("Start enderecoJson={}", enderecoJson);
 		
-		Endereco endereco = enderecoJson.mapToDomain();
+		Endereco endereco = enderecoJson.mapearParaEnderecoDomain();
 		
 		criarAlterarEnderecoUseCase.alterar(endereco);
 		

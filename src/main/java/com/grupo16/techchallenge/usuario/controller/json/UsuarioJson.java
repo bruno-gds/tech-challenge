@@ -38,10 +38,10 @@ public class UsuarioJson {
 	private String genero;
 	private List<ParenteJson> parentes;
 	
-	public Usuario mapearParaDomain() {
+	public Usuario mapearParaUsuarioDomain() {
 		List<Parente> usuariosParentes = new ArrayList<>();
 		if(parentes != null) {
-			usuariosParentes = parentes.stream().map(p -> p.toParente()).toList();
+			usuariosParentes = parentes.stream().map(p -> p.mapearParaParenteDomain()).toList();
 		}
 		
 		return Usuario.builder()
