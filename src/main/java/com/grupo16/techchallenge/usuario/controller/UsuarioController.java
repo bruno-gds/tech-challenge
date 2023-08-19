@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo16.techchallenge.usuario.controller.json.UsuarioJson;
 import com.grupo16.techchallenge.usuario.domain.Usuario;
-import com.grupo16.techchallenge.usuario.usecase.UserUseCase;
+import com.grupo16.techchallenge.usuario.usecase.CriarAlterarUsuarioUseCase;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UsuarioController {
 	
 	@Autowired
-	private UserUseCase userUseCase;
+	private CriarAlterarUsuarioUseCase userUseCase;
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
@@ -32,7 +32,7 @@ public class UsuarioController {
 		
 		Usuario usuario = usuarioJson.mapearParaDomain();
 		
-		Long usuarioId = userUseCase.create(usuario);
+		Long usuarioId = userUseCase.criar(usuario);
 
 		log.trace("End usuarioId={}", usuarioId);
 		return usuarioId;

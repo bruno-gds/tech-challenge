@@ -13,23 +13,23 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class UserUseCase {
+public class CriarAlterarUsuarioUseCase {
 	
 	@Autowired
 	private UserRepositoryGateway userRepository;
 
-	public Long create(Usuario user) {
-		log.trace("Start user={}", user);
+	public Long criar(Usuario usuario) {
+		log.trace("Start usuario={}", usuario);
 		
-		Optional<Usuario> userOp = userRepository.getByCpf(user.getCpf());
-		if(userOp.isPresent()) {
-			log.warn("CPF já cadastrado: {}", user.getCpf());
+		Optional<Usuario> usuarioOp = userRepository.getByCpf(usuario.getCpf());
+		if(usuarioOp.isPresent()) {
+			log.warn("CPF já cadastrado: {}", usuario.getCpf());
 			throw new CpfAlreadyRegisteredException();
 		}
 		
-		Long userId = userRepository.create(user);
+		Long usuarioId = userRepository.create(usuario);
 		
-		log.trace("End userId={}", userId);
-		return userId;
+		log.trace("End usuarioId={}", usuarioId);
+		return usuarioId;
 	}
 }
