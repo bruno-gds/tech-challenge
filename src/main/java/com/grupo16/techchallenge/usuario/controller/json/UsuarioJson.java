@@ -38,7 +38,7 @@ public class UsuarioJson {
 	private String genero;
 	private List<ParenteJson> parentes;
 	
-	public Usuario toUsuario() {
+	public Usuario mapearParaDomain() {
 		List<Parente> usuariosParentes = new ArrayList<>();
 		if(parentes != null) {
 			usuariosParentes = parentes.stream().map(p -> p.toParente()).toList();

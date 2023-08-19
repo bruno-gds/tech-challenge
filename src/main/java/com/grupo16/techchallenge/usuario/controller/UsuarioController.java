@@ -16,24 +16,25 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RequestMapping("/users")
+@RequestMapping("/usuarios")
 @RestController
-public class UserController {
+public class UsuarioController {
 	
 	@Autowired
 	private UserUseCase userUseCase;
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
-	public Long create(
-			@Valid @RequestBody UsuarioJson userJson) {
-		log.trace("Start userJson={}", userJson);
+	public Long criar(
+			@Valid 
+			@RequestBody UsuarioJson usuarioJson) {
+		log.trace("Start usuarioJson={}", usuarioJson);
 		
-		Usuario user = userJson.toUsuario();
+		Usuario usuario = usuarioJson.mapearParaDomain();
 		
-		Long userId = userUseCase.create(user);
+		Long usuarioId = userUseCase.create(usuario);
 
-		log.trace("End userId={}", userId);
-		return userId;
+		log.trace("End usuarioId={}", usuarioId);
+		return usuarioId;
 	}
 }
