@@ -1,40 +1,33 @@
-package com.grupo16.techchallenge.usuario.gateway.repository;
+package com.grupo16.techchallenge.usuario.gateway.repository.mysql;
 
-import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.grupo16.techchallenge.usuario.domain.Usuario;
 import com.grupo16.techchallenge.usuario.gateway.UsuarioRepositoryGateway;
 import com.grupo16.techchallenge.usuario.gateway.exception.ErrorToAccessDatabaseException;
+import com.grupo16.techchallenge.usuario.gateway.repository.jpa.repository.UsuarioRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Repository
-public class PersonLocalRepositoryGateway implements UsuarioRepositoryGateway {
-	private Long sequenceId = 1L;
+public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 	
-	Set<Usuario> people;
-
-	public PersonLocalRepositoryGateway() {
-		this.people = new HashSet<>();
-	}
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 
 	@Override
-	public Long salvar(Usuario person) {
+	public Long salvar(Usuario usuario) {
 		try {
-			log.trace("Start person={}", person);
-			person.setId(sequenceId++);
+			log.trace("Start usuario={}", usuario);
 			
-			people.add(person);
+			//TODO: implementar
 			
-			Long personId = person.getId();
-			
-			log.trace("End personId={}", personId);
-			return personId;
+			log.trace("End usuarioId={}");
+			return null;
 			
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -45,7 +38,12 @@ public class PersonLocalRepositoryGateway implements UsuarioRepositoryGateway {
 	@Override
 	public Optional<Usuario> obterByCpf(String cpf) {
 		try {
-			return people.stream().filter(p -> p.getCpf().equals(cpf)).findFirst();
+			log.trace("Start cpf={}", cpf);
+			
+			//TODO: implementar
+			
+			log.trace("End usuarioOp={}");
+			return null;
 
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
