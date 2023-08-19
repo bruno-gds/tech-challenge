@@ -40,5 +40,14 @@ public class ObterEnderecoUseCase {
 		log.trace("End endereco={}", enderecoOp.get());
 		return enderecoOp.get();
 	}
+	
+	public Endereco obter(Long id) {
+		log.trace("Start id={}", id);
+		
+		Optional<Endereco> enderecoOp = enderecoRepository.obter(id);
+		
+		log.trace("End endereco={}");
+		return null;
+	}
 
 }

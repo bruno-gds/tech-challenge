@@ -13,4 +13,6 @@ public interface EnderecoRepositoryGateway {
 
 	public Optional<Endereco> obterByIdAndUsuarioId(Long id, Long idUsuario);
 
+	public Optional<Endereco> obter(Long id);
+
 }

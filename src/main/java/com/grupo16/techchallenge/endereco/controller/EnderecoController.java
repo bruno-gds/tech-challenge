@@ -10,14 +10,15 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo16.techchallenge.endereco.controller.json.EnderecoJson;
 import com.grupo16.techchallenge.endereco.domain.Endereco;
 import com.grupo16.techchallenge.endereco.usecase.CriarAlterarEnderecoUseCase;
+import com.grupo16.techchallenge.endereco.usecase.RemoverEnderecoUseCase;
 import com.grupo16.techchallenge.endereco.usecase.ObterEnderecoUseCase;
 
 import jakarta.validation.Valid;
@@ -33,6 +34,9 @@ public class EnderecoController {
 
 	@Autowired	
 	private ObterEnderecoUseCase obterEnderecoUseCase;
+	
+	@Autowired	
+	private RemoverEnderecoUseCase removerEnderecoUseCase;
 
 	@ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -63,7 +67,7 @@ public class EnderecoController {
 	}
 	
 	@PatchMapping
-	public void update(
+	public void alterar(
 			@RequestBody(required = true) EnderecoJson enderecoJson) {
 		log.trace("Start enderecoJson={}", enderecoJson);
 		
@@ -75,13 +79,30 @@ public class EnderecoController {
 	}
 	
 	@DeleteMapping("{id}")
-	public void delete(
-			@PathVariable(name = "id", required = true) Long idEndereco,
-			@RequestHeader(name = "id-usuario", required = true) Long idUsuario) {
-		log.trace("Start idEndereco={}, idUsuario={}", idEndereco, idUsuario);
+	public void remover(
+			@PathVariable(name = "id", required = true) Long id) {
+		log.trace("Start id={}", id);
 		
-		//TODO implementar
-		
+		removerEnderecoUseCase.remover(id);
+				
 		log.trace("End");
 	}
+	
+	@GetMapping
+	public List<EnderecoJson> buscar(
+			@RequestParam(name = "rua", required = false) String rua,
+			@RequestParam(name = "bairro", required = false) String bairro,
+			@RequestParam(name = "cidade", required = false) String cidade,
+			@RequestParam(name = "estado", required = false) String estado,
+			@RequestParam(name = "cep", required = false) String cep){
+		
+		/*
+		 * TODO implementar
+		 * A busca deve ser capaz de filtrar as informações por rua, bairro, 
+		 * cidade ou outra informação relevante.
+		 */
+		
+		return null;
+	}
+	
 }

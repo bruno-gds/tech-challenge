@@ -80,4 +80,10 @@ public class EnderecoMySQLGateway implements EnderecoRepositoryGateway {
 			throw new ErrorToAccessDatabaseException();
 		}
 	}
+
+	@Override
+	public Optional<Endereco> obter(Long id) {
+		// TODO Auto-generated method stub
+		return Optional.empty();
+	}
 }
