@@ -62,29 +62,43 @@ public class EnderecoMySQLGateway implements EnderecoRepositoryGateway {
 		try {
 			log.trace("Start enderecoId={}, usuarioId={}", id, usuarioId);
 			
-			Optional<EnderecoEntity> entityOp = enderecoRepository.findByIdAndUsuarioId(id, usuarioId);
-			Optional<Endereco> enderecoOp = Optional.empty(); 
+			Optional<EnderecoEntity> entityOp = enderecoRepository.findByIdAndUsuarioId(id, usuarioId);		
+			Optional<Endereco> enderecoOp = checarSeEntityExisteMapearParaDomain(entityOp);
 			
-			if(entityOp.isEmpty()) {
-				log.trace("End endereco={}");
-				return enderecoOp; 
-			}
-			
-			Endereco endereco = entityOp.get().mapToDomain();
-			
-			log.trace("End endereco={}", endereco);
-			return Optional.of(endereco);
+			log.trace("End enderecoOp={}", enderecoOp);
+			return enderecoOp;
 			
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw new ErrorToAccessDatabaseException();
 		}
 	}
-
+	
 	@Override
 	public Optional<Endereco> obter(Long id) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+		try {
+			log.trace("Start id={}", id);
+			
+			Optional<EnderecoEntity> entityOp = enderecoRepository.findById(id);
+			Optional<Endereco> enderecoOp = checarSeEntityExisteMapearParaDomain(entityOp);
+			
+			log.trace("End enderecoOp={}", enderecoOp);
+			return enderecoOp;
+			
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ErrorToAccessDatabaseException();
+		}
+		
+	}
+	
+	private Optional<Endereco> checarSeEntityExisteMapearParaDomain(Optional<EnderecoEntity> entityOp){
+		Optional<Endereco> enderecoOp = Optional.empty();
+		if(entityOp.isEmpty()) {
+			return enderecoOp; 
+		}
+		Endereco endereco = entityOp.get().mapToDomain();
+		return Optional.of(endereco);
 	}
 
 	@Override
