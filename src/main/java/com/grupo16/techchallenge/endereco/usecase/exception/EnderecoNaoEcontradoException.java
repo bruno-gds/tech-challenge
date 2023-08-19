@@ -10,6 +10,6 @@ public class EnderecoNaoEcontradoException extends SystemBaseException{
 	
 	private final String code = "tc.endereco.enderecoNaoEcontrado";
 	private final String message = "Endereço não encontrado.";
-	private final Integer httpStatus = 422;
+	private final Integer httpStatus = 404;
 
 }

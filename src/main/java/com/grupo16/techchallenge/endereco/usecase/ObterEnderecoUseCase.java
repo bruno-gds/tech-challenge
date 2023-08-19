@@ -30,12 +30,9 @@ public class ObterEnderecoUseCase {
 
 	public Endereco obterByIdAndUsuarioId(Long id, Long idUsuario) {
 		log.trace("Start idEndereco={}, idUsuario={}", id, idUsuario);
-		Optional<Endereco> enderecoOp = enderecoRepository.obterByIdAndUsuarioId(id, idUsuario);
 		
-		if(enderecoOp.isEmpty()) {
-			log.warn("Endereco não encontrado.");
-			throw new EnderecoNaoEcontradoException();
-		}
+		Optional<Endereco> enderecoOp = enderecoRepository.obterByIdAndUsuarioId(id, idUsuario);
+		checarSeEnderecoFoiEncontrado(enderecoOp);
 	
 		log.trace("End endereco={}", enderecoOp.get());
 		return enderecoOp.get();
@@ -45,9 +42,16 @@ public class ObterEnderecoUseCase {
 		log.trace("Start id={}", id);
 		
 		Optional<Endereco> enderecoOp = enderecoRepository.obter(id);
+		checarSeEnderecoFoiEncontrado(enderecoOp);
 		
-		log.trace("End endereco={}");
-		return null;
+		log.trace("End endereco={}", enderecoOp.get());
+		return enderecoOp.get();
 	}
 
+	private void checarSeEnderecoFoiEncontrado(Optional<Endereco> enderecoOp) {
+		if(enderecoOp.isEmpty()) {
+			log.warn("Endereco não encontrado.");
+			throw new EnderecoNaoEcontradoException();
+		}
+	}
 }
