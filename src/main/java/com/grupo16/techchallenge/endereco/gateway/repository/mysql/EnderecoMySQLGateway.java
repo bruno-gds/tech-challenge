@@ -92,6 +92,22 @@ public class EnderecoMySQLGateway implements EnderecoRepositoryGateway {
 		
 	}
 	
+	@Override
+	public void remover(Long id) {
+		try {
+			log.trace("Start id={}", id);
+			
+			enderecoRepository.deleteById(id);
+			
+			log.trace("End");
+			
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ErrorToAccessDatabaseException();
+		}
+		
+	}
+	
 	private Optional<Endereco> checarSeEntityExisteMapearParaDomain(Optional<EnderecoEntity> entityOp){
 		Optional<Endereco> enderecoOp = Optional.empty();
 		if(entityOp.isEmpty()) {
@@ -99,11 +115,5 @@ public class EnderecoMySQLGateway implements EnderecoRepositoryGateway {
 		}
 		Endereco endereco = entityOp.get().mapToDomain();
 		return Optional.of(endereco);
-	}
-
-	@Override
-	public void remover(Long id) {
-		// TODO Auto-generated method stub
-		
 	}
 }
