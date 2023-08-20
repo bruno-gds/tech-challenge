@@ -3,7 +3,6 @@ package com.grupo16.techchallenge.usuario.controller;
 import java.time.LocalDate;
 import java.util.List;
 
-import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.grupo16.techchallenge.usuario.controller.json.UsuarioJson;
 import com.grupo16.techchallenge.usuario.domain.Usuario;
 import com.grupo16.techchallenge.usuario.usecase.CriarAlterarUsuarioUseCase;
+import com.grupo16.techchallenge.usuario.usecase.ObterUsuarioUseCase;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +30,10 @@ import lombok.extern.slf4j.Slf4j;
 public class UsuarioController {
 
 	@Autowired
-	private CriarAlterarUsuarioUseCase userUseCase;
+	private CriarAlterarUsuarioUseCase criarAlterarUsuarioUseCase;
+
+	@Autowired
+	private ObterUsuarioUseCase obterUsuarioUseCase;
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
@@ -41,7 +44,7 @@ public class UsuarioController {
 
 		Usuario usuario = usuarioJson.mapearParaUsuarioDomain();
 
-		Long usuarioId = userUseCase.criar(usuario);
+		Long usuarioId = criarAlterarUsuarioUseCase.criar(usuario);
 
 		log.trace("End usuarioId={}", usuarioId);
 		return usuarioId;
@@ -52,10 +55,13 @@ public class UsuarioController {
 			@PathVariable(name = "cpf", required = true) String cpf) {
 		log.trace("Start cpf={}", cpf);
 
-		//TODO: implementar
+		String cpfUsuario = removeMask(cpf);
 		
-		log.trace("End usuario={}");
-		return null;
+		Usuario usuario = obterUsuarioUseCase.obterByCpf(cpfUsuario);
+		UsuarioJson usuarioJson = new UsuarioJson(usuario);
+			
+		log.trace("End usuarioJson={}", usuarioJson);
+		return usuarioJson;
 	}
 	
 	@PatchMapping
@@ -94,5 +100,9 @@ public class UsuarioController {
 		 */
 		
 		return null;
+	}
+	
+	private String removeMask(String cpf) {
+		return cpf.replace(".", "").replace("-", "").replace(" ", "");
 	}
 }

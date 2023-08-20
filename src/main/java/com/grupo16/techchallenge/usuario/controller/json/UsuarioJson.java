@@ -38,6 +38,8 @@ public class UsuarioJson {
 	private String genero;
 	private List<ParenteJson> parentes;
 	
+	
+	
 	public Usuario mapearParaUsuarioDomain() {
 		List<Parente> usuariosParentes = new ArrayList<>();
 		if(parentes != null) {
@@ -56,5 +58,13 @@ public class UsuarioJson {
 	
 	private String removeMask(String cpf) {
 		return cpf.replace(".", "").replace("-", "").replace(" ", "");
+	}
+
+	public UsuarioJson(Usuario usuario) {
+		this.id = usuario.getId();
+		this.nome = usuario.getNome();
+		this.cpf = usuario.getCpf();
+		this.dataNascimento = usuario.getDataNascimento();
+		this.genero = String.valueOf(usuario.getGenero());
 	}
 }
