@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.grupo16.techchallenge.endereco.gateway.repository.jpa.entity.EnderecoEntity;
+import com.grupo16.techchallenge.usuario.domain.Genero;
+import com.grupo16.techchallenge.usuario.domain.Usuario;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,4 +38,14 @@ public class UsuarioEntity {
 	@OneToMany(mappedBy = "usuario")
 	private List<EnderecoEntity> enderecos;
 	
+	
+	public Usuario mapearUsuarioEntityParaDomain() {
+		return Usuario.builder()
+				.id(id)
+				.nome(nome)
+				.cpf(cpf)
+				.dataNascimento(dataNascimento)
+				.genero(Genero.getByOrdinal(genero))
+				.build();
+	}
 }

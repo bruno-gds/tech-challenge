@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.grupo16.techchallenge.usuario.domain.Usuario;
 import com.grupo16.techchallenge.usuario.gateway.UsuarioRepositoryGateway;
 import com.grupo16.techchallenge.usuario.gateway.exception.ErrorToAccessDatabaseException;
+import com.grupo16.techchallenge.usuario.gateway.repository.jpa.entity.UsuarioEntity;
 import com.grupo16.techchallenge.usuario.gateway.repository.jpa.repository.UsuarioRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -39,8 +40,14 @@ public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 	public Optional<Usuario> obterByCpf(String cpf) {
 		try {
 			log.trace("Start cpf={}", cpf);
+			Optional<Usuario> usuarioOp = Optional.empty();
 			
-			//TODO: implementar
+			Optional<UsuarioEntity> entity = usuarioRepository.findByCpf(cpf);
+			if(entity.isEmpty()) {
+				return usuarioOp;
+			}
+			
+			//TODO implementar....
 			
 			log.trace("End usuarioOp={}");
 			return null;

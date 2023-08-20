@@ -69,6 +69,6 @@ public class UsuarioJson {
 		this.nome = usuario.getNome();
 		this.cpf = usuario.getCpf();
 		this.dataNascimento = usuario.getDataNascimento();
-		this.genero = String.valueOf(usuario.getGenero());
+		this.genero = usuario.getGenero().name();
 	}
 }

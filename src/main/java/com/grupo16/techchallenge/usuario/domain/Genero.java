@@ -14,4 +14,9 @@ public enum Genero {
 		this.value = value;
 	}
 	
+	public static Genero getByOrdinal(int ordinal) {
+		Genero[] values = values();
+		return values[ordinal];
+ 	}
+	
 }
