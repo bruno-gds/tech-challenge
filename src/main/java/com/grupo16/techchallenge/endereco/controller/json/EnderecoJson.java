@@ -63,6 +63,7 @@ public class EnderecoJson {
     }
 
 	public EnderecoJson(Endereco endereco) {
+		this.id = endereco.getId();
 		this.rua = endereco.getRua();
 		this.numero = endereco.getNumero();
 		this.bairro = endereco.getBairro();
@@ -71,10 +72,6 @@ public class EnderecoJson {
 		this.cep = endereco.getCep();
 		this.usuario = UsuarioJson.builder()
 				.id(endereco.getUsuario().getId())
-				.nome(endereco.getUsuario().getNome())
-				.cpf(endereco.getUsuario().getCpf())
-				.dataNascimento(endereco.getUsuario().getDataNascimento())
 				.build();
-		
 	}
 }
