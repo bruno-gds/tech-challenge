@@ -3,6 +3,7 @@ package com.grupo16.techchallenge.usuario.controller;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -48,7 +49,7 @@ public class UsuarioController {
 
 	@GetMapping("{cpf}")
 	public UsuarioJson obter(
-			@PathVariable(name = "cpf", required = true) Long cpf) {
+			@PathVariable(name = "cpf", required = true) String cpf) {
 		log.trace("Start cpf={}", cpf);
 
 		//TODO: implementar
