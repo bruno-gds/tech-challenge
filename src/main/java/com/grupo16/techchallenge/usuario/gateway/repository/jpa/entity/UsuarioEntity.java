@@ -38,6 +38,13 @@ public class UsuarioEntity {
 	@OneToMany(mappedBy = "usuario")
 	private List<EnderecoEntity> enderecos;
 	
+	public UsuarioEntity(Usuario usuario) {
+		this.id = usuario.getId();
+		this.nome = usuario.getNome();
+		this.cpf = usuario.getCpf();
+		this.dataNascimento = usuario.getDataNascimento();
+		this.genero = usuario.getGenero().ordinal();
+	}
 	
 	public Usuario mapearUsuarioEntityParaDomain() {
 		return Usuario.builder()

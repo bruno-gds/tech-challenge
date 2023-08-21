@@ -38,7 +38,7 @@ public class EnderecoEntity {
 	private String numero;
 	private String bairro;
 	private String cidade;
-	private Long estado;
+	private int estado;
 	private String cep;
 
 	@ManyToOne
@@ -55,7 +55,7 @@ public class EnderecoEntity {
 		this.numero = endereco.getNumero();
 		this.bairro = endereco.getBairro();
 		this.cidade = endereco.getCidade();
-		this.estado = (long) endereco.getEstado().ordinal();
+		this.estado = endereco.getEstado().ordinal();
 		this.cep = endereco.getCep();
 		this.usuario = UsuarioEntity.builder()
 				.id(endereco.getUsuario().getId())
@@ -69,7 +69,7 @@ public class EnderecoEntity {
 				.numero(numero)
 				.bairro(bairro)
 				.cidade(cidade)
-				.estado(Estado.getByOrdinal(estado.intValue()))
+				.estado(Estado.getByOrdinal(estado))
 				.cep(cep)
 				.usuario(Usuario.builder()
 						.id(this.usuario.getId())
