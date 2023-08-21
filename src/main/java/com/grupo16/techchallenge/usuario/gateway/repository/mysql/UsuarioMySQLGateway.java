@@ -25,10 +25,12 @@ public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 		try {
 			log.trace("Start usuario={}", usuario);
 			
-			//TODO: implementar
+			UsuarioEntity entity = new UsuarioEntity(usuario);
 			
-			log.trace("End usuarioId={}");
-			return null;
+			Long usuarioId = usuarioRepository.save(entity).getId();
+			
+			log.trace("End usuarioId={}", usuarioId);
+			return usuarioId;
 			
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
