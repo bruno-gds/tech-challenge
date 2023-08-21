@@ -45,7 +45,57 @@ public class EletrodomesticoMySQLGateway implements EletrodomesticoRepositoryGat
     }
 
     @Override
-    public Optional<Eletrodomestico> obterIdEIdEndereco(Long id, Long idEndereco) {
-        return Optional.empty();
+    public Optional<Eletrodomestico> obterIdEIdEndereco(Long id, Long enderecoId) {
+        try {
+            log.trace("Start eletrodomesticoId={}, enderecoId={}", id, enderecoId);
+
+            Optional<EletrodomesticoEntity> entityOp = eletrodomesticoRepository.findByIdAndEnderecoId(id, enderecoId);
+            Optional<Eletrodomestico> eletrodomesticoOp = checarSeEntityExisteMapearParaDomain(entityOp);
+
+            log.trace("End eletrodomesticoOp={}", eletrodomesticoOp);
+            return eletrodomesticoOp;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            throw new ErrorToAccessDatabaseException();
+        }
+    }
+
+    @Override
+    public Optional<Eletrodomestico> obter(Long id) {
+        try {
+            log.trace("Start id={}", id);
+
+            Optional<EletrodomesticoEntity> entityOp = eletrodomesticoRepository.findById(id);
+            Optional<Eletrodomestico> eletrodomesticoOp = checarSeEntityExisteMapearParaDomain(entityOp);
+
+            log.trace("End eletrodomesticoOp={}", eletrodomesticoOp);
+            return eletrodomesticoOp;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            throw new ErrorToAccessDatabaseException();
+        }
+    }
+
+    @Override
+    public void remover(Long id) {
+        try {
+            log.trace("Start id={}", id);
+
+            eletrodomesticoRepository.deleteById(id);
+
+            log.trace("End");
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            throw new ErrorToAccessDatabaseException();
+        }
+    }
+
+    private Optional<Eletrodomestico> checarSeEntityExisteMapearParaDomain(Optional<EletrodomesticoEntity> entityOp){
+        Optional<Eletrodomestico> eletrodomesticoOp = Optional.empty();
+        if(entityOp.isEmpty()) {
+            return eletrodomesticoOp;
+        }
+        Eletrodomestico eletrodomestico = entityOp.get().mapToDomain();
+        return Optional.of(eletrodomestico);
     }
 }

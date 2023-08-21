@@ -1,6 +1,7 @@
 package com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.entity;
 
 import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
+import com.grupo16.techchallenge.endereco.domain.Endereco;
 import com.grupo16.techchallenge.endereco.gateway.repository.jpa.entity.EnderecoEntity;
 
 import jakarta.persistence.*;
@@ -51,6 +52,21 @@ public class EletrodomesticoEntity {
         this.voltagem = eletrodomestico.getVoltagem();
         this.endereco = EnderecoEntity.builder()
                 .id(eletrodomestico.getEndereco().getId())
+                .build();
+    }
+
+    public Eletrodomestico mapToDomain() {
+        return Eletrodomestico.builder()
+                .id(id)
+                .nome(nome)
+                .modelo(modelo)
+                .marca(marca)
+                .cor(cor)
+                .potencia(potencia)
+                .voltagem(voltagem)
+                .endereco(Endereco.builder()
+                        .id(this.endereco.getId())
+                        .build())
                 .build();
     }
 }

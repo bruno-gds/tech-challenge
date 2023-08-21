@@ -4,6 +4,7 @@ import com.grupo16.techchallenge.eletrodomestico.controller.json.Eletrodomestico
 import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
 import com.grupo16.techchallenge.eletrodomestico.usecase.CriarAlterarEletrodomesticoUseCase;
 
+import com.grupo16.techchallenge.eletrodomestico.usecase.RemoverEletrodomesticoUseCase;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class EletrodomesticoController {
 
     @Autowired
     private CriarAlterarEletrodomesticoUseCase criarAlterarEletrodomesticoUseCase;
+
+    @Autowired
+    private RemoverEletrodomesticoUseCase removerEletrodomesticoUseCase;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
@@ -34,6 +38,7 @@ public class EletrodomesticoController {
         return eletrodomesticoId;
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PatchMapping
     public void alterar(
         @RequestBody EletrodomesticoJson eletrodomesticoJson
@@ -43,6 +48,18 @@ public class EletrodomesticoController {
         Eletrodomestico eletrodomestico = eletrodomesticoJson.mapeandoParaEletrodomestico();
 
         criarAlterarEletrodomesticoUseCase.alterar(eletrodomestico);
+
+        log.trace("End");
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("{id}")
+    public void remover(
+    		@PathVariable(name = "id") Long id
+    ) {
+        log.trace("Start id={}", id);
+
+        removerEletrodomesticoUseCase.remover(id);
 
         log.trace("End");
     }

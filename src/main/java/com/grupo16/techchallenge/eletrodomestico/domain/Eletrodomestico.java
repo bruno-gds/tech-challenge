@@ -4,13 +4,13 @@ import java.util.List;
 
 import com.grupo16.techchallenge.endereco.domain.Endereco;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 @Builder
 @Getter
 @ToString
+@AllArgsConstructor
+@NoArgsConstructor
 public class Eletrodomestico {
 
     private Long id;
