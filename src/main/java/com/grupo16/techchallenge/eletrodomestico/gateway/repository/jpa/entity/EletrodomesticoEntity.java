@@ -64,9 +64,9 @@ public class EletrodomesticoEntity {
                 .cor(cor)
                 .potencia(potencia)
                 .voltagem(voltagem)
-//                .endereco(Endereco.builder()
-//                        .id(this.endereco.getId())
-//                        .build())
+                .endereco(Endereco.builder()
+                        .id(this.endereco.getId())
+                        .build())
                 .build();
     }
 }

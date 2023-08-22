@@ -47,9 +47,9 @@ public class EletrodomesticoJson {
         this.cor = eletrodomestico.getCor();
         this.potencia = eletrodomestico.getPotencia();
         this.voltagem = eletrodomestico.getVoltagem();
-//        this.endereco = EnderecoJson.builder()
-//                .id(eletrodomestico.getEndereco().getId())
-//                .build();
+        this.endereco = EnderecoJson.builder()
+                .id(eletrodomestico.getEndereco().getId())
+                .build();
     }
 
     public Eletrodomestico mapeandoParaEletrodomestico() {
