@@ -3,6 +3,7 @@ package com.grupo16.techchallenge.eletrodomestico.controller.json;
 import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
 
 import com.grupo16.techchallenge.endereco.controller.json.EnderecoJson;
+import com.grupo16.techchallenge.endereco.domain.Endereco;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -13,6 +14,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EletrodomesticoJson {
+
+    private Long id;
 
     @NotBlank
     private String nome;
@@ -36,8 +39,20 @@ public class EletrodomesticoJson {
     // TODO: BRUNO = Implementar medicoes consumo
 
 
-    public Eletrodomestico mapeandoParaEletrodomestico() {
+    public EletrodomesticoJson(Eletrodomestico eletrodomestico) {
+        this.id = eletrodomestico.getId();
+        this.nome = eletrodomestico.getNome();
+        this.modelo = eletrodomestico.getModelo();
+        this.marca = eletrodomestico.getMarca();
+        this.cor = eletrodomestico.getCor();
+        this.potencia = eletrodomestico.getPotencia();
+        this.voltagem = eletrodomestico.getVoltagem();
+//        this.endereco = EnderecoJson.builder()
+//                .id(eletrodomestico.getEndereco().getId())
+//                .build();
+    }
 
+    public Eletrodomestico mapeandoParaEletrodomestico() {
         return Eletrodomestico.builder()
                 .nome(nome)
                 .modelo(modelo)
@@ -45,6 +60,9 @@ public class EletrodomesticoJson {
                 .cor(cor)
                 .potencia(potencia)
                 .voltagem(voltagem)
+                .endereco(Endereco.builder()
+                        .id(this.endereco.getId())
+                        .build())
                 .build();
     }
 }
