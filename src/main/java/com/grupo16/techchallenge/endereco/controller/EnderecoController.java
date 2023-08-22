@@ -100,6 +100,8 @@ public class EnderecoController {
 		 * TODO implementar
 		 * A busca deve ser capaz de filtrar as informações por rua, bairro, 
 		 * cidade ou outra informação relevante.
+		 * 
+		 * OBS.: Podemos usar Criteria Builder 
 		 */
 		
 		return null;

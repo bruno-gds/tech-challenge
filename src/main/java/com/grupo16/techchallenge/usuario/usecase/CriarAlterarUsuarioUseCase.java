@@ -32,4 +32,9 @@ public class CriarAlterarUsuarioUseCase {
 		log.trace("End usuarioId={}", usuarioId);
 		return usuarioId;
 	}
+
+	public void alterar(Usuario usuario) {
+		
+		
+	}
 }

@@ -69,10 +69,10 @@ public class UsuarioController {
 			@RequestBody(required = true) UsuarioJson usuarioJson) {
 		log.trace("Start usuarioJson={}", usuarioJson);
 		
-		//TODO: implementar
+		Usuario usuario = usuarioJson.mapearParaUsuarioDomain();
+		criarAlterarUsuarioUseCase.alterar(usuario);
 		
 		log.trace("End");
-		
 	}
 	
 	@DeleteMapping("{id}")
@@ -97,6 +97,8 @@ public class UsuarioController {
 		 * TODO implementar
 		 * A busca deve ser capaz de filtrar as informações por nome, parentesco, 
 		 * sexo ou outra informação relevante.
+		 * 
+		 * OBS.: Podemos usar Criteria Builder 
 		 */
 		
 		return null;
