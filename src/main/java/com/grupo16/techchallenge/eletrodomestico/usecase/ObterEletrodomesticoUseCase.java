@@ -26,6 +26,16 @@ public class ObterEletrodomesticoUseCase {
     @Autowired
     private EletrodomesticoRepositoryGateway eletrodomesticoRepository;
 
+    public Eletrodomestico obterPeloIdEEnderecoId(Long id, Long idEndereco) {
+        log.trace("Start idEletodomestico={}, idEndereco={}", id, idEndereco);
+
+        Optional<Eletrodomestico> eletrodomesticoOp = eletrodomesticoRepository.obterIdEIdEndereco(id, idEndereco);
+        checarSeEletrodomesticoFoiEncontrado(eletrodomesticoOp);
+
+        log.trace("End eletrodomestico={}", eletrodomesticoOp.get());
+        return eletrodomesticoOp.get();
+    }
+
     public Eletrodomestico obter(Long id) {
         log.trace("Start id={}", id);
 
@@ -39,7 +49,6 @@ public class ObterEletrodomesticoUseCase {
 
     public Page<EletrodomesticoJson> obterTodos(PageRequest pageRequest) {
         log.trace("Start pageRequest={}", pageRequest);
-
 
         Page<Eletrodomestico> eletrodomesticos = eletrodomesticoRepository.obterTodos(pageRequest);
 

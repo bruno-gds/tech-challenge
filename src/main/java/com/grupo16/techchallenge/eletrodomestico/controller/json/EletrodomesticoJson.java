@@ -54,6 +54,7 @@ public class EletrodomesticoJson {
 
     public Eletrodomestico mapeandoParaEletrodomestico() {
         return Eletrodomestico.builder()
+                .id(id)
                 .nome(nome)
                 .modelo(modelo)
                 .marca(marca)
