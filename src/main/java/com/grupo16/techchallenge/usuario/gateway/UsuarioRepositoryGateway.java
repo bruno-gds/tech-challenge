@@ -12,4 +12,6 @@ public interface UsuarioRepositoryGateway {
 
 	public Optional<Usuario> obter(Long id);
 
+	public void remover(Long id);
+
 }

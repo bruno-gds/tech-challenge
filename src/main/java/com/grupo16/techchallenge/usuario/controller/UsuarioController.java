@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -21,6 +20,7 @@ import com.grupo16.techchallenge.usuario.controller.json.UsuarioJson;
 import com.grupo16.techchallenge.usuario.domain.Usuario;
 import com.grupo16.techchallenge.usuario.usecase.CriarAlterarUsuarioUseCase;
 import com.grupo16.techchallenge.usuario.usecase.ObterUsuarioUseCase;
+import com.grupo16.techchallenge.usuario.usecase.RemoverUsuarioUseCase;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +35,9 @@ public class UsuarioController {
 
 	@Autowired
 	private ObterUsuarioUseCase obterUsuarioUseCase;
+
+	@Autowired
+	private RemoverUsuarioUseCase removerUsuarioUseCase;
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
@@ -81,7 +84,7 @@ public class UsuarioController {
 			@PathVariable(name = "id", required = true) Long id) {
 		log.trace("Start id={}", id);
 
-		//TODO: implementar
+		removerUsuarioUseCase.remover(id);
 		
 		log.trace("End usuario={}");		
 	}

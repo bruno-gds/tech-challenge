@@ -42,16 +42,7 @@ public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 	public Optional<Usuario> obterByCpf(String cpf) {
 		try {
 			log.trace("Start cpf={}", cpf);
-//			Optional<Usuario> usuarioOp = Optional.empty();
-//			
-//			Optional<UsuarioEntity> entityOp = usuarioRepository.findByCpf(cpf);
-//			if(entityOp.isEmpty()) {
-//				return usuarioOp;
-//			}
-//
-//			Usuario usuario = entityOp.get().mapearUsuarioEntityParaDomain();
-//			usuarioOp = Optional.of(usuario);
-			
+
 			Optional<UsuarioEntity> entityOp = usuarioRepository.findByCpf(cpf);
 			Optional<Usuario> usuarioOp = checarSeEntityExisteMapearParaDomain(entityOp);
 			
@@ -81,6 +72,21 @@ public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 			throw new ErrorToAccessDatabaseException();
 		}
 	}
+
+	@Override
+	public void remover(Long id) {
+		try {
+			log.trace("Start id={}", id);
+			
+			usuarioRepository.deleteById(id);
+			
+			log.trace("End");
+			
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ErrorToAccessDatabaseException();
+		}
+	}
 	
 	private Optional<Usuario> checarSeEntityExisteMapearParaDomain(Optional<UsuarioEntity> entityOp){
 		Optional<Usuario> usuarioOp = Optional.empty();
@@ -91,5 +97,6 @@ public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 		
 		return usuarioOp;
 	}
+
 
 }
