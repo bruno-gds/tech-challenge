@@ -18,6 +18,9 @@ public class CriarAlterarUsuarioUseCase {
 	@Autowired
 	private UsuarioRepositoryGateway usuarioRepository;
 
+	@Autowired
+	private ObterUsuarioUseCase obterUsuarioUseCase;
+
 	public Long criar(Usuario usuario) {
 		log.trace("Start usuario={}", usuario);
 		
@@ -34,7 +37,20 @@ public class CriarAlterarUsuarioUseCase {
 	}
 
 	public void alterar(Usuario usuario) {
+		log.trace("Start usuario={}", usuario);
+
+		Usuario usuarioEncontrado = obterUsuarioUseCase.obter(usuario.getId());
 		
+		Usuario usuarioToUpdate = Usuario.builder()
+				.id(usuarioEncontrado.getId())
+				.nome(usuario.getNome())
+				.cpf(usuario.getCpf())
+				.dataNascimento(usuario.getDataNascimento())
+				.genero(usuario.getGenero())
+				.build();
 		
+		usuarioRepository.salvar(usuarioToUpdate);
+		
+		log.trace("End");
 	}
 }

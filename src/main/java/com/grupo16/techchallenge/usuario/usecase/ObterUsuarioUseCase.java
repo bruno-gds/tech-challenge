@@ -30,4 +30,12 @@ public class ObterUsuarioUseCase {
 		log.trace("End usuario={}", usuarioOp.get());
 		return usuarioOp.get();
 	}
+
+	public Usuario obter(Long id) {
+		log.trace("Start id={}", id);
+		
+		
+		log.trace("Start usuario={}");
+		return null;
+	}
 }

@@ -48,11 +48,12 @@ public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 			if(entity.isEmpty()) {
 				return usuarioOp;
 			}
+
+			Usuario usuario = entity.get().mapearUsuarioEntityParaDomain();
+			usuarioOp = Optional.of(usuario);
 			
-			//TODO implementar....
-			
-			log.trace("End usuarioOp={}");
-			return null;
+			log.trace("End usuarioOp={}", usuarioOp);
+			return usuarioOp;
 
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);

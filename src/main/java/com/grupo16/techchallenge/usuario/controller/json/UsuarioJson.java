@@ -51,6 +51,7 @@ public class UsuarioJson {
 		}
 		
 		return Usuario.builder()
+				.id(id)
 				.nome(nome)
 				.cpf(removeMask(cpf))
 				.dataNascimento(dataNascimento)
