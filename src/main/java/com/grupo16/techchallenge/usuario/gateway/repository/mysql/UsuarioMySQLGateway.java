@@ -42,15 +42,18 @@ public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 	public Optional<Usuario> obterByCpf(String cpf) {
 		try {
 			log.trace("Start cpf={}", cpf);
-			Optional<Usuario> usuarioOp = Optional.empty();
+//			Optional<Usuario> usuarioOp = Optional.empty();
+//			
+//			Optional<UsuarioEntity> entityOp = usuarioRepository.findByCpf(cpf);
+//			if(entityOp.isEmpty()) {
+//				return usuarioOp;
+//			}
+//
+//			Usuario usuario = entityOp.get().mapearUsuarioEntityParaDomain();
+//			usuarioOp = Optional.of(usuario);
 			
-			Optional<UsuarioEntity> entity = usuarioRepository.findByCpf(cpf);
-			if(entity.isEmpty()) {
-				return usuarioOp;
-			}
-
-			Usuario usuario = entity.get().mapearUsuarioEntityParaDomain();
-			usuarioOp = Optional.of(usuario);
+			Optional<UsuarioEntity> entityOp = usuarioRepository.findByCpf(cpf);
+			Optional<Usuario> usuarioOp = checarSeEntityExisteMapearParaDomain(entityOp);
 			
 			log.trace("End usuarioOp={}", usuarioOp);
 			return usuarioOp;
@@ -60,6 +63,33 @@ public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 			throw new ErrorToAccessDatabaseException();
 		}
 		
+	}
+
+	@Override
+	public Optional<Usuario> obter(Long id) {
+		try {
+			log.trace("Start id={}", id);
+			
+			Optional<UsuarioEntity> entityOp = usuarioRepository.findById(id);
+			Optional<Usuario> usuarioOp = checarSeEntityExisteMapearParaDomain(entityOp);
+			
+			log.trace("End usuarioOp={}", usuarioOp);
+			return usuarioOp;
+			
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ErrorToAccessDatabaseException();
+		}
+	}
+	
+	private Optional<Usuario> checarSeEntityExisteMapearParaDomain(Optional<UsuarioEntity> entityOp){
+		Optional<Usuario> usuarioOp = Optional.empty();
+		if(entityOp.isEmpty()) {
+			return usuarioOp;
+		}
+		usuarioOp = Optional.of(entityOp.get().mapearUsuarioEntityParaDomain());
+		
+		return usuarioOp;
 	}
 
 }

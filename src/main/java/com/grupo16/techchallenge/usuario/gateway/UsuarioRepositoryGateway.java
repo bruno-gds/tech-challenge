@@ -10,4 +10,6 @@ public interface UsuarioRepositoryGateway {
 
 	public Optional<Usuario> obterByCpf(String cpf);
 
+	public Optional<Usuario> obter(Long id);
+
 }

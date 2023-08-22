@@ -113,7 +113,8 @@ public class EnderecoMySQLGateway implements EnderecoRepositoryGateway {
 		if(entityOp.isEmpty()) {
 			return enderecoOp; 
 		}
-		Endereco endereco = entityOp.get().mapToDomain();
-		return Optional.of(endereco);
+		enderecoOp = Optional.of(entityOp.get().mapToDomain());
+		
+		return enderecoOp;
 	}
 }

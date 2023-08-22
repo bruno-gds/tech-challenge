@@ -34,6 +34,7 @@ public class ObterUsuarioUseCase {
 	public Usuario obter(Long id) {
 		log.trace("Start id={}", id);
 		
+		Optional<Usuario> usuarioOp = usuarioRepository.obter(id);
 		
 		log.trace("Start usuario={}");
 		return null;
