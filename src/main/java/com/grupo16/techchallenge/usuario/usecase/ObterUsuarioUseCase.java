@@ -35,8 +35,12 @@ public class ObterUsuarioUseCase {
 		log.trace("Start id={}", id);
 		
 		Optional<Usuario> usuarioOp = usuarioRepository.obter(id);
+		if(usuarioOp.isEmpty()) {
+			log.warn("Usuário não encontrado. id={}", id);
+			throw new UsuarioNaoEncontradoException();
+		}
 		
-		log.trace("Start usuario={}");
-		return null;
+		log.trace("Start usuario={}", usuarioOp.get());
+		return usuarioOp.get();
 	}
 }
