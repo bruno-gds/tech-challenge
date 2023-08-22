@@ -68,6 +68,7 @@ public class UsuarioController {
 		return usuarioJson;
 	}
 	
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping
 	public void alterar(
 			@RequestBody(required = true) UsuarioJson usuarioJson) {
@@ -79,6 +80,7 @@ public class UsuarioController {
 		log.trace("End");
 	}
 	
+	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("{id}")
 	public void remover(
 			@PathVariable(name = "id", required = true) Long id) {
