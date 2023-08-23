@@ -11,6 +11,6 @@ public class Parentesco {
 	
 	private Usuario usuario;
 	private Usuario usuarioParente;
-	private String tipoParentesco;
+	private TipoParentesco tipoParentesco;
 	
 }

@@ -2,8 +2,10 @@ package com.grupo16.techchallenge.usuario.controller.json;
 
 import com.grupo16.techchallenge.usuario.domain.Genero;
 import com.grupo16.techchallenge.usuario.domain.Parentesco;
+import com.grupo16.techchallenge.usuario.domain.TipoParentesco;
 import com.grupo16.techchallenge.usuario.domain.Usuario;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -11,8 +13,11 @@ import lombok.ToString;
 @ToString
 public class ParentescoJson {
 	
+	@NotBlank
 	private UsuarioJson usuario;
+	@NotBlank
 	private UsuarioJson usuarioParente;
+	@NotBlank
 	private String tipoParentesco;
 	
 	public Parentesco mapearParentescoJsonParaDomain() {
@@ -23,7 +28,7 @@ public class ParentescoJson {
 						.dataNascimento(usuarioParente.getDataNascimento())
 						.genero(Genero.valueOf(usuarioParente.getGenero()))
 						.build())
-				.tipoParentesco(tipoParentesco)
+				.tipoParentesco(TipoParentesco.valueOf(tipoParentesco))
 				.usuario(Usuario.builder()
 						.id(usuario.getId())
 						.build())

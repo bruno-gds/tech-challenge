@@ -1,7 +1,5 @@
 package com.grupo16.techchallenge.usuario.gateway.repository.jpa.entity;
 
-import com.grupo16.techchallenge.usuario.domain.Usuario;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -22,12 +20,12 @@ public class ParentescoEntity {
 	private Long tipoParentescoId;//TODO: criar Enum
 	
 	@ManyToOne
-	@JoinColumn(name = "UsuarioPrincipal_Id")
-	private Usuario usuarioPrincipal;
+	@JoinColumn(name = "UsuarioPrincipal_Id",insertable=false, updatable=false)
+	private UsuarioEntity usuarioPrincipal;
 
 	@ManyToOne
-	@JoinColumn(name = "UsuarioParente_Id")
-	private Usuario usuarioParente;
+	@JoinColumn(name = "UsuarioParente_Id",insertable=false, updatable=false)
+	private UsuarioEntity usuarioParente;
 	
 
 }
