@@ -24,7 +24,7 @@ public class ParentescoJson {
 		return Parentesco.builder()
 				.usuarioParente(Usuario.builder()
 						.nome(usuarioParente.getNome())
-						.cpf(usuarioParente.getCpf())
+						.cpf(removeMask(usuarioParente.getCpf()))
 						.dataNascimento(usuarioParente.getDataNascimento())
 						.genero(Genero.valueOf(usuarioParente.getGenero()))
 						.build())
@@ -33,6 +33,10 @@ public class ParentescoJson {
 						.id(usuario.getId())
 						.build())
 				.build();
+	}
+	
+	private String removeMask(String cpf) {
+		return cpf.replace(".", "").replace("-", "").replace(" ", "");
 	}
 
 }

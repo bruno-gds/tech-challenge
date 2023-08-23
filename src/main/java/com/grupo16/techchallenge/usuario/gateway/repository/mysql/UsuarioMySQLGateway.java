@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.grupo16.techchallenge.usuario.domain.Parentesco;
-import com.grupo16.techchallenge.usuario.domain.TipoParentesco;
 import com.grupo16.techchallenge.usuario.domain.Usuario;
 import com.grupo16.techchallenge.usuario.gateway.UsuarioRepositoryGateway;
 import com.grupo16.techchallenge.usuario.gateway.exception.ErrorToAccessDatabaseException;
 import com.grupo16.techchallenge.usuario.gateway.repository.jpa.entity.ParentescoEntity;
 import com.grupo16.techchallenge.usuario.gateway.repository.jpa.entity.ParentescoId;
 import com.grupo16.techchallenge.usuario.gateway.repository.jpa.entity.UsuarioEntity;
+import com.grupo16.techchallenge.usuario.gateway.repository.jpa.repository.ParentescoRepository;
 import com.grupo16.techchallenge.usuario.gateway.repository.jpa.repository.UsuarioRepository;
 
 import jakarta.transaction.Transactional;
@@ -24,6 +24,9 @@ public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	private ParentescoRepository parentescoRepository;
 
 	@Override
 	public Long salvar(Usuario usuario) {
@@ -117,6 +120,8 @@ public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 					.tipoParentescoId((long) parentesco.getTipoParentesco().ordinal())
 					.build();
 
+			parentescoRepository.save(entity);
+			
 			return null;
 			
 		} catch (Exception e) {
