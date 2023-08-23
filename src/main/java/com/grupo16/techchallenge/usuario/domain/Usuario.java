@@ -21,7 +21,7 @@ public class Usuario {
 	private String cpf;
 	private LocalDate dataNascimento;
 	private Genero genero;	
-	private List<Parente> parentes;
+	private List<Parentesco> parentes;
 	private List<Endereco> enderecos;
 	
 }

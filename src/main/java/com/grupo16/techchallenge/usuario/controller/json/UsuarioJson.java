@@ -7,7 +7,7 @@ import java.util.List;
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.grupo16.techchallenge.usuario.domain.Genero;
-import com.grupo16.techchallenge.usuario.domain.Parente;
+import com.grupo16.techchallenge.usuario.domain.Parentesco;
 import com.grupo16.techchallenge.usuario.domain.Usuario;
 
 import jakarta.validation.constraints.NotBlank;
@@ -40,14 +40,14 @@ public class UsuarioJson {
 
 	@NotBlank
 	private String genero;
-	private List<ParenteJson> parentes;
+	private List<ParentescoJson> parentes;
 	
 	
 	
 	public Usuario mapearParaUsuarioDomain() {
-		List<Parente> usuariosParentes = new ArrayList<>();
+		List<Parentesco> usuariosParentes = new ArrayList<>();
 		if(parentes != null) {
-			usuariosParentes = parentes.stream().map(p -> p.mapearParaParenteDomain()).toList();
+			usuariosParentes = parentes.stream().map(p -> p.mapearParentescoJsonParaDomain()).toList();
 		}
 		
 		return Usuario.builder()

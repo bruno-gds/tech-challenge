@@ -7,9 +7,8 @@ import lombok.ToString;
 @Getter
 @Builder
 @ToString
-public class Parente {
+public class Parentesco {
 	
-	private Long id;
 	private Usuario usuario;
 	private Usuario usuarioParente;
 	private String tipoParentesco;

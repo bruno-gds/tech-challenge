@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.grupo16.techchallenge.usuario.domain.Parentesco;
 import com.grupo16.techchallenge.usuario.domain.Usuario;
 import com.grupo16.techchallenge.usuario.gateway.UsuarioRepositoryGateway;
 import com.grupo16.techchallenge.usuario.usecase.exception.CpfJaCadastradoException;
@@ -52,5 +53,10 @@ public class CriarAlterarUsuarioUseCase {
 		usuarioRepository.salvar(usuarioToUpdate);
 		
 		log.trace("End");
+	}
+
+	public Long criarParentesco(Parentesco parente) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

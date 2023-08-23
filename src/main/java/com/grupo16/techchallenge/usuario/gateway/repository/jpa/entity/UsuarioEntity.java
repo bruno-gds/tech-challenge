@@ -38,6 +38,9 @@ public class UsuarioEntity {
 	@OneToMany(mappedBy = "usuario")
 	private List<EnderecoEntity> enderecos;
 	
+	@OneToMany(mappedBy = "parentescoId")
+	private List<ParentescoEntity> parentescos;
+	
 	public UsuarioEntity(Usuario usuario) {
 		this.id = usuario.getId();
 		this.nome = usuario.getNome();
