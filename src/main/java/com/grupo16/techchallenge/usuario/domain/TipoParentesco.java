@@ -6,5 +6,10 @@ public enum TipoParentesco {
 	MAE,
 	IRMAO,
 	IRMA;
+	
+	public static TipoParentesco getByOrdinal(int ordinal){
+		TipoParentesco[] values = values();
+		return values[ordinal];
+	}	
 
 }

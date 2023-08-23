@@ -4,7 +4,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
 @Embeddable
@@ -18,4 +20,8 @@ public class ParentescoId {
 	@Column(name = "UsuarioParente_Id")
 	private Long usuarioParenteId;
 
+	public ParentescoId(Long usuarioPrincipalId, Long usuarioParenteId) {
+		this.usuarioPrincipalId = usuarioPrincipalId;
+		this.usuarioParenteId = usuarioParenteId;
+	}
 }

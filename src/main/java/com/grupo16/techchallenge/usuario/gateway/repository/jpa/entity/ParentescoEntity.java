@@ -6,8 +6,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Getter;
 
+@Builder
 @Entity
 @Table(name = "Parentesco")
 @Getter
@@ -17,7 +19,7 @@ public class ParentescoEntity {
 	private ParentescoId parentescoId;
 	
 	@Column(name = "TipoParentesco_Id")
-	private Long tipoParentescoId;//TODO: criar Enum
+	private Long tipoParentescoId;
 	
 	@ManyToOne
 	@JoinColumn(name = "UsuarioPrincipal_Id",insertable=false, updatable=false)

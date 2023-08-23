@@ -55,8 +55,13 @@ public class CriarAlterarUsuarioUseCase {
 		log.trace("End");
 	}
 
-	public Long criarParentesco(Parentesco parente) {
-		// TODO Auto-generated method stub
-		return null;
+	public Long criarParentesco(Parentesco parentesco) {
+		log.trace("Start parentesco={}", parentesco);
+
+		obterUsuarioUseCase.obter(parentesco.getUsuario().getId());
+		Long parenteId = usuarioRepository.salvar(parentesco);
+		
+		log.trace("End parenteId={}", parenteId);
+		return parenteId;
 	}
 }
