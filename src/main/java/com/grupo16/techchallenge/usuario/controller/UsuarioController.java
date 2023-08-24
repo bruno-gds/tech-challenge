@@ -101,10 +101,10 @@ public class UsuarioController {
 		
 		Parentesco parentesco = parentescoJson.mapearParentescoJsonParaDomain();
 		
-		Long idParente = criarAlterarUsuarioUseCase.criarParentesco(parentesco);
+		Long parenteId = criarAlterarUsuarioUseCase.criarParentesco(parentesco);
 		
-		log.trace("End");		
-		return null;
+		log.trace("End parenteId={}", parenteId);		
+		return parenteId;
 	}
 	
 	@GetMapping

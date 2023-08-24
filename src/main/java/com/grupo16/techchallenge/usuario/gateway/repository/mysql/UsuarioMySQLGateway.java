@@ -122,7 +122,7 @@ public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 
 			parentescoRepository.save(entity);
 			
-			return null;
+			return parenteId;
 			
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
