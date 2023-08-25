@@ -24,12 +24,12 @@ São três APIs principais: Pessoa, Endereço e Eletrodoméstico. O objetivo des
 <a name="funcionalidades-do-projeto"></a>
 ## 🔨  Funcionalidades do projeto
 
-### API Pessoa
+### API Usuarios
 
 >[ Base URL: http://localhost:8080 ]
 
 
-A API Pessoa tem como objetivo permitir o registro e gerenciamento das informações dos usuários cadastrados.
+A API Usuario tem como objetivo permitir o registro e gerenciamento das informações dos usuários cadastrados.
 Além do cadastro principal, o usuário tem a opção de incluir outras pessoas relacionadas a ele, informando o grau de parentesco.
 É importante ressaltar que o cadastro de pessoas relacionadas (parentes) ao usuário não é obrigatório.
 
@@ -38,24 +38,17 @@ Além do cadastro principal, o usuário tem a opção de incluir outras pessoas 
 ### ``POST``
 
 ```
-	/people
+	/usuarios
 ```
 
 **Body** raw (json)
 
 ```
 {
-    "name": "string",
+    "nome": "string",
     "cpf": "string",
-    "birthDate": "string",
-    "gender": "string"",
-    "relatives":[
-        {
-            "name": "string",
-            "parentage": "string",
-            "gender": "string"
-        }
-    ]
+    "dataNascimento": "string",
+    "genero": "string"
 }
 ```
 
@@ -65,25 +58,13 @@ Além do cadastro principal, o usuário tem a opção de incluir outras pessoas 
 
 
 ```
-curl --location 'http://localhost:8080/people' \
+curl --location 'http://localhost:8080/usuarios' \
 --header 'Content-Type: application/json' \
 --data '{
-    "name": "Pedro Gonçalves Nunes",
+    "nome": "Pedro Gonçalves Nunes",
     "cpf": "041.276.747-33",
-    "birthDate": "1990-10-02",
-    "gender": "Masculino",
-    "relatives": [
-        {
-            "name": "Marcos Medeiros Nunes",
-            "parentage": "Pai",
-            "gender": "Masculino"
-        },
-        {
-            "name": "Fernanda Gonçalves Nunes",
-            "parentage": "Mãe",
-            "gender": "Feminino"
-        }
-    ]
+    "dataNascimento": "1990-10-02",
+    "genero": "MASCULINO"
 }'
 ```
 </details>
@@ -129,6 +110,51 @@ curl --location 'http://localhost:8080/people' \
 ```
 </details>
 
+### ``GET``
+
+```
+	/usuarios/{CPF}
+```
+
+<details>
+  <summary>Exemplo Request:</summary>
+
+
+```
+curl --location --request GET 'http://localhost:8080/usuarios/041.276.747-33' \
+--header 'Content-Type: application/json'
+```
+</details>
+
+
+
+<details>
+  <summary>Responses:</summary>
+
+200 - _OK_
+- Será retornado o usuário
+
+```
+{
+    "id": 2,
+    "nome": "Pedro Gonçalves Nunes",
+    "cpf": "04127674733",
+    "dataNascimento": "1990-10-02",
+    "genero": "MASCULINO",
+    "parentes": null
+}
+```
+
+404 - _Not Found_
+
+```
+{
+    "code": "tc.usuario.usuarioNaoEncontrado",
+    "message": "Usuario não encontrado."
+}
+```
+</details>
+
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
 
 ---------
@@ -147,7 +173,7 @@ Com a API de Endereço, torna-se mais fácil e eficiente gerenciar e manter atua
 ### ``POST``
 
 ```
-	/adresses
+	/enderecos
 ```
 
 **Body** raw (json)
@@ -227,19 +253,22 @@ Com essa API, é possível simplificar o processo de gerenciamento e manutençã
 ### ``POST``
 
 ```
-	/homeAppliances
+	/eletrodomesticos
 ```
 
 **Body** raw (json)
 
 ```
 {
-    "name": String,
-    "brand": String,
-    "model": String,
-    "color": String,
-    "power": Long,
-    "voltage": Long
+    "nome": String,
+    "modelo": String,
+    "marca": String,
+    "cor": String,
+    "potencia": Long,
+    "voltagem": Long,
+    "endereco": {
+        "id": Long
+    }
 }
 ```
 
