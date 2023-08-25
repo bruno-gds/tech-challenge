@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @Slf4j
 @RestController
@@ -30,6 +32,22 @@ public class EletrodomesticoController {
     @Autowired
     private RemoverEletrodomesticoUseCase removerEletrodomesticoUseCase;
 
+    @GetMapping
+    @RequestMapping("/filtro")
+    public List<EletrodomesticoJson> buscaFiltrada(
+            @RequestParam(name = "nome", required = false) String nome,
+            @RequestParam(name = "modelo", required = false) String modelo,
+            @RequestParam(name = "marca", required = false) String marca,
+            @RequestParam(name = "potencia", required = false) Long potencia
+    ) {
+        log.trace("Start nome={}, modelo={}, marca={}, potencia={}", nome, modelo, marca, potencia);
+
+        var eletrodomestico = obterEletrodomesticoUseCase.buscaFiltrada(nome, modelo, marca, potencia);
+        var eletrodomesticoJson = eletrodomestico.stream().map(EletrodomesticoJson::new).toList();
+
+        log.trace("End eletrodomestico={}", eletrodomesticoJson);
+        return eletrodomesticoJson;
+    }
 
     @GetMapping
     public ResponseEntity<Page<EletrodomesticoJson>> obterTodos(
@@ -61,7 +79,7 @@ public class EletrodomesticoController {
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @PatchMapping
+    @PutMapping
     public void alterar(
         @RequestBody EletrodomesticoJson eletrodomesticoJson
     ) {

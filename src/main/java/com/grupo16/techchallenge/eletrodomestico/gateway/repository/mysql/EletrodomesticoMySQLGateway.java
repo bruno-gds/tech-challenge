@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -95,6 +96,22 @@ public class EletrodomesticoMySQLGateway implements EletrodomesticoRepositoryGat
     }
 
     @Override
+    public Optional<List<Eletrodomestico>> buscaFiltrada(String nome, String modelo, String marca, Long potencia) {
+        try {
+            log.trace("Start nome={}, modelo={}, marca={}, potencia={}", nome, modelo, marca, potencia);
+
+            var entityOp = eletrodomesticoRepository.buscaFiltrada(nome, modelo, marca, potencia);
+            Optional<List<Eletrodomestico>> eletrodomesticoOp = checarSeListaDeEntityExisteMapearParaDomain(entityOp);
+
+            log.trace("End eletrodomesticoOp={}", eletrodomesticoOp.get());
+            return eletrodomesticoOp;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            throw new ErrorToAccessDatabaseException();
+        }
+    }
+
+    @Override
     public void remover(Long id) {
         try {
             log.trace("Start id={}", id);
@@ -115,5 +132,14 @@ public class EletrodomesticoMySQLGateway implements EletrodomesticoRepositoryGat
         }
         Eletrodomestico eletrodomestico = entityOp.get().mapToDomain();
         return Optional.of(eletrodomestico);
+    }
+
+    private Optional<List<Eletrodomestico>> checarSeListaDeEntityExisteMapearParaDomain(Optional<List<EletrodomesticoEntity>> entityOp){
+        Optional<List<Eletrodomestico>> eletrodomesticosOp = Optional.empty();
+        if(entityOp.isEmpty()) {
+            return eletrodomesticosOp;
+        }
+        List<Eletrodomestico> eletrodomesticos = entityOp.get().stream().map(EletrodomesticoEntity::mapToDomain).toList();
+        return Optional.of(eletrodomesticos);
     }
 }

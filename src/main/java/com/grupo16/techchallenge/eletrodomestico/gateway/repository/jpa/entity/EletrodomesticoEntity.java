@@ -1,6 +1,7 @@
 package com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.entity;
 
 import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
+import com.grupo16.techchallenge.eletrodomestico.domain.MedicaoConsumo;
 import com.grupo16.techchallenge.endereco.domain.Endereco;
 import com.grupo16.techchallenge.endereco.gateway.repository.jpa.entity.EnderecoEntity;
 
@@ -9,6 +10,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 /**
  * @author Bruno Gomes Damascena dos santos (bruno-gds) < brunog.damascena@gmail.com >
@@ -39,7 +42,9 @@ public class EletrodomesticoEntity {
     @JoinColumn(name = "Endereco_id")
     private EnderecoEntity endereco;
 
-//    private List<MedicaoConsumo> medicoesConsumo;
+//    @ManyToOne
+//    @JoinColumn(name = "MedicaoConsumo_id")
+//    private MedicaoConsumo medicoesConsumo;
 
 
     public EletrodomesticoEntity(Eletrodomestico eletrodomestico) {

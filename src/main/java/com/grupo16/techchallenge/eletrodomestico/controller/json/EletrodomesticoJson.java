@@ -8,6 +8,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @ToString
 @Builder
@@ -51,6 +53,7 @@ public class EletrodomesticoJson {
                 .id(eletrodomestico.getEndereco().getId())
                 .build();
     }
+
 
     public Eletrodomestico mapeandoParaEletrodomestico() {
         return Eletrodomestico.builder()
