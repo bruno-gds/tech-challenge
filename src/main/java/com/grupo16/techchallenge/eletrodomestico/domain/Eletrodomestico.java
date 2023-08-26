@@ -21,5 +21,5 @@ public class Eletrodomestico {
     private Long potencia;
     private Long voltagem;
     private Endereco endereco;
-    private List<MedicaoConsumo> medicoesConsumo;
+    private List<LeituraConsumo> medicoesConsumo;
 }

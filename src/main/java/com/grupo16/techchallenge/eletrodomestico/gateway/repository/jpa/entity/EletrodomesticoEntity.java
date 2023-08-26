@@ -1,7 +1,7 @@
 package com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.entity;
 
 import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
-import com.grupo16.techchallenge.eletrodomestico.domain.MedicaoConsumo;
+import com.grupo16.techchallenge.eletrodomestico.domain.LeituraConsumo;
 import com.grupo16.techchallenge.endereco.domain.Endereco;
 import com.grupo16.techchallenge.endereco.gateway.repository.jpa.entity.EnderecoEntity;
 

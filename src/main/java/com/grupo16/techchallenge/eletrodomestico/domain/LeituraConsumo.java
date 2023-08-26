@@ -9,11 +9,11 @@ import lombok.ToString;
 @Builder
 @Getter
 @ToString
-public class MedicaoConsumo {
+public class LeituraConsumo {
 	
 	private Long id;
 	private LocalDateTime dataHora;
-	private Double consumo;
+	private Double leituraConsumo;
 	
 	private Eletrodomestico eletrodomestico;
 

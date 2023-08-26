@@ -1,7 +1,9 @@
 package com.grupo16.techchallenge.eletrodomestico.controller;
 
 import com.grupo16.techchallenge.eletrodomestico.controller.json.EletrodomesticoJson;
+import com.grupo16.techchallenge.eletrodomestico.controller.json.LeituraConsumoJson;
 import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
+import com.grupo16.techchallenge.eletrodomestico.domain.LeituraConsumo;
 import com.grupo16.techchallenge.eletrodomestico.usecase.CriarAlterarEletrodomesticoUseCase;
 
 import com.grupo16.techchallenge.eletrodomestico.usecase.ObterEletrodomesticoUseCase;
@@ -102,5 +104,21 @@ public class EletrodomesticoController {
         removerEletrodomesticoUseCase.remover(id);
 
         log.trace("End");
+    }
+    
+    @PostMapping("/leitura")
+    public Long registrarConsumo(
+    		@RequestParam(name = "eletrodomesticoId", required = true) Long eletrodomesticoId,
+    		@RequestBody(required = true) LeituraConsumoJson leituraConsumoJson ) {
+    	log.trace("Start leituraConsumoJson={}", leituraConsumoJson);
+    	
+    	Eletrodomestico eletrodomestico = Eletrodomestico.builder().id(eletrodomesticoId).build();
+    	LeituraConsumo leituraConsumo = LeituraConsumo.builder()
+    			.leituraConsumo(leituraConsumoJson.getLeituraConsumo())
+    			.eletrodomestico(eletrodomestico)
+    			.build();
+    	
+    	
+    	return null;
     }
 }
