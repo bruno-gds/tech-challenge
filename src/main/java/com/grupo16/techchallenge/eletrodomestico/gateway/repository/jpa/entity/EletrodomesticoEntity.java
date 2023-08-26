@@ -42,9 +42,8 @@ public class EletrodomesticoEntity {
     @JoinColumn(name = "Endereco_id")
     private EnderecoEntity endereco;
 
-//    @ManyToOne
-//    @JoinColumn(name = "MedicaoConsumo_id")
-//    private MedicaoConsumo medicoesConsumo;
+    @OneToMany(mappedBy = "eletrodomestico")
+    private List<LeituraConsumoEntity> leiturasConsumo;
 
 
     public EletrodomesticoEntity(Eletrodomestico eletrodomestico) {

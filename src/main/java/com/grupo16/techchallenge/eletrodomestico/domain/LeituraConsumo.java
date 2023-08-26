@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 @Builder
@@ -12,6 +13,7 @@ import lombok.ToString;
 public class LeituraConsumo {
 	
 	private Long id;
+	@Setter
 	private LocalDateTime dataHora;
 	private Double leituraConsumo;
 	
