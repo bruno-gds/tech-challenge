@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.grupo16.techchallenge.endereco.dto.PesquisarEnderecoParamsDto;
 import com.grupo16.techchallenge.endereco.gateway.repository.jpa.entity.EnderecoEntity;
+import com.grupo16.techchallenge.usuario.gateway.repository.jpa.entity.UsuarioEntity;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -22,11 +23,13 @@ public class EnderecoCriteriaBuilder {
     	Root<EnderecoEntity> rootEntity = criteriaQuery.from(EnderecoEntity.class);
     	
     	List<Predicate> predicates = new ArrayList<>();
+    	
+    	predicates.add(cb.equal(rootEntity.get("usuario"), UsuarioEntity.builder().id(paramsDto.getIdUsuario()).build()));
 
     	if(paramsDto.hasRua()) {
-    		predicates.add(cb.like(rootEntity.get("rua").as(String.class), "%" + paramsDto.getRua() + "%"));
+    		predicates.add(cb.like(rootEntity.get("rua"), "%" + paramsDto.getRua() + "%"));
     	}
-
+    	
     	//TODO: adicionar outros campos
     	
 

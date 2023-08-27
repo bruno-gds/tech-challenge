@@ -5,7 +5,6 @@ import java.util.List;
 import com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.entity.EletrodomesticoEntity;
 import com.grupo16.techchallenge.endereco.domain.Endereco;
 import com.grupo16.techchallenge.endereco.domain.Estado;
-import com.grupo16.techchallenge.usuario.domain.Genero;
 import com.grupo16.techchallenge.usuario.domain.Usuario;
 import com.grupo16.techchallenge.usuario.gateway.repository.jpa.entity.UsuarioEntity;
 
