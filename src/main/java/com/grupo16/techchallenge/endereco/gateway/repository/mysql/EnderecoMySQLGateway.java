@@ -7,16 +7,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.grupo16.techchallenge.endereco.domain.Endereco;
+import com.grupo16.techchallenge.endereco.dto.PesquisarEnderecoParamsDto;
 import com.grupo16.techchallenge.endereco.gateway.EnderecoRepositoryGateway;
 import com.grupo16.techchallenge.endereco.gateway.exception.ErrorToAccessDatabaseException;
 import com.grupo16.techchallenge.endereco.gateway.repository.jpa.entity.EnderecoEntity;
 import com.grupo16.techchallenge.endereco.gateway.repository.jpa.repository.EnderecoRepository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Repository
 public class EnderecoMySQLGateway implements EnderecoRepositoryGateway {
+	
+	@Autowired
+	private EntityManager entityManager;
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
@@ -107,6 +115,31 @@ public class EnderecoMySQLGateway implements EnderecoRepositoryGateway {
 		}
 		
 	}
+
+	@Override
+	public List<Endereco> pesquisar(PesquisarEnderecoParamsDto paramsDto) {
+		try {
+			log.trace("Start paramsDto={}", paramsDto);
+			
+			CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+			
+			CriteriaQuery<EnderecoEntity> criteria = EnderecoCriteriaBuilder.getSQLSearchCriteria(cb, paramsDto);
+			
+			TypedQuery<EnderecoEntity> query = entityManager.createQuery(criteria);
+			
+			List<EnderecoEntity> entities = query.getResultList();
+			
+			List<Endereco> domains = entities.stream().map(EnderecoEntity::mapToDomain).toList();
+			
+			log.trace("End domains={}", domains);
+
+			return domains;
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ErrorToAccessDatabaseException();
+		}
+	}
+
 	
 	private Optional<Endereco> checarSeEntityExisteMapearParaDomain(Optional<EnderecoEntity> entityOp){
 		Optional<Endereco> enderecoOp = Optional.empty();
@@ -117,4 +150,5 @@ public class EnderecoMySQLGateway implements EnderecoRepositoryGateway {
 		
 		return enderecoOp;
 	}
+
 }
