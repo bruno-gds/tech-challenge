@@ -20,5 +20,25 @@ public class PesquisarUsuarioParamsDto {
 	private TipoParentesco parentesco; 
 	private LocalDate dataNascimento; 
 	private Genero genero;
+	
+	public boolean hasNome() {
+		return nome != null && !nome.isEmpty();
+	}
+
+	public boolean hasCpf() {
+		return cpf != null && !cpf.isEmpty();
+	}
+
+	public boolean hasParentesco() {
+		return parentesco != null;
+	}
+
+	public boolean hasGenero() {
+		return genero != null;
+	}
+
+	public boolean hasDataNascimento() {
+		return dataNascimento != null;
+	}
 
 }

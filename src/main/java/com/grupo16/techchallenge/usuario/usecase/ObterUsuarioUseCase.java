@@ -48,6 +48,10 @@ public class ObterUsuarioUseCase {
 
 	public List<Usuario> pesquisar(PesquisarUsuarioParamsDto paramsDto) {
 		log.trace("Start paramsDto={}", paramsDto);
-		return null;
+		
+		List<Usuario> usuarios = usuarioRepository.pesquisar(paramsDto);
+		
+		log.trace("End usuarios={}", usuarios);
+		return usuarios;
 	}
 }

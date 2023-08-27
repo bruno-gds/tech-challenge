@@ -1,5 +1,6 @@
 package com.grupo16.techchallenge.usuario.gateway.repository.mysql;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.grupo16.techchallenge.usuario.domain.Parentesco;
 import com.grupo16.techchallenge.usuario.domain.Usuario;
+import com.grupo16.techchallenge.usuario.dto.PesquisarUsuarioParamsDto;
 import com.grupo16.techchallenge.usuario.gateway.UsuarioRepositoryGateway;
 import com.grupo16.techchallenge.usuario.gateway.exception.ErrorToAccessDatabaseException;
 import com.grupo16.techchallenge.usuario.gateway.repository.jpa.entity.ParentescoEntity;
@@ -15,12 +17,19 @@ import com.grupo16.techchallenge.usuario.gateway.repository.jpa.entity.UsuarioEn
 import com.grupo16.techchallenge.usuario.gateway.repository.jpa.repository.ParentescoRepository;
 import com.grupo16.techchallenge.usuario.gateway.repository.jpa.repository.UsuarioRepository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Repository
 public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
+	
+	@Autowired
+	private EntityManager entityManager;
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
@@ -129,6 +138,30 @@ public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 			throw new ErrorToAccessDatabaseException();
 		}
 		
+	}
+
+	@Override
+	public List<Usuario> pesquisar(PesquisarUsuarioParamsDto paramsDto) {
+		try {
+			log.trace("Start paramsDto={}", paramsDto);
+			
+			CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+			
+			CriteriaQuery<UsuarioEntity> criteria = UsuarioCriteriaBuilder.getSQLSearchCriteria(cb, paramsDto);
+			
+			TypedQuery<UsuarioEntity> query = entityManager.createQuery(criteria);
+			
+			List<UsuarioEntity> entities = query.getResultList();
+			
+			List<Usuario> usuarios = entities.stream().map(UsuarioEntity::mapearUsuarioEntityParaDomain).toList();
+			
+			log.trace("End usuarios={}", usuarios);
+			return usuarios;
+			
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ErrorToAccessDatabaseException();
+		}
 	}
 
 
