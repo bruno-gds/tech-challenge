@@ -1,13 +1,19 @@
 package com.grupo16.techchallenge.eletrodomestico.controller;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,8 +21,10 @@ import com.grupo16.techchallenge.eletrodomestico.controller.json.Eletrodomestico
 import com.grupo16.techchallenge.eletrodomestico.controller.json.LeituraConsumoJson;
 import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
 import com.grupo16.techchallenge.eletrodomestico.domain.LeituraConsumo;
+import com.grupo16.techchallenge.eletrodomestico.dto.ConsumoEletrodomesticoParamsDto;
 import com.grupo16.techchallenge.eletrodomestico.usecase.CriarAlterarEletrodomesticoUseCase;
-import com.grupo16.techchallenge.eletrodomestico.usecase.ObterEletrodomesticoUseCase;
+import com.grupo16.techchallenge.eletrodomestico.usecase.ObterConsumoUseCase;
+import com.grupo16.techchallenge.eletrodomestico.usecase.PesquisarConsumoEletrodomesticoUseCase;
 import com.grupo16.techchallenge.eletrodomestico.usecase.RegistrarConsumoEletrodomesticoUseCase;
 import com.grupo16.techchallenge.eletrodomestico.usecase.RemoverEletrodomesticoUseCase;
 
@@ -33,14 +41,14 @@ public class EletrodomesticoController {
 	private CriarAlterarEletrodomesticoUseCase criarAlterarEletrodomesticoUseCase;
 
 	@Autowired
-	private ObterEletrodomesticoUseCase obterEletrodomesticoUseCase;
-
-	@Autowired
 	private RemoverEletrodomesticoUseCase removerEletrodomesticoUseCase;
 
 	@Autowired
 	private RegistrarConsumoEletrodomesticoUseCase registrarConsumoEletrodomesticoUseCase;
-
+	
+	@Autowired
+	private ObterConsumoUseCase obterConsumoUseCase;
+	
 //	@GetMapping
 //	@RequestMapping("/filtro")
 //	public List<EletrodomesticoJson> buscaFiltrada(
@@ -109,7 +117,7 @@ public class EletrodomesticoController {
 		log.trace("End");
 	}
 
-	@PostMapping("{id}/leitura")
+	@PostMapping("{id}/consumos")
 	public Long registrarConsumo(
 			@PathVariable(name = "id", required = true) Long eletrodomesticoId,
 			@RequestBody(required = true) LeituraConsumoJson leituraConsumoJson ) {
@@ -117,7 +125,7 @@ public class EletrodomesticoController {
 
 		Eletrodomestico eletrodomestico = Eletrodomestico.builder().id(eletrodomesticoId).build();
 		LeituraConsumo leituraConsumo = LeituraConsumo.builder()
-				.leituraConsumo(leituraConsumoJson.getLeituraConsumo())
+				.consumo(leituraConsumoJson.getConsumo())
 				.eletrodomestico(eletrodomestico)
 				.build();
 
@@ -125,5 +133,25 @@ public class EletrodomesticoController {
 
 		log.trace("End registroId={}",registroId);
 		return registroId;
+	}
+	
+	@GetMapping("{id}/consumo-total-periodo")
+	public Double pesquisarRegistroConsumo(
+			@PathVariable(name = "id", required = true) Long eletrodomesticoId,
+			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam(name = "dataInicio", required = false) LocalDateTime dataInicio,
+			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam(name = "dataFim", required = false) LocalDateTime dataFim) {
+		
+		log.trace("Start eletrodomesticoId={}, dataInicio={}, dataFim={}", eletrodomesticoId, dataInicio, dataFim);
+		
+		ConsumoEletrodomesticoParamsDto paramDto = ConsumoEletrodomesticoParamsDto.builder()
+					.eletrodomesticoId(eletrodomesticoId)
+					.dataInicio(dataInicio)
+					.dataFim(dataFim)
+				.build();
+		
+		Double consumo = obterConsumoUseCase.obter(paramDto);
+		
+		log.trace("End consumo={}", consumo);
+		return consumo;
 	}
 }

@@ -1,19 +1,19 @@
 package com.grupo16.techchallenge.eletrodomestico.usecase;
 
-import com.grupo16.techchallenge.eletrodomestico.controller.json.EletrodomesticoJson;
-import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
-import com.grupo16.techchallenge.eletrodomestico.gateway.EletrodomesticoRepositoryGateway;
-import com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.entity.EletrodomesticoEntity;
-import com.grupo16.techchallenge.eletrodomestico.usecase.exception.EletrodomesticoNaoEncontradoException;
-import com.grupo16.techchallenge.endereco.controller.json.EnderecoJson;
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import com.grupo16.techchallenge.eletrodomestico.controller.json.EletrodomesticoJson;
+import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
+import com.grupo16.techchallenge.eletrodomestico.gateway.EletrodomesticoRepositoryGateway;
+import com.grupo16.techchallenge.eletrodomestico.usecase.exception.EletrodomesticoNaoEncontradoException;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Bruno Gomes Damascena dos santos (bruno-gds) < brunog.damascena@gmail.com >

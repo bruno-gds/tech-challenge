@@ -1,9 +1,14 @@
 package com.grupo16.techchallenge.eletrodomestico.gateway;
 
+import java.util.List;
+
 import com.grupo16.techchallenge.eletrodomestico.domain.LeituraConsumo;
+import com.grupo16.techchallenge.eletrodomestico.dto.ConsumoEletrodomesticoParamsDto;
 
 public interface LeituraConsumoRepositoryGateway {
 	
-	public Long salvar(LeituraConsumo leituraConsumo);
+	Long salvar(LeituraConsumo leituraConsumo);
+
+	List<LeituraConsumo> pesquisar(ConsumoEletrodomesticoParamsDto paramsDto);
 
 }
