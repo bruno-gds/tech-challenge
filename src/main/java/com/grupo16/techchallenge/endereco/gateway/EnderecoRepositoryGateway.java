@@ -10,9 +10,6 @@ public interface EnderecoRepositoryGateway {
 	
 	public Long salvar(Endereco endereco);
 
-	@Deprecated(forRemoval = true)
-	public List<Endereco> obterTodosByUsuarioId(Long idUsuario);
-
 	public Optional<Endereco> obterByIdAndUsuarioId(Long id, Long idUsuario);
 
 	public Optional<Endereco> obter(Long id);

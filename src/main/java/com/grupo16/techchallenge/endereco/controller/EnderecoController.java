@@ -54,21 +54,6 @@ public class EnderecoController {
         return id;
     }
 	
-	//TODO
-//	@GetMapping("usuarios/{idUsuario}/enderecos")
-//	public List<EnderecoJson> obterTodosByIdUsuario(
-//			@PathVariable(name = "idUsuario", required = true) Long idUsuario) {
-//		log.trace("Start idUsuario={}", idUsuario);
-//		
-//		List<Endereco> enderecos = obterEnderecoUseCase.obterTodosByIdUsuario(idUsuario);
-//		
-//		List<EnderecoJson> enderecosJson = enderecos.stream().map(EnderecoJson::new).toList();
-//		
-//		log.trace("End enderecosJson={}", enderecosJson);
-//		return enderecosJson;
-//		
-//	}
-	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping("enderecos/{id}")
 	public void alterar(

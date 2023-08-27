@@ -20,17 +20,6 @@ public class ObterEnderecoUseCase {
 	@Autowired
 	private EnderecoRepositoryGateway enderecoRepositoryGateway;
 
-	//FIXME: remover
-	@Deprecated(forRemoval = true, since = "Utilizar pesquisar")
-	public List<Endereco> obterTodosByIdUsuario(Long idUsuario) {
-		log.trace("Start idUsuario={}", idUsuario);
-		
-		List<Endereco> enderecos = enderecoRepositoryGateway.obterTodosByUsuarioId(idUsuario);
-		
-		log.trace("End enderecos={}", enderecos);
-		return enderecos;
-	}
-
 	public Endereco obterByIdAndUsuarioId(Long id, Long idUsuario) {
 		log.trace("Start idEndereco={}, idUsuario={}", id, idUsuario);
 		
