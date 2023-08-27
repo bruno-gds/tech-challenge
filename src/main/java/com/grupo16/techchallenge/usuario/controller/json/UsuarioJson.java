@@ -44,14 +44,14 @@ public class UsuarioJson {
 	
 	
 	
-	public Usuario mapearParaUsuarioDomain() {
+	public Usuario mapearParaUsuarioDomain(Long id) {
 		List<Parentesco> usuariosParentes = new ArrayList<>();
 		if(parentes != null) {
 			usuariosParentes = parentes.stream().map(p -> p.mapearParentescoJsonParaDomain()).toList();
 		}
 		
 		return Usuario.builder()
-				.id(id)
+				.id(id != null ? id : this.id)
 				.nome(nome)
 				.cpf(removeMask(cpf))
 				.dataNascimento(dataNascimento)

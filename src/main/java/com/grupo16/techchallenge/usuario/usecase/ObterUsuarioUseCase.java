@@ -1,11 +1,13 @@
 package com.grupo16.techchallenge.usuario.usecase;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.grupo16.techchallenge.usuario.domain.Usuario;
+import com.grupo16.techchallenge.usuario.dto.PesquisarUsuarioParamsDto;
 import com.grupo16.techchallenge.usuario.gateway.UsuarioRepositoryGateway;
 import com.grupo16.techchallenge.usuario.usecase.exception.UsuarioNaoEncontradoException;
 
@@ -42,5 +44,10 @@ public class ObterUsuarioUseCase {
 		
 		log.trace("Start usuario={}", usuarioOp.get());
 		return usuarioOp.get();
+	}
+
+	public List<Usuario> pesquisar(PesquisarUsuarioParamsDto paramsDto) {
+		log.trace("Start paramsDto={}", paramsDto);
+		return null;
 	}
 }

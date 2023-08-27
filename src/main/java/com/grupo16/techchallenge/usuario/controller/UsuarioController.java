@@ -18,8 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo16.techchallenge.usuario.controller.json.ParentescoJson;
 import com.grupo16.techchallenge.usuario.controller.json.UsuarioJson;
+import com.grupo16.techchallenge.usuario.domain.Genero;
 import com.grupo16.techchallenge.usuario.domain.Parentesco;
+import com.grupo16.techchallenge.usuario.domain.TipoParentesco;
 import com.grupo16.techchallenge.usuario.domain.Usuario;
+import com.grupo16.techchallenge.usuario.dto.PesquisarUsuarioParamsDto;
 import com.grupo16.techchallenge.usuario.usecase.CriarAlterarUsuarioUseCase;
 import com.grupo16.techchallenge.usuario.usecase.ObterUsuarioUseCase;
 import com.grupo16.techchallenge.usuario.usecase.RemoverUsuarioUseCase;
@@ -28,7 +31,7 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@RequestMapping("/usuarios")
+@RequestMapping("usuarios")
 @RestController
 public class UsuarioController {
 
@@ -48,7 +51,7 @@ public class UsuarioController {
 			@RequestBody UsuarioJson usuarioJson) {
 		log.trace("Start usuarioJson={}", usuarioJson);
 
-		Usuario usuario = usuarioJson.mapearParaUsuarioDomain();
+		Usuario usuario = usuarioJson.mapearParaUsuarioDomain(null);
 
 		Long usuarioId = criarAlterarUsuarioUseCase.criar(usuario);
 
@@ -71,12 +74,13 @@ public class UsuarioController {
 	}
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PutMapping
+	@PutMapping("{id}")
 	public void alterar(
+			@PathVariable(name = "id", required = true) Long id, 
 			@RequestBody(required = true) UsuarioJson usuarioJson) {
 		log.trace("Start usuarioJson={}", usuarioJson);
 		
-		Usuario usuario = usuarioJson.mapearParaUsuarioDomain();
+		Usuario usuario = usuarioJson.mapearParaUsuarioDomain(id);
 		criarAlterarUsuarioUseCase.alterar(usuario);
 		
 		log.trace("End");
@@ -94,7 +98,7 @@ public class UsuarioController {
 	}
 	
 	@ResponseStatus(HttpStatus.CREATED)
-	@PostMapping("/parentes")
+	@PostMapping("parentes")
 	public Long criarParentesco(
 			@RequestBody(required = true)ParentescoJson parentescoJson) {
 		log.trace("Start parenteJson={}", parentescoJson);
@@ -107,23 +111,32 @@ public class UsuarioController {
 		return parenteId;
 	}
 	
-	@GetMapping
-	public List<UsuarioJson> buscar(
+	@GetMapping("{idUsuarioPrincipal}/parentes")
+	public List<UsuarioJson> pesquisar(
+			@PathVariable(name = "idUsuarioPrincipal", required = true) Long idUsuarioPrincipal,
 			@RequestParam(name = "nome", required = false) String nome,
 			@RequestParam(name = "cpf", required = false) String cpf,
 			@RequestParam(name = "parentesco", required = false) String parentesco,
 			@RequestParam(name = "dataNascimento", required = false) LocalDate dataNascimento,
 			@RequestParam(name = "genero", required = false) String genero){
+		log.trace("Start idUsuarioPrincipal={}, nome={}, cpf={}, parentesco={}, dataNascimento={}, genero={}",
+				idUsuarioPrincipal, nome, cpf, parentesco, dataNascimento, genero);
 		
-		/*
-		 * TODO implementar
-		 * A busca deve ser capaz de filtrar as informações por nome, parentesco, 
-		 * sexo ou outra informação relevante.
-		 * 
-		 * OBS.: Podemos usar Criteria Builder 
-		 */
+		PesquisarUsuarioParamsDto paramsDto = PesquisarUsuarioParamsDto.builder()
+				.idUsuarioPrincipal(idUsuarioPrincipal)
+				.nome(nome)
+				.cpf(cpf)
+				.parentesco(parentesco == null ? null : TipoParentesco.valueOf(parentesco))
+				.dataNascimento(dataNascimento)
+				.genero(genero == null ? null : Genero.valueOf(genero))
+				.build(); 
 		
-		return null;
+		List<Usuario> usuarios = obterUsuarioUseCase.pesquisar(paramsDto);
+		
+		List<UsuarioJson> usuariosJson = usuarios.stream().map(UsuarioJson::new).toList();
+		
+		log.trace("End usuariosJson={}", usuariosJson);
+		return usuariosJson;
 	}
 	
 	private String removeMask(String cpf) {

@@ -89,8 +89,6 @@ public class EnderecoController {
 			@RequestParam(name = "cep", required = false) String cep){
 		log.trace("Start idUsuario={}, rua={}, bairro={}, cidade={}, estado={}, cep={}", idUsuario, rua, bairro, cidade, estado, cep);
 		
-		
-		
 		PesquisarEnderecoParamsDto paramsDto = PesquisarEnderecoParamsDto.builder()
 					.idUsuario(idUsuario)
 					.rua(rua)
