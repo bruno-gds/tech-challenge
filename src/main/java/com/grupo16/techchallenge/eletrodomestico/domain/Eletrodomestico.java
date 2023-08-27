@@ -31,6 +31,9 @@ public class Eletrodomestico {
     //TODO: ideal seria trabalhar com BigDecimal ao invés de Double
     public Double getConsumo(LocalDateTime dataInicio, LocalDateTime dataFim) {
     	
+    	if(medicoesConsumo.isEmpty()) {
+    		return 0D;
+    	}
     	
     	Double consumoMenor = medicoesConsumo.stream()
     			.sorted((mc1, mc2) -> mc1.getDataHora().compareTo(mc2.getDataHora()))

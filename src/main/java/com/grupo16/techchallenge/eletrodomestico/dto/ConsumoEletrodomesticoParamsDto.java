@@ -13,4 +13,10 @@ public class ConsumoEletrodomesticoParamsDto {
 	private Long eletrodomesticoId;
 	private LocalDateTime dataInicio;
 	private LocalDateTime dataFim;
+	
+	
+	public boolean hasPeriodDate() {
+		return dataInicio != null && dataInicio != null;
+	}
+	
 }

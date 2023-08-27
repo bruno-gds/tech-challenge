@@ -1,6 +1,7 @@
 package com.grupo16.techchallenge.eletrodomestico.gateway.repository.mysql;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -53,6 +54,27 @@ public class LeituraConsumoMySQLGateway implements LeituraConsumoRepositoryGatew
 			
 			log.trace("End domains={}", domains);
 			return domains;
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ErrorToAccessDatabaseException();			
+		}
+	}
+
+	@Override
+	public Optional<LeituraConsumo> obterUltimaLeituraPorEletrodomesticoId(Long eletrodomesticoId) {
+		try {
+			log.trace("Start eletrodomesticoId={}", eletrodomesticoId);
+			
+			Optional<LeituraConsumoEntity> entityOp = leituraConsumoRepository.findFirstByEletrodomesticoIdOrderByDataHoraDesc(eletrodomesticoId);
+			
+			Optional<LeituraConsumo> domainOp = Optional.empty();
+			if(entityOp.isPresent()) {
+				LeituraConsumoEntity leituraConsumoEntity = entityOp.get();
+				domainOp = Optional.of(leituraConsumoEntity.mapToDomain());
+			}
+			
+			log.trace("End domainOp={}", domainOp);
+			return domainOp;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw new ErrorToAccessDatabaseException();			

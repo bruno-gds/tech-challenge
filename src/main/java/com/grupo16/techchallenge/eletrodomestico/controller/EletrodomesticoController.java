@@ -1,7 +1,6 @@
 package com.grupo16.techchallenge.eletrodomestico.controller;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,7 +23,6 @@ import com.grupo16.techchallenge.eletrodomestico.domain.LeituraConsumo;
 import com.grupo16.techchallenge.eletrodomestico.dto.ConsumoEletrodomesticoParamsDto;
 import com.grupo16.techchallenge.eletrodomestico.usecase.CriarAlterarEletrodomesticoUseCase;
 import com.grupo16.techchallenge.eletrodomestico.usecase.ObterConsumoUseCase;
-import com.grupo16.techchallenge.eletrodomestico.usecase.PesquisarConsumoEletrodomesticoUseCase;
 import com.grupo16.techchallenge.eletrodomestico.usecase.RegistrarConsumoEletrodomesticoUseCase;
 import com.grupo16.techchallenge.eletrodomestico.usecase.RemoverEletrodomesticoUseCase;
 
