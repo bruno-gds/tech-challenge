@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.grupo16.techchallenge.endereco.controller.json.EnderecoJson;
 import com.grupo16.techchallenge.endereco.domain.Endereco;
+import com.grupo16.techchallenge.endereco.domain.Estado;
 import com.grupo16.techchallenge.endereco.dto.PesquisarEnderecoParamsDto;
 import com.grupo16.techchallenge.endereco.usecase.CriarAlterarEnderecoUseCase;
 import com.grupo16.techchallenge.endereco.usecase.ObterEnderecoUseCase;
@@ -103,12 +104,14 @@ public class EnderecoController {
 			@RequestParam(name = "cep", required = false) String cep){
 		log.trace("Start idUsuario={}, rua={}, bairro={}, cidade={}, estado={}, cep={}", idUsuario, rua, bairro, cidade, estado, cep);
 		
+		
+		
 		PesquisarEnderecoParamsDto paramsDto = PesquisarEnderecoParamsDto.builder()
 					.idUsuario(idUsuario)
 					.rua(rua)
 					.bairro(bairro)
 					.cidade(cidade)
-					.estado(estado)
+					.estado(estado == null ? null : Estado.valueOf(estado))
 					.cep(cep)
 				.build();
 		

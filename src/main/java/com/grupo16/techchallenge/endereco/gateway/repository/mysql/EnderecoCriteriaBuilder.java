@@ -29,8 +29,22 @@ public class EnderecoCriteriaBuilder {
     	if(paramsDto.hasRua()) {
     		predicates.add(cb.like(rootEntity.get("rua"), "%" + paramsDto.getRua() + "%"));
     	}
+
+    	if(paramsDto.hasBairro()) {
+    		predicates.add(cb.like(rootEntity.get("bairro"), "%" + paramsDto.getBairro() + "%"));
+    	}
+
+    	if(paramsDto.hasCidade()) {
+    		predicates.add(cb.like(rootEntity.get("cidade"), "%" + paramsDto.getCidade() + "%"));
+    	}
     	
-    	//TODO: adicionar outros campos
+    	if(paramsDto.hasEstado()) {
+    		predicates.add(cb.equal(rootEntity.get("estado"), paramsDto.getEstado().ordinal()));
+    	}
+    	
+    	if(paramsDto.hasCep()) {
+    		predicates.add(cb.like(rootEntity.get("cep"), "%" + paramsDto.getCep() + "%"));
+    	}
     	
 
 		final Predicate[] predicatesArray = predicates.toArray(new Predicate[predicates.size()]);
