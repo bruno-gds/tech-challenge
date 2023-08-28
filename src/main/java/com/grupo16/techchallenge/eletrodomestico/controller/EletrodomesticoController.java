@@ -1,6 +1,7 @@
 package com.grupo16.techchallenge.eletrodomestico.controller;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,6 +24,7 @@ import com.grupo16.techchallenge.eletrodomestico.domain.LeituraConsumo;
 import com.grupo16.techchallenge.eletrodomestico.dto.ConsumoEletrodomesticoParamsDto;
 import com.grupo16.techchallenge.eletrodomestico.usecase.CriarAlterarEletrodomesticoUseCase;
 import com.grupo16.techchallenge.eletrodomestico.usecase.ObterConsumoUseCase;
+import com.grupo16.techchallenge.eletrodomestico.usecase.ObterEletrodomesticoUseCase;
 import com.grupo16.techchallenge.eletrodomestico.usecase.RegistrarConsumoEletrodomesticoUseCase;
 import com.grupo16.techchallenge.eletrodomestico.usecase.RemoverEletrodomesticoUseCase;
 
@@ -45,24 +47,27 @@ public class EletrodomesticoController {
 	private RegistrarConsumoEletrodomesticoUseCase registrarConsumoEletrodomesticoUseCase;
 	
 	@Autowired
+	private ObterEletrodomesticoUseCase obterEletrodomesticoUseCase;
+	
+	@Autowired
 	private ObterConsumoUseCase obterConsumoUseCase;
 	
-//	@GetMapping
-//	@RequestMapping("/filtro")
-//	public List<EletrodomesticoJson> buscaFiltrada(
-//			@RequestParam(name = "nome", required = false) String nome,
-//			@RequestParam(name = "modelo", required = false) String modelo,
-//			@RequestParam(name = "marca", required = false) String marca,
-//			@RequestParam(name = "potencia", required = false) Long potencia
-//			) {
-//		log.trace("Start nome={}, modelo={}, marca={}, potencia={}", nome, modelo, marca, potencia);
-//
-//		var eletrodomestico = obterEletrodomesticoUseCase.buscaFiltrada(nome, modelo, marca, potencia);
-//		var eletrodomesticoJson = eletrodomestico.stream().map(EletrodomesticoJson::new).toList();
-//
-//		log.trace("End eletrodomestico={}", eletrodomesticoJson);
-//		return eletrodomesticoJson;
-//	}
+	@GetMapping
+	@RequestMapping("/filtro")
+	public List<EletrodomesticoJson> buscaFiltrada(
+			@RequestParam(name = "nome", required = false) String nome,
+			@RequestParam(name = "modelo", required = false) String modelo,
+			@RequestParam(name = "marca", required = false) String marca,
+			@RequestParam(name = "potencia", required = false) Long potencia
+			) {
+		log.trace("Start nome={}, modelo={}, marca={}, potencia={}", nome, modelo, marca, potencia);
+
+		var eletrodomestico = obterEletrodomesticoUseCase.buscaFiltrada(nome, modelo, marca, potencia);
+		var eletrodomesticoJson = eletrodomestico.stream().map(EletrodomesticoJson::new).toList();
+
+		log.trace("End eletrodomestico={}", eletrodomesticoJson);
+		return eletrodomesticoJson;
+	}
 
 //	@GetMapping
 //	public ResponseEntity<Page<EletrodomesticoJson>> obterTodos(

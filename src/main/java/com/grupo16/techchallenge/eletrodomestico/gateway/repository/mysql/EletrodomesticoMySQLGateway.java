@@ -103,7 +103,7 @@ public class EletrodomesticoMySQLGateway implements EletrodomesticoRepositoryGat
             var entityOp = eletrodomesticoRepository.buscaFiltrada(nome, modelo, marca, potencia);
             Optional<List<Eletrodomestico>> eletrodomesticoOp = checarSeListaDeEntityExisteMapearParaDomain(entityOp);
 
-            log.trace("End eletrodomesticoOp={}", eletrodomesticoOp.get());
+            log.trace("End eletrodomesticoOp={}", eletrodomesticoOp);
             return eletrodomesticoOp;
         } catch (Exception e) {
             log.error(e.getMessage(), e);
