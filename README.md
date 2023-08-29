@@ -16,7 +16,13 @@ São três APIs principais: Pessoa, Endereço e Eletrodoméstico. O objetivo des
 
 ## Instruções
 
-- Maven: para build do projeto. **Para buildar:** mvn clean install
+- Maven: Para build do projeto. **Para buildar:** mvn clean install
+- Docker: Subindo DB. **Para iniciar o Bando de Dados:**
+```
+- Acesse o diretório 'docker' do projeto
+- Crie o diretório 'db-data' para armazenar os seus dados do DB
+- Após estes passos, execute: 'docker-compose up -d'
+```
 - Foi utilizado Lombok e Validation, portanto é necessário adicionar os plugins na IDE
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
