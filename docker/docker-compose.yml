@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  tc-db:
+    image: brunogds/tech-challenge-group16:2.0
+    environment:
+      MYSQL_ROOT_PASSWORD: senha
+      MYSQL_DATABASE: tech_challenge
+      MYSQL_USER: bruno
+      MYSQL_PASSWORD: bruno123
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db-data:/var/lib/mysql
