@@ -61,13 +61,11 @@ public class ObterEletrodomesticoUseCase {
     public List<Eletrodomestico> buscaFiltrada(String nome, String modelo, String marca, Long potencia) {
         log.trace("Start nome={}, modelo={}, marca={}, potencia={}", nome, modelo, marca, potencia);
 
-        var eletrodomesticoOp = eletrodomesticoRepository.buscaFiltrada(nome, modelo, marca, potencia);
+        var eletrodomestico = eletrodomesticoRepository.buscaFiltrada(nome, modelo, marca, potencia);
 
-        checarSeListaDeEntityExisteMapearParaDomain(eletrodomesticoOp);
+        log.trace("End eletrodomestico={}", eletrodomestico);
 
-        log.trace("End eletrodomestico={}", eletrodomesticoOp.get());
-
-        return eletrodomesticoOp.get();
+        return eletrodomestico;
     }
 
     private void checarSeEletrodomesticoFoiEncontrado(Optional<Eletrodomestico> eletrodomesticoOp) {
