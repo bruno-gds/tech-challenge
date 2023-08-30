@@ -96,11 +96,11 @@ public class EletrodomesticoMySQLGateway implements EletrodomesticoRepositoryGat
     }
 
     @Override
-    public List<Eletrodomestico> buscaFiltrada(String nome, String modelo, String marca, Long potencia) {
+    public List<Eletrodomestico> buscaFiltrada(Long idUsuario, String nome, String modelo, String marca, Long potencia) {
         try {
-            log.trace("Start nome={}, modelo={}, marca={}, potencia={}", nome, modelo, marca, potencia);
+            log.trace("Start idUsuario={}, nome={}, modelo={}, marca={}, potencia={}", idUsuario, nome, modelo, marca, potencia);
 
-            var entity = eletrodomesticoRepository.buscaFiltrada(nome, modelo, marca, potencia);
+            var entity = eletrodomesticoRepository.buscaFiltrada(idUsuario, nome, modelo, marca, potencia);
             List<Eletrodomestico> domain = entity.stream().map(EletrodomesticoEntity::mapToDomain).toList();
 
             log.trace("End eletrodomesticoOp={}", domain);

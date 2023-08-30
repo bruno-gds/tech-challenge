@@ -17,7 +17,7 @@ public interface EletrodomesticoRepositoryGateway {
 
     public Page<Eletrodomestico> obterTodos(PageRequest pageRequest);
 
-    public List<Eletrodomestico> buscaFiltrada(String nome, String modelo, String marca, Long potencia);
+    public List<Eletrodomestico> buscaFiltrada(Long id, String nome, String modelo, String marca, Long potencia);
 
     public void remover(Long id);
 }

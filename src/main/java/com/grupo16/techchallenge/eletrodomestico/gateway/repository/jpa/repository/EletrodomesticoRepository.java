@@ -18,12 +18,15 @@ public interface EletrodomesticoRepository extends JpaRepository<Eletrodomestico
 
     Optional<EletrodomesticoEntity> findByIdAndEnderecoId(Long id, Long idEndereco);
 
-    @Query("SELECT e FROM EletrodomesticoEntity e WHERE " +
-            "(:nome IS NULL OR e.nome LIKE %:nome%) AND " +
-            "(:modelo IS NULL OR e.modelo LIKE %:modelo% ) AND " +
-            "(:marca IS NULL OR e.marca LIKE %:marca% ) AND " +
-            "(:potencia IS NULL OR e.potencia=:potencia)")
+    @Query("SELECT eletrodomestico FROM EletrodomesticoEntity eletrodomestico " +
+            "INNER JOIN EnderecoEntity endereco ON eletrodomestico.endereco.id = endereco.id " +
+            "WHERE endereco.usuario.id = :idUsuario AND " +
+            "(:nome IS NULL OR eletrodomestico.nome LIKE %:nome%) AND " +
+            "(:modelo IS NULL OR eletrodomestico.modelo LIKE %:modelo% ) AND " +
+            "(:marca IS NULL OR eletrodomestico.marca LIKE %:marca% ) AND " +
+            "(:potencia IS NULL OR eletrodomestico.potencia=:potencia)")
     List<EletrodomesticoEntity> buscaFiltrada(
+            @Param("idUsuario") Long idUsuario,
             @Param("nome") String nome,
             @Param("modelo") String modelo,
             @Param("marca") String marca,
