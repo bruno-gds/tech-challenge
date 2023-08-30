@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   tc-db:
-    image: brunogds/tech-challenge-group16:2.0
+    image: brunogds/tech-challenge-group16:3.0
     environment:
       MYSQL_ROOT_PASSWORD: senha
       MYSQL_DATABASE: tech_challenge
