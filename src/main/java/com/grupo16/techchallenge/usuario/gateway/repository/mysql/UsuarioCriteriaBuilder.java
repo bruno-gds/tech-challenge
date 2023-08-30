@@ -23,7 +23,7 @@ public class UsuarioCriteriaBuilder {
     	
     	List<Predicate> predicates = new ArrayList<>();
     	
-//    	predicates.add(cb.equal(rootEntity.get("id"), paramsDto.getIdUsuarioPrincipal()));
+    	predicates.add(cb.equal(rootEntity.get("parenteId"), paramsDto.getIdUsuarioPrincipal()));
 
     	if(paramsDto.hasNome()) {
     		predicates.add(cb.like(rootEntity.get("nome"), "%" + paramsDto.getNome() + "%"));
@@ -34,7 +34,7 @@ public class UsuarioCriteriaBuilder {
     	}
 
     	if(paramsDto.hasParentesco()) {
-    		predicates.add(cb.equal(rootEntity.get("parentesco"), paramsDto.getParentesco().ordinal()));
+    		predicates.add(cb.equal(rootEntity.get("tipoParentesco"), paramsDto.getParentesco().ordinal()));
     	}
     	
     	if(paramsDto.hasGenero()) {

@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Builder
 @Getter
@@ -37,12 +38,12 @@ public class UsuarioEntity {
 	
 	@OneToMany(mappedBy = "usuario")
 	private List<EnderecoEntity> enderecos;
+
+	@Setter
+	private Long parenteId;
 	
-	@OneToMany(mappedBy = "usuarioPrincipal")
-	private List<ParentescoEntity> parentescosUsuarioPrincipal;
-	
-	@OneToMany(mappedBy = "usuarioParente")
-	private List<ParentescoEntity> parentescosUsuarioParente;
+	@Setter
+	private Long tipoParentesco;
 	
 	public UsuarioEntity(Usuario usuario) {
 		this.id = usuario.getId();

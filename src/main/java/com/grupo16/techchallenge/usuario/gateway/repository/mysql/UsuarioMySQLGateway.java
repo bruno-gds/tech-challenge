@@ -11,17 +11,13 @@ import com.grupo16.techchallenge.usuario.domain.Usuario;
 import com.grupo16.techchallenge.usuario.dto.PesquisarUsuarioParamsDto;
 import com.grupo16.techchallenge.usuario.gateway.UsuarioRepositoryGateway;
 import com.grupo16.techchallenge.usuario.gateway.exception.ErrorToAccessDatabaseException;
-import com.grupo16.techchallenge.usuario.gateway.repository.jpa.entity.ParentescoEntity;
-import com.grupo16.techchallenge.usuario.gateway.repository.jpa.entity.ParentescoId;
 import com.grupo16.techchallenge.usuario.gateway.repository.jpa.entity.UsuarioEntity;
-import com.grupo16.techchallenge.usuario.gateway.repository.jpa.repository.ParentescoRepository;
 import com.grupo16.techchallenge.usuario.gateway.repository.jpa.repository.UsuarioRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -34,9 +30,6 @@ public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-	@Autowired
-	private ParentescoRepository parentescoRepository;
-
 	@Override
 	public Long salvar(Usuario usuario) {
 		try {
@@ -115,23 +108,16 @@ public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 		return usuarioOp;
 	}
 
-	@Transactional
 	@Override
 	public Long salvar(Parentesco parentesco) {
 		try {
-			
-			Long parenteId = salvar(parentesco.getUsuarioParente());
-			
-			ParentescoId parentescoId = new ParentescoId(parentesco.getUsuario().getId(), parenteId);
-			
-			ParentescoEntity entity = ParentescoEntity.builder()
-					.parentescoId(parentescoId)
-					.tipoParentescoId((long) parentesco.getTipoParentesco().ordinal())
-					.build();
+			//TODO: add logs
 
-			parentescoRepository.save(entity);
-			
-			return parenteId;
+			UsuarioEntity parenteEntity = new UsuarioEntity(parentesco.getUsuarioParente());
+			parenteEntity.setParenteId(parentesco.getUsuario().getId());
+			parenteEntity.setTipoParentesco((long) parentesco.getTipoParentesco().ordinal());
+
+			return usuarioRepository.save(parenteEntity).getId();
 			
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
