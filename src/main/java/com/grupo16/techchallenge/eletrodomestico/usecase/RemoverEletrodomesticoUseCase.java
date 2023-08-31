@@ -5,12 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * @author Bruno Gomes Damascena dos santos (bruno-gds) < brunog.damascena@gmail.com >
- * Date: 21/08/2023
- * Project Name: tech-challenge
- */
-
 @Slf4j
 @Service
 public class RemoverEletrodomesticoUseCase {

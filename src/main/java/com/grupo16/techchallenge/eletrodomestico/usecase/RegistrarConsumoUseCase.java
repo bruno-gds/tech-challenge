@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class RegistrarConsumoEletrodomesticoUseCase {
+public class RegistrarConsumoUseCase {
 	
 	@Autowired
 	private LeituraConsumoRepositoryGateway leituraConsumoRepositoryGateway;

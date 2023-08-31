@@ -15,7 +15,7 @@ public class LeituraConsumo {
 	private Long id;
 	@Setter
 	private LocalDateTime dataHora;
-	private Double consumo;//TODO: alterar para BigDecimal
+	private Double consumo;
 	
 	private Eletrodomestico eletrodomestico;
 

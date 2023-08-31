@@ -1,23 +1,23 @@
 package com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.entity;
 
+import java.util.List;
+
 import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
-import com.grupo16.techchallenge.eletrodomestico.domain.LeituraConsumo;
 import com.grupo16.techchallenge.endereco.domain.Endereco;
 import com.grupo16.techchallenge.endereco.gateway.repository.jpa.entity.EnderecoEntity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
-
-/**
- * @author Bruno Gomes Damascena dos santos (bruno-gds) < brunog.damascena@gmail.com >
- * Date: 15/08/2023
- * Project Name: tech-challenge
- */
 
 @Builder
 @Getter

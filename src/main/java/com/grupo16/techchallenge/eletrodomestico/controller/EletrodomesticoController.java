@@ -25,7 +25,7 @@ import com.grupo16.techchallenge.eletrodomestico.dto.ConsumoEletrodomesticoParam
 import com.grupo16.techchallenge.eletrodomestico.usecase.CriarAlterarEletrodomesticoUseCase;
 import com.grupo16.techchallenge.eletrodomestico.usecase.ObterConsumoUseCase;
 import com.grupo16.techchallenge.eletrodomestico.usecase.ObterEletrodomesticoUseCase;
-import com.grupo16.techchallenge.eletrodomestico.usecase.RegistrarConsumoEletrodomesticoUseCase;
+import com.grupo16.techchallenge.eletrodomestico.usecase.RegistrarConsumoUseCase;
 import com.grupo16.techchallenge.eletrodomestico.usecase.RemoverEletrodomesticoUseCase;
 
 import jakarta.validation.Valid;
@@ -44,7 +44,7 @@ public class EletrodomesticoController {
 	private RemoverEletrodomesticoUseCase removerEletrodomesticoUseCase;
 
 	@Autowired
-	private RegistrarConsumoEletrodomesticoUseCase registrarConsumoEletrodomesticoUseCase;
+	private RegistrarConsumoUseCase registrarConsumoEletrodomesticoUseCase;
 	
 	@Autowired
 	private ObterEletrodomesticoUseCase obterEletrodomesticoUseCase;

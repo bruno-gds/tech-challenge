@@ -8,12 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * @author Bruno Gomes Damascena dos santos (bruno-gds) < brunog.damascena@gmail.com >
- * Date: 15/08/2023
- * Project Name: tech-challenge
- */
-
 public interface EletrodomesticoRepository extends JpaRepository<EletrodomesticoEntity, Long> {
 
     Optional<EletrodomesticoEntity> findByIdAndEnderecoId(Long id, Long idEndereco);

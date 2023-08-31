@@ -8,7 +8,7 @@ import lombok.Getter;
 public class ErrorToAccessDatabaseException extends SystemBaseException{
 	private static final long serialVersionUID = 3310150815407960688L;
 	
-	private final String code = "tc.homeAppliance.errorToAccessDatabase";
+	private final String code = "tc.eletrodomestico.errorToAccessDatabase";
 	private final String message = "Ocorreu um erro ao acessar o banco de dados.";
 	private final Integer httpStatus = 500;
 

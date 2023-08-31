@@ -28,7 +28,6 @@ public class Eletrodomestico {
     private Endereco endereco;
     private List<LeituraConsumo> medicoesConsumo;
 	
-    //TODO: ideal seria trabalhar com BigDecimal ao invés de Double
     public Double getConsumo(LocalDateTime dataInicio, LocalDateTime dataFim) {
     	
     	if(medicoesConsumo.isEmpty()) {
@@ -51,25 +50,4 @@ public class Eletrodomestico {
     	
 		return consumoMaior - consumoMenor;
 	}
-    
-    //TESTE
-//    public static void main(String[] args) {
-//    	
-//    	List<LeituraConsumo> medicoesConsumo = Arrays.asList(
-//    			LeituraConsumo.builder().consumo(1D).dataHora(LocalDateTime.of(2023, Month.AUGUST, 3, 0, 0)) .build(),
-//    			LeituraConsumo.builder().consumo(2D).dataHora(LocalDateTime.of(2023, Month.AUGUST, 4, 0, 0)) .build(),//MENOR
-//    			LeituraConsumo.builder().consumo(3D).dataHora(LocalDateTime.of(2023, Month.AUGUST, 5, 0, 0)) .build(),
-//    			LeituraConsumo.builder().consumo(4D).dataHora(LocalDateTime.of(2023, Month.AUGUST, 6, 0, 0)) .build(),//MAIOR
-//    			LeituraConsumo.builder().consumo(5D).dataHora(LocalDateTime.of(2023, Month.AUGUST, 6, 0, 1)) .build());
-//    	
-//    	
-//    	Eletrodomestico eletrodomestico = new Eletrodomestico();
-//    	eletrodomestico.medicoesConsumo = medicoesConsumo;
-//    	
-//    	LocalDateTime inicio = LocalDateTime.of(2023, Month.AUGUST, 4, 0, 0);
-//    	LocalDateTime fim = LocalDateTime.of(2023, Month.AUGUST, 6, 0, 0);
-//    	
-//    	Double consumo = eletrodomestico.getConsumo(inicio, fim);
-//	}
-    
 }

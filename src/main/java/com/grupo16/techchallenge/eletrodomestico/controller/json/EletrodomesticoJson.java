@@ -1,14 +1,16 @@
 package com.grupo16.techchallenge.eletrodomestico.controller.json;
 
 import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
-
 import com.grupo16.techchallenge.endereco.controller.json.EnderecoJson;
 import com.grupo16.techchallenge.endereco.domain.Endereco;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
-
-import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
 @ToString
@@ -37,9 +39,6 @@ public class EletrodomesticoJson {
     private Long voltagem;
 
     private EnderecoJson endereco;
-
-    // TODO: BRUNO = Implementar medicoes consumo
-
 
     public EletrodomesticoJson(Eletrodomestico eletrodomestico) {
         this.id = eletrodomestico.getId();
