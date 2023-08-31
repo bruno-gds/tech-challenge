@@ -8,7 +8,7 @@ import lombok.Getter;
 public class ErrorToAccessDatabaseException extends SystemBaseException{
 	private static final long serialVersionUID = -1738985112058252461L;
 
-	private final String code = "tc.address.errorToAccessDatabase";
+	private final String code = "tc.endereco.errorToAccessDatabase";
 	private final String message = "Ocorreu um erro ao acessar o banco de dados.";
 	private final Integer httpStatus = 500;
 

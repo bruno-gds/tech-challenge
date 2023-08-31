@@ -20,13 +20,7 @@ public class CriarAlterarEnderecoUseCase {
 	
 	public Long criar(Endereco endereco) {
 		log.trace("Start endereco={}", endereco);
-		
-		/*
-		 *TODO: conferir se o id usuario existe
-		 *Para isso, criar um gateway e implementar a chamada para o 
-		 *microsservico Usuario;  
-		 */
-		
+
 		Long id = enderecoRepository.salvar(endereco);
 		
 		log.trace("End id={}", id);
