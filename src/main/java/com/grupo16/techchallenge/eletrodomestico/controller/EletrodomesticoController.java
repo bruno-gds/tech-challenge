@@ -53,16 +53,17 @@ public class EletrodomesticoController {
 	private ObterConsumoUseCase obterConsumoUseCase;
 	
 	@GetMapping
-	@RequestMapping("/filtro")
+	@RequestMapping("/{idUsuario}")
 	public List<EletrodomesticoJson> buscaFiltrada(
+			@PathVariable(name = "idUsuario") Long idUsuario,
 			@RequestParam(name = "nome", required = false) String nome,
 			@RequestParam(name = "modelo", required = false) String modelo,
 			@RequestParam(name = "marca", required = false) String marca,
 			@RequestParam(name = "potencia", required = false) Long potencia
 			) {
-		log.trace("Start nome={}, modelo={}, marca={}, potencia={}", nome, modelo, marca, potencia);
+		log.trace("Start idUsuario={}, nome={}, modelo={}, marca={}, potencia={}", idUsuario, nome, modelo, marca, potencia);
 
-		var eletrodomestico = obterEletrodomesticoUseCase.buscaFiltrada(nome, modelo, marca, potencia);
+		var eletrodomestico = obterEletrodomesticoUseCase.buscaFiltrada(idUsuario, nome, modelo, marca, potencia);
 		var eletrodomesticoJson = eletrodomestico.stream().map(EletrodomesticoJson::new).toList();
 
 		log.trace("End eletrodomestico={}", eletrodomesticoJson);

@@ -58,10 +58,10 @@ public class ObterEletrodomesticoUseCase {
         return eletrodomesticos.map(EletrodomesticoJson::new);
     }
 
-    public List<Eletrodomestico> buscaFiltrada(String nome, String modelo, String marca, Long potencia) {
-        log.trace("Start nome={}, modelo={}, marca={}, potencia={}", nome, modelo, marca, potencia);
+    public List<Eletrodomestico> buscaFiltrada(Long idUsuario, String nome, String modelo, String marca, Long potencia) {
+        log.trace("Start idUsuario={}, nome={}, modelo={}, marca={}, potencia={}", idUsuario, nome, modelo, marca, potencia);
 
-        var eletrodomestico = eletrodomesticoRepository.buscaFiltrada(nome, modelo, marca, potencia);
+        var eletrodomestico = eletrodomesticoRepository.buscaFiltrada(idUsuario, nome, modelo, marca, potencia);
 
         log.trace("End eletrodomestico={}", eletrodomestico);
 

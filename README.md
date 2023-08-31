@@ -347,6 +347,7 @@ curl --location 'http://localhost:8080/homeAppliances' \
 - Utilização de código limpo e princípios **SOLID**
 - Boas práticas da Linguagem/Framework
 - Clean architecture
+- Docker
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
 

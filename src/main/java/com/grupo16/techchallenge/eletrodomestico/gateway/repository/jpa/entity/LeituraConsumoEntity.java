@@ -29,7 +29,7 @@ public class LeituraConsumoEntity {
 	private Long id;
 	
 	private LocalDateTime dataHora;
-	private Double consumo;
+	private Double leitura;
 
 	@ManyToOne
 	@JoinColumn(name = "Eletrodomestico_id")
@@ -39,7 +39,7 @@ public class LeituraConsumoEntity {
 	public LeituraConsumoEntity(LeituraConsumo leituraConsumo) {
 		this.id = leituraConsumo.getId();
 		this.dataHora = leituraConsumo.getDataHora();
-		this.consumo = leituraConsumo.getConsumo();
+		this.leitura = leituraConsumo.getConsumo();
 		this.eletrodomestico = EletrodomesticoEntity.builder()
 				.id(leituraConsumo.getEletrodomestico().getId())
 				.build();
@@ -49,7 +49,7 @@ public class LeituraConsumoEntity {
 		return LeituraConsumo.builder()
 				.id(id)
 				.dataHora(dataHora)
-				.consumo(consumo)
+				.consumo(leitura)
 				.build();
 	}
 
