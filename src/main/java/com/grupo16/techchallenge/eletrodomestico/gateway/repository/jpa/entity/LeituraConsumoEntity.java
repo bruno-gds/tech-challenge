@@ -29,7 +29,7 @@ public class LeituraConsumoEntity {
 	private Long id;
 	
 	private LocalDateTime dataHora;
-	private Double leitura;//FIXME: mudar parar "consumo"
+	private Double leitura;
 
 	@ManyToOne
 	@JoinColumn(name = "Eletrodomestico_id")

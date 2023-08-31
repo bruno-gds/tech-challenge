@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
 import com.grupo16.techchallenge.endereco.domain.Endereco;
@@ -91,6 +92,9 @@ public class EnderecoMySQLGateway implements EnderecoRepositoryGateway {
 			
 			log.trace("End");
 			
+		} catch (DataIntegrityViolationException e) {
+			log.error(e.getMessage(), e);
+			throw new ErrorToAccessDatabaseException();
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw new ErrorToAccessDatabaseException();

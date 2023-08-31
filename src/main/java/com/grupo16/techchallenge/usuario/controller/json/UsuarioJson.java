@@ -1,13 +1,13 @@
 package com.grupo16.techchallenge.usuario.controller.json;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.validator.constraints.br.CPF;
 
 import com.grupo16.techchallenge.usuario.domain.Genero;
-import com.grupo16.techchallenge.usuario.domain.Parentesco;
+import com.grupo16.techchallenge.usuario.domain.Parente;
+import com.grupo16.techchallenge.usuario.domain.TipoParentesco;
 import com.grupo16.techchallenge.usuario.domain.Usuario;
 
 import jakarta.validation.constraints.NotBlank;
@@ -27,6 +27,7 @@ import lombok.ToString;
 public class UsuarioJson {
 	
 	private Long id;
+	private Long idUsuarioPrincipal;
 	
 	@NotBlank
 	private String nome;
@@ -40,36 +41,46 @@ public class UsuarioJson {
 
 	@NotBlank
 	private String genero;
-	private List<ParentescoJson> parentes;
+	private List<UsuarioJson> parentes;
 	
-	
+	private TipoParentesco parentesco;
 	
 	public Usuario mapearParaUsuarioDomain(Long id) {
-		List<Parentesco> usuariosParentes = new ArrayList<>();
-		if(parentes != null) {
-			usuariosParentes = parentes.stream().map(p -> p.mapearParentescoJsonParaDomain()).toList();
-		}
-		
 		return Usuario.builder()
 				.id(id != null ? id : this.id)
 				.nome(nome)
 				.cpf(removeMask(cpf))
 				.dataNascimento(dataNascimento)
 				.genero(Genero.valueOf(genero))
-				.parentes(usuariosParentes)
 				.build();
-		
 	}
 	
-	private String removeMask(String cpf) {
-		return cpf.replace(".", "").replace("-", "").replace(" ", "");
+	public Usuario mapearParaParenteDomain(Long id) {
+		return Parente.builder()
+				.id(id != null ? id : this.id)
+				.nome(nome)
+				.cpf(removeMask(cpf))
+				.dataNascimento(dataNascimento)
+				.genero(Genero.valueOf(genero))
+				.parentesco(parentesco)
+				.usuarioPrinpal(Usuario.builder().id(idUsuarioPrincipal).build())
+				.build();
 	}
-
+	
 	public UsuarioJson(Usuario usuario) {
 		this.id = usuario.getId();
 		this.nome = usuario.getNome();
 		this.cpf = usuario.getCpf();
 		this.dataNascimento = usuario.getDataNascimento();
 		this.genero = usuario.getGenero().name();
+
+		if(usuario instanceof Parente) {
+			Parente parente = (Parente) usuario;
+			this.parentesco = parente.getParentesco();
+		}
+	}
+
+	private String removeMask(String cpf) {
+		return cpf.replace(".", "").replace("-", "").replace(" ", "");
 	}
 }

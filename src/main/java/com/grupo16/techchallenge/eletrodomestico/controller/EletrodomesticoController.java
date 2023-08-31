@@ -70,19 +70,6 @@ public class EletrodomesticoController {
 		return eletrodomesticoJson;
 	}
 
-//	@GetMapping
-//	public ResponseEntity<Page<EletrodomesticoJson>> obterTodos(
-//			@RequestParam(name = "page", defaultValue = "0") Integer page,
-//			@RequestParam(name = "linesPerPage", defaultValue = "10") Integer linesPerPage) {
-//		log.trace("Start page={}, linesPerPage={}", page, linesPerPage);
-//
-//		PageRequest pageRequest = PageRequest.of(page, linesPerPage);
-//		Page<EletrodomesticoJson> eletrodomesticos = obterEletrodomesticoUseCase.obterTodos(pageRequest);
-//
-//		log.trace("End eletrodomesticos={}", eletrodomesticos);
-//		return ResponseEntity.ok(eletrodomesticos);
-//	}
-
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping
 	public Long criar(
@@ -140,7 +127,7 @@ public class EletrodomesticoController {
 	}
 	
 	@GetMapping("{id}/consumo-total-periodo")
-	public Double pesquisarRegistroConsumo(
+	public String pesquisarRegistroConsumo(
 			@PathVariable(name = "id", required = true) Long eletrodomesticoId,
 			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam(name = "dataInicio", required = false) LocalDateTime dataInicio,
 			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam(name = "dataFim", required = false) LocalDateTime dataFim) {
@@ -155,7 +142,9 @@ public class EletrodomesticoController {
 		
 		Double consumo = obterConsumoUseCase.obter(paramDto);
 		
-		log.trace("End consumo={}", consumo);
-		return consumo;
+		String consumoStr = consumo + " kWh";
+		
+		log.trace("End consumo={}", consumoStr);
+		return consumoStr;
 	}
 }
