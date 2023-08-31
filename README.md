@@ -7,7 +7,7 @@ São três APIs principais: Pessoa, Endereço e Eletrodoméstico. O objetivo des
 
 ## Sumário
 * [Instruções](#instruções)
-* [API Usuário](#api-pessoa)
+* [API Usuário](#api-usuário)
 * [API Endereço](#api-endereço)
 * [API Eletrodoméstico](#api-eletrodoméstico)
 * [Tecnologias](#tecnologias)
@@ -435,6 +435,83 @@ curl --location --request DELETE 'http://localhost:8080/eletrodomesticos/2' \
   <summary>Responses:</summary>
 
 204 - _No Content_
+
+500 - _Internal Server Error_
+
+```
+{
+	"code": "tc.homeAppliance.errorToAccessDatabase",
+	"message": "Ocorreu um erro ao acessar o banco de dados."
+}
+```
+</details>
+
+### ``GET``
+
+```
+	/eletrodomesticos/{idUsuario}
+```
+
+**Filtros:** nome, modelo, marca, potencia
+
+<details>
+  <summary>Exemplo Request:</summary>
+
+
+```
+curl --location --request GET 'http://localhost:8080/eletrodomesticos/1' \
+--header 'Content-Type: application/json' \
+--data ''
+```
+</details>
+
+<details>
+  <summary>Responses:</summary>
+
+200 - _OK_
+
+```
+[
+    {
+        "id": 2,
+        "nome": "Iphone",
+        "modelo": "XR",
+        "marca": "Apple",
+        "cor": "Peto",
+        "potencia": 50,
+        "voltagem": 220,
+        "endereco": {
+            "id": 2,
+            "rua": null,
+            "numero": null,
+            "bairro": null,
+            "cidade": null,
+            "estado": null,
+            "cep": null,
+            "usuario": null
+        }
+    },
+    {
+        "id": 3,
+        "nome": "Geladeira",
+        "modelo": "Frost Free Duplex",
+        "marca": "Consul",
+        "cor": "Branca",
+        "potencia": 90,
+        "voltagem": 110,
+        "endereco": {
+            "id": 2,
+            "rua": null,
+            "numero": null,
+            "bairro": null,
+            "cidade": null,
+            "estado": null,
+            "cep": null,
+            "usuario": null
+        }
+    }
+]
+```
 
 500 - _Internal Server Error_
 
