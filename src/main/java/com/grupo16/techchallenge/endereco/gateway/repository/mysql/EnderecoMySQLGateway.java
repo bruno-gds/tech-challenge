@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.grupo16.techchallenge.endereco.domain.Endereco;
 import com.grupo16.techchallenge.endereco.dto.PesquisarEnderecoParamsDto;
 import com.grupo16.techchallenge.endereco.gateway.EnderecoRepositoryGateway;
+import com.grupo16.techchallenge.endereco.gateway.exception.ErroAoExcluirEnderecoException;
 import com.grupo16.techchallenge.endereco.gateway.exception.ErrorToAccessDatabaseException;
 import com.grupo16.techchallenge.endereco.gateway.repository.jpa.entity.EnderecoEntity;
 import com.grupo16.techchallenge.endereco.gateway.repository.jpa.repository.EnderecoRepository;
@@ -94,7 +95,7 @@ public class EnderecoMySQLGateway implements EnderecoRepositoryGateway {
 			
 		} catch (DataIntegrityViolationException e) {
 			log.error(e.getMessage(), e);
-			throw new ErrorToAccessDatabaseException();
+			throw new ErroAoExcluirEnderecoException();
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw new ErrorToAccessDatabaseException();

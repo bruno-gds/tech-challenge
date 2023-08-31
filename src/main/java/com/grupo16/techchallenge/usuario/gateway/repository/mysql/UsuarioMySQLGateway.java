@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
 import com.grupo16.techchallenge.usuario.domain.Parente;
 import com.grupo16.techchallenge.usuario.domain.Usuario;
 import com.grupo16.techchallenge.usuario.dto.PesquisarUsuarioParamsDto;
 import com.grupo16.techchallenge.usuario.gateway.UsuarioRepositoryGateway;
+import com.grupo16.techchallenge.usuario.gateway.exception.ErroAoExcluirUsuarioException;
 import com.grupo16.techchallenge.usuario.gateway.exception.ErrorToAccessDatabaseException;
 import com.grupo16.techchallenge.usuario.gateway.repository.jpa.entity.UsuarioEntity;
 import com.grupo16.techchallenge.usuario.gateway.repository.jpa.repository.UsuarioRepository;
@@ -103,6 +105,9 @@ public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 			
 			log.trace("End");
 			
+		} catch (DataIntegrityViolationException e) {
+			log.error(e.getMessage(), e);
+			throw new ErroAoExcluirUsuarioException();
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw new ErrorToAccessDatabaseException();
