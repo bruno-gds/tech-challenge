@@ -29,7 +29,7 @@ public class LeituraConsumoEntity {
 	private Long id;
 	
 	private LocalDateTime dataHora;
-	private Double leitura;//FIXME: mudar parar "consumo"
+	private Double consumo;
 
 	@ManyToOne
 	@JoinColumn(name = "Eletrodomestico_id")
@@ -39,7 +39,7 @@ public class LeituraConsumoEntity {
 	public LeituraConsumoEntity(LeituraConsumo leituraConsumo) {
 		this.id = leituraConsumo.getId();
 		this.dataHora = leituraConsumo.getDataHora();
-		this.leitura = leituraConsumo.getConsumo();
+		this.consumo = leituraConsumo.getConsumo();
 		this.eletrodomestico = EletrodomesticoEntity.builder()
 				.id(leituraConsumo.getEletrodomestico().getId())
 				.build();
@@ -49,7 +49,7 @@ public class LeituraConsumoEntity {
 		return LeituraConsumo.builder()
 				.id(id)
 				.dataHora(dataHora)
-				.consumo(leitura)
+				.consumo(consumo)
 				.build();
 	}
 

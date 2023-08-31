@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.grupo16.techchallenge.usuario.domain.Parentesco;
+import com.grupo16.techchallenge.usuario.domain.Parente;
 import com.grupo16.techchallenge.usuario.domain.Usuario;
 import com.grupo16.techchallenge.usuario.dto.PesquisarUsuarioParamsDto;
 import com.grupo16.techchallenge.usuario.gateway.UsuarioRepositoryGateway;
@@ -34,10 +34,21 @@ public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 	public Long salvar(Usuario usuario) {
 		try {
 			log.trace("Start usuario={}", usuario);
+
+			Long usuarioId = null;
 			
-			UsuarioEntity entity = new UsuarioEntity(usuario);
-			
-			Long usuarioId = usuarioRepository.save(entity).getId();
+			if(usuario instanceof Parente) {
+				Parente parente = (Parente) usuario;
+				
+				UsuarioEntity parenteEntity = new UsuarioEntity(parente);
+				parenteEntity.setParenteId(parente.getUsuarioPrinpal().getId());
+				parenteEntity.setTipoParentesco((long) parente.getParentesco().ordinal());
+	
+				usuarioId = usuarioRepository.save(parenteEntity).getId();
+			} else {
+				UsuarioEntity entity = new UsuarioEntity(usuario);
+				usuarioId = usuarioRepository.save(entity).getId();
+			}
 			
 			log.trace("End usuarioId={}", usuarioId);
 			return usuarioId;
@@ -108,23 +119,23 @@ public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 		return usuarioOp;
 	}
 
-	@Override
-	public Long salvar(Parentesco parentesco) {
-		try {
-			//TODO: add logs
-
-			UsuarioEntity parenteEntity = new UsuarioEntity(parentesco.getUsuarioParente());
-			parenteEntity.setParenteId(parentesco.getUsuario().getId());
-			parenteEntity.setTipoParentesco((long) parentesco.getTipoParentesco().ordinal());
-
-			return usuarioRepository.save(parenteEntity).getId();
-			
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			throw new ErrorToAccessDatabaseException();
-		}
-		
-	}
+//	@Override
+//	public Long salvar(Parentesco parentesco) {
+//		try {
+//			//TODO: add logs
+//
+//			UsuarioEntity parenteEntity = new UsuarioEntity(parentesco.getUsuarioParente());
+//			parenteEntity.setParenteId(parentesco.getUsuario().getId());
+//			parenteEntity.setTipoParentesco((long) parentesco.getTipoParentesco().ordinal());
+//
+//			return usuarioRepository.save(parenteEntity).getId();
+//			
+//		} catch (Exception e) {
+//			log.error(e.getMessage(), e);
+//			throw new ErrorToAccessDatabaseException();
+//		}
+//		
+//	}
 
 	@Override
 	public List<Usuario> pesquisar(PesquisarUsuarioParamsDto paramsDto) {

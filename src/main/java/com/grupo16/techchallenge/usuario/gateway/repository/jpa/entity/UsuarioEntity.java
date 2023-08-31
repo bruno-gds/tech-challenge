@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.grupo16.techchallenge.endereco.gateway.repository.jpa.entity.EnderecoEntity;
 import com.grupo16.techchallenge.usuario.domain.Genero;
+import com.grupo16.techchallenge.usuario.domain.Parente;
+import com.grupo16.techchallenge.usuario.domain.TipoParentesco;
 import com.grupo16.techchallenge.usuario.domain.Usuario;
 
 import jakarta.persistence.Entity;
@@ -54,12 +56,28 @@ public class UsuarioEntity {
 	}
 	
 	public Usuario mapearUsuarioEntityParaDomain() {
-		return Usuario.builder()
-				.id(id)
-				.nome(nome)
-				.cpf(cpf)
-				.dataNascimento(dataNascimento)
-				.genero(Genero.getByOrdinal(genero))
-				.build();
+		
+		if(tipoParentesco == null) {
+			return Usuario.builder()
+					.id(id)
+					.nome(nome)
+					.cpf(cpf)
+					.dataNascimento(dataNascimento)
+					.genero(Genero.getByOrdinal(genero))
+					.build();
+		} else {
+			return Parente.builder()
+					.id(id)
+					.nome(nome)
+					.cpf(cpf)
+					.dataNascimento(dataNascimento)
+					.genero(Genero.getByOrdinal(genero))
+					.parentesco(TipoParentesco.getByOrdinal(tipoParentesco.intValue()))
+					.usuarioPrinpal(Usuario.builder().id(parenteId).build())
+					.build();
+			
+		}
+		
+		
 	}
 }

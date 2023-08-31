@@ -16,10 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.grupo16.techchallenge.usuario.controller.json.ParentescoJson;
 import com.grupo16.techchallenge.usuario.controller.json.UsuarioJson;
 import com.grupo16.techchallenge.usuario.domain.Genero;
-import com.grupo16.techchallenge.usuario.domain.Parentesco;
 import com.grupo16.techchallenge.usuario.domain.TipoParentesco;
 import com.grupo16.techchallenge.usuario.domain.Usuario;
 import com.grupo16.techchallenge.usuario.dto.PesquisarUsuarioParamsDto;
@@ -80,7 +78,14 @@ public class UsuarioController {
 			@RequestBody(required = true) UsuarioJson usuarioJson) {
 		log.trace("Start usuarioJson={}", usuarioJson);
 		
-		Usuario usuario = usuarioJson.mapearParaUsuarioDomain(id);
+		Usuario usuario;
+		if(usuarioJson.getParentesco() == null) {
+			usuario = usuarioJson.mapearParaUsuarioDomain(id);
+		}
+		else {
+			usuario = usuarioJson.mapearParaParenteDomain(id);
+		}
+		
 		criarAlterarUsuarioUseCase.alterar(usuario);
 		
 		log.trace("End");
@@ -99,13 +104,10 @@ public class UsuarioController {
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("parentes")
-	public Long criarParentesco(
-			@RequestBody(required = true)ParentescoJson parentescoJson) {
-		log.trace("Start parenteJson={}", parentescoJson);
+	public Long criarParentesco(@RequestBody(required = true) UsuarioJson usuarioJson) {
+		log.trace("Start usuarioJson={}", usuarioJson);
 		
-		Parentesco parentesco = parentescoJson.mapearParentescoJsonParaDomain();
-		
-		Long parenteId = criarAlterarUsuarioUseCase.criarParentesco(parentesco);
+		Long parenteId = criarAlterarUsuarioUseCase.criar(usuarioJson.mapearParaParenteDomain(null));
 		
 		log.trace("End parenteId={}", parenteId);		
 		return parenteId;

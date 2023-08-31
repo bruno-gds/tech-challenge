@@ -5,23 +5,22 @@ import java.util.List;
 
 import com.grupo16.techchallenge.endereco.domain.Endereco;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 @Getter
-@Builder
+@SuperBuilder
 @ToString
 public class Usuario {
 	
 	@Setter
-	private Long id;
-	private String nome;
-	private String cpf;
-	private LocalDate dataNascimento;
-	private Genero genero;	
-	private List<Parentesco> parentes;
-	private List<Endereco> enderecos;
-	
+	protected Long id;
+	protected String nome;
+	protected String cpf;
+	protected LocalDate dataNascimento;
+	protected Genero genero;	
+	protected List<Endereco> enderecos;
+	private List<Parente> parentes;
 }

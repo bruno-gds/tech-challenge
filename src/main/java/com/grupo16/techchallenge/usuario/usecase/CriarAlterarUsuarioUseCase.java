@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.grupo16.techchallenge.usuario.domain.Parentesco;
+import com.grupo16.techchallenge.usuario.domain.Parente;
 import com.grupo16.techchallenge.usuario.domain.Usuario;
 import com.grupo16.techchallenge.usuario.gateway.UsuarioRepositoryGateway;
 import com.grupo16.techchallenge.usuario.usecase.exception.CpfJaCadastradoException;
@@ -25,6 +25,7 @@ public class CriarAlterarUsuarioUseCase {
 	public Long criar(Usuario usuario) {
 		log.trace("Start usuario={}", usuario);
 		
+		//TODO: adicionar nesta pesquisa o id do usuário principal
 		Optional<Usuario> usuarioOp = usuarioRepository.obterByCpf(usuario.getCpf());
 		if(usuarioOp.isPresent()) {
 			log.warn("CPF já cadastrado: {}", usuario.getCpf());
@@ -42,26 +43,35 @@ public class CriarAlterarUsuarioUseCase {
 
 		Usuario usuarioEncontrado = obterUsuarioUseCase.obter(usuario.getId());
 		
-		Usuario usuarioToUpdate = Usuario.builder()
-				.id(usuarioEncontrado.getId())
-				.nome(usuario.getNome())
-				.cpf(usuario.getCpf())
-				.dataNascimento(usuario.getDataNascimento())
-				.genero(usuario.getGenero())
-				.build();
-		
-		usuarioRepository.salvar(usuarioToUpdate);
-		
-		log.trace("End");
-	}
-
-	public Long criarParentesco(Parentesco parentesco) {
-		log.trace("Start parentesco={}", parentesco);
-
-		obterUsuarioUseCase.obter(parentesco.getUsuario().getId());
-		Long parenteId = usuarioRepository.salvar(parentesco);
-		
-		log.trace("End parenteId={}", parenteId);
-		return parenteId;
+		if(usuarioEncontrado instanceof Parente) {
+			Parente parenteEncontrado = (Parente) usuarioEncontrado;
+			Parente parenteToUpdate = (Parente) usuario;
+			Parente parenteToSave = Parente.builder()
+					.id(parenteEncontrado.getId())
+					.nome(parenteToUpdate.getNome())
+					.cpf(parenteToUpdate.getCpf())
+					.dataNascimento(parenteToUpdate.getDataNascimento())
+					.genero(parenteToUpdate.getGenero())
+					.parentesco(parenteToUpdate.getParentesco())
+					.usuarioPrinpal(Usuario.builder()
+							.id(parenteEncontrado.getUsuarioPrinpal().getId())
+							.build())
+					.build();
+			usuarioRepository.salvar(parenteToSave);
+			log.trace("End");
+		}
+		else {
+			Usuario usuarioToSave = Usuario.builder()
+					.id(usuarioEncontrado.getId())
+					.nome(usuario.getNome())
+					.cpf(usuario.getCpf())
+					.dataNascimento(usuario.getDataNascimento())
+					.genero(usuario.getGenero())
+					.build();
+			
+			usuarioRepository.salvar(usuarioToSave);
+			
+			log.trace("End");
+		}
 	}
 }
