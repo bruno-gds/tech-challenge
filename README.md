@@ -7,7 +7,7 @@ São três APIs principais: Pessoa, Endereço e Eletrodoméstico. O objetivo des
 
 ## Sumário
 * [Instruções](#instruções)
-* [API Pessoa](#api-pessoa)
+* [API Usuário](#api-pessoa)
 * [API Endereço](#api-endereço)
 * [API Eletrodoméstico](#api-eletrodoméstico)
 * [Tecnologias](#tecnologias)
@@ -30,7 +30,7 @@ São três APIs principais: Pessoa, Endereço e Eletrodoméstico. O objetivo des
 <a name="funcionalidades-do-projeto"></a>
 ## 🔨  Funcionalidades do projeto
 
-### API Usuarios
+### API Usuário
 
 >[ Base URL: http://localhost:8080 ]
 
@@ -283,15 +283,18 @@ Com essa API, é possível simplificar o processo de gerenciamento e manutençã
 
 
 ```
-curl --location 'http://localhost:8080/homeAppliances' \
+curl --location 'http://localhost:8080/eletrodomesticos' \
 --header 'Content-Type: application/json' \
 --data '{
-    "name": "Geladeira",
-    "brand": "Eletrolux",
-    "model": "TF39",
-    "color": "Branca",
-    "power": 120,
-    "voltage": 127
+    "nome": "Geladeira",
+    "modelo": "Frost Free Duplex",
+    "marca": "Consul",
+    "cor": "Branca",
+    "potencia": 90,
+    "voltagem": 110,
+    "endereco": {
+        "id": 2
+    }
 }'
 ```
 </details>
@@ -323,6 +326,115 @@ curl --location 'http://localhost:8080/homeAppliances' \
     "message": "Voltagem inválida, aceito apenas '110' e '220'."
 }
 ```
+
+500 - _Internal Server Error_
+
+```
+{
+	"code": "tc.homeAppliance.errorToAccessDatabase",
+	"message": "Ocorreu um erro ao acessar o banco de dados."
+}
+```
+</details>
+
+### ``PUT``
+
+```
+	/eletrodomesticos
+```
+
+**Body** raw (json)
+
+```
+{
+    "id": Long,
+    "nome": String,
+    "modelo": String,
+    "marca": String,
+    "cor": String,
+    "potencia": Long,
+    "voltagem": Long,
+    "endereco": {
+        "id": Long
+    }
+}
+```
+
+<details>
+  <summary>Exemplo Request Body:</summary>
+
+
+```
+curl --location 'http://localhost:8080/eletrodomesticos' \
+--header 'Content-Type: application/json' \
+--data '{
+    "id": 7,
+    "nome": "Iphone 3 alterado",
+    "modelo": "14",
+    "marca": "Apple",
+    "cor": "Azul marinho",
+    "potencia": 51,
+    "voltagem": 110,
+    "endereco": {
+        "id": 2
+    }
+}'
+```
+</details>
+
+<details>
+  <summary>Responses:</summary>
+
+204 - _No Content_
+
+400 - _Bad Request_
+
+```
+{
+  "code": "tc.argumentNotValid",
+  "message": "voltage:não deve ser nulo;"
+}
+```
+
+422 - _Unprocessable Entity_
+
+```
+{
+    "code": "tc.homeAppliance.IllegalArgumentVoltage",
+    "message": "Voltagem inválida, aceito apenas '110' e '220'."
+}
+```
+
+500 - _Internal Server Error_
+
+```
+{
+	"code": "tc.homeAppliance.errorToAccessDatabase",
+	"message": "Ocorreu um erro ao acessar o banco de dados."
+}
+```
+</details>
+
+### ``DELETE``
+
+```
+	/eletrodomesticos/{idEletrodomestico}
+```
+
+<details>
+  <summary>Exemplo Request:</summary>
+
+
+```
+curl --location --request DELETE 'http://localhost:8080/eletrodomesticos/2' \
+--data ''
+```
+</details>
+
+<details>
+  <summary>Responses:</summary>
+
+204 - _No Content_
 
 500 - _Internal Server Error_
 
