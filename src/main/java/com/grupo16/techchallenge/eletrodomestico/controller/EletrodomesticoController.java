@@ -77,7 +77,7 @@ public class EletrodomesticoController {
 			@RequestBody(required = true) EletrodomesticoJson eletrodomesticoJson) {
 		log.trace("Start eletrodomesticoJson={}", eletrodomesticoJson);
 
-		Eletrodomestico eletrodomestico = eletrodomesticoJson.mapearParaEletrodomesticoDomain();
+		Eletrodomestico eletrodomestico = eletrodomesticoJson.mapearParaEletrodomesticoDomain(null);
 		Long eletrodomesticoId = criarAlterarEletrodomesticoUseCase.criar(eletrodomestico);
 
 		log.trace("End eletrodomesticoId={}", eletrodomesticoId);
@@ -85,12 +85,13 @@ public class EletrodomesticoController {
 	}
 
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PutMapping
+	@PutMapping("{id}")
 	public void alterar(
-			@RequestBody(required = true) EletrodomesticoJson eletrodomesticoJson) {
+			@PathVariable(name = "id") Long id,
+			@RequestBody EletrodomesticoJson eletrodomesticoJson) {
 		log.trace("Start eletrodomesticoJson={}", eletrodomesticoJson);
 
-		Eletrodomestico eletrodomestico = eletrodomesticoJson.mapearParaEletrodomesticoDomain();
+		Eletrodomestico eletrodomestico = eletrodomesticoJson.mapearParaEletrodomesticoDomain(id);
 
 		criarAlterarEletrodomesticoUseCase.alterar(eletrodomestico);
 

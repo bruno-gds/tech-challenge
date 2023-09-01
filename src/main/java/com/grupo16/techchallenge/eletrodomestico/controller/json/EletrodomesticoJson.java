@@ -54,9 +54,9 @@ public class EletrodomesticoJson {
     }
 
 
-    public Eletrodomestico mapearParaEletrodomesticoDomain() {
+    public Eletrodomestico mapearParaEletrodomesticoDomain(Long id) {
         return Eletrodomestico.builder()
-                .id(id)
+                .id(id != null ? id : this.id)
                 .nome(nome)
                 .modelo(modelo)
                 .marca(marca)
