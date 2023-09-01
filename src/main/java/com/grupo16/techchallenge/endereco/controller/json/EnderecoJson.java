@@ -1,5 +1,6 @@
 package com.grupo16.techchallenge.endereco.controller.json;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.grupo16.techchallenge.endereco.domain.Endereco;
 import com.grupo16.techchallenge.endereco.domain.Estado;
 import com.grupo16.techchallenge.usuario.controller.json.UsuarioJson;
@@ -19,6 +20,7 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class EnderecoJson {
 	
 	private Long id;
