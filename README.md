@@ -186,11 +186,15 @@ Com a API de Endereço, torna-se mais fácil e eficiente gerenciar e manter atua
 
 ```
 {
-    "street": "string",
-    "number": "string",
-    "neighborhood": "string",
-    "city": "string",
-    "state": "string"
+    "rua": "string",
+    "numero": "string",
+    "bairro": "string",
+    "cidade": "string",
+    "estado": "string",
+    "cep": "string",
+    "usuario": {
+        "id": Long
+    }
 }
 ```
 
@@ -199,16 +203,19 @@ Com a API de Endereço, torna-se mais fácil e eficiente gerenciar e manter atua
 
 
 ```
-curl --location 'http://localhost:8080/adresses' \
+curl --location 'http://localhost:8080/enderecos' \
 --header 'Content-Type: application/json' \
 --data '{
-    "street": "Rua Dezoito",
-    "number": "5698",
-    "neighborhood": "São José",
-    "city": "Blumenau",
-    "state": "SC"
-}
-'
+	"rua": "Rua 7",
+    "numero": "22",
+	"bairro": "Copa Cabana",
+	"cidade": "Rio de Janeiro",
+	"estado": "RJ",
+    "cep": "09876345",
+    "usuario": {
+        "id": 1
+    }
+}'
 ```
 </details>
 
@@ -230,6 +237,104 @@ curl --location 'http://localhost:8080/adresses' \
   "message": "state:O estado deve estar no formato 'SP';"
 }
 ```
+
+500 - _Internal Server Error_
+
+```
+{
+	"code": "tc.address.errorToAccessDatabase",
+	"message": "Ocorreu um erro ao acessar o banco de dados."
+}
+```
+</details>
+
+### ``PUT``
+
+```
+	/enderecos/{idEndereco}
+```
+
+**Body** raw (json)
+
+```
+{
+    "rua": "string",
+    "numero": "string",
+    "bairro": "string",
+    "cidade": "string",
+    "estado": "string",
+    "cep": "string",
+    "usuario": {
+        "id": Long
+    }
+}
+```
+
+<details>
+  <summary>Exemplo Request Body:</summary>
+
+
+```
+curl --location --request PUT 'http://localhost:8080/enderecos/2' \
+--header 'Content-Type: application/json' \
+--data '{
+	"rua": "Rua 2 alterada",
+    "numero": "22",
+	"bairro": "Copa Cabana",
+	"cidade": "Rio de Janeiro",
+	"estado": "RJ",
+    "cep": "09876345",
+    "usuario": {
+        "id": 1
+    }
+}'
+```
+</details>
+
+<details>
+  <summary>Responses:</summary>
+
+204 - _No Content_
+
+400 - _Bad Request_
+
+```
+{
+  "code": "tc.argumentNotValid",
+  "message": "state:O estado deve estar no formato 'SP';"
+}
+```
+
+500 - _Internal Server Error_
+
+```
+{
+	"code": "tc.address.errorToAccessDatabase",
+	"message": "Ocorreu um erro ao acessar o banco de dados."
+}
+```
+</details>
+
+### ``DELETE``
+
+```
+	/enderecos/{idEndereco}
+```
+
+<details>
+  <summary>Exemplo Request:</summary>
+
+
+```
+curl --location --request DELETE 'http://localhost:8080/enderecos/3' \
+--data ''
+```
+</details>
+
+<details>
+  <summary>Responses:</summary>
+
+204 - _No Content_
 
 500 - _Internal Server Error_
 
