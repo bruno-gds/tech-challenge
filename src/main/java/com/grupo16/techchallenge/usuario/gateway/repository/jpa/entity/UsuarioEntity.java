@@ -75,9 +75,6 @@ public class UsuarioEntity {
 					.parentesco(TipoParentesco.getByOrdinal(tipoParentesco.intValue()))
 					.usuarioPrinpal(Usuario.builder().id(parenteId).build())
 					.build();
-			
 		}
-		
-		
 	}
 }

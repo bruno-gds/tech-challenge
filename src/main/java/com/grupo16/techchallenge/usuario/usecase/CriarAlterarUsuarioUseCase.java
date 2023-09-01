@@ -25,7 +25,7 @@ public class CriarAlterarUsuarioUseCase {
 	public Long criar(Usuario usuario) {
 		log.trace("Start usuario={}", usuario);
 		
-		//TODO: adicionar nesta pesquisa o id do usuário principal
+		//TODO: adicionar nesta pesquisa o id do usuário principal para qd criar usuario parente (débito técnico).
 		Optional<Usuario> usuarioOp = usuarioRepository.obterByCpf(usuario.getCpf());
 		if(usuarioOp.isPresent()) {
 			log.warn("CPF já cadastrado: {}", usuario.getCpf());

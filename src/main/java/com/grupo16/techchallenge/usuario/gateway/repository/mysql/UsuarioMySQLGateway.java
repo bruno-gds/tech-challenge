@@ -124,24 +124,6 @@ public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 		return usuarioOp;
 	}
 
-//	@Override
-//	public Long salvar(Parentesco parentesco) {
-//		try {
-//			//TODO: add logs
-//
-//			UsuarioEntity parenteEntity = new UsuarioEntity(parentesco.getUsuarioParente());
-//			parenteEntity.setParenteId(parentesco.getUsuario().getId());
-//			parenteEntity.setTipoParentesco((long) parentesco.getTipoParentesco().ordinal());
-//
-//			return usuarioRepository.save(parenteEntity).getId();
-//			
-//		} catch (Exception e) {
-//			log.error(e.getMessage(), e);
-//			throw new ErrorToAccessDatabaseException();
-//		}
-//		
-//	}
-
 	@Override
 	public List<Usuario> pesquisar(PesquisarUsuarioParamsDto paramsDto) {
 		try {
@@ -165,6 +147,4 @@ public class UsuarioMySQLGateway implements UsuarioRepositoryGateway {
 			throw new ErrorToAccessDatabaseException();
 		}
 	}
-
-
 }
