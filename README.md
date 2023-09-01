@@ -340,14 +340,13 @@ curl --location 'http://localhost:8080/eletrodomesticos' \
 ### ``PUT``
 
 ```
-	/eletrodomesticos
+	/eletrodomesticos/{idEletrodomestico}
 ```
 
 **Body** raw (json)
 
 ```
 {
-    "id": Long,
     "nome": String,
     "modelo": String,
     "marca": String,
@@ -365,11 +364,10 @@ curl --location 'http://localhost:8080/eletrodomesticos' \
 
 
 ```
-curl --location 'http://localhost:8080/eletrodomesticos' \
+curl --location --request PUT 'http://localhost:8080/eletrodomesticos/2' \
 --header 'Content-Type: application/json' \
 --data '{
-    "id": 7,
-    "nome": "Iphone 3 alterado",
+    "nome": "Iphone alterado",
     "modelo": "14",
     "marca": "Apple",
     "cor": "Azul marinho",
@@ -452,7 +450,8 @@ curl --location --request DELETE 'http://localhost:8080/eletrodomesticos/2' \
 	/eletrodomesticos/{idUsuario}
 ```
 
-**Filtros:** nome, modelo, marca, potencia
+**Filtros disponíveis:** nome, modelo, marca, potencia. Ex.:
+>/eletrodomesticos/{idUsuario}?marca=apple
 
 <details>
   <summary>Exemplo Request:</summary>
@@ -474,21 +473,14 @@ curl --location --request GET 'http://localhost:8080/eletrodomesticos/1' \
 [
     {
         "id": 2,
-        "nome": "Iphone",
-        "modelo": "XR",
+        "nome": "Iphone alterado",
+        "modelo": "14",
         "marca": "Apple",
-        "cor": "Peto",
-        "potencia": 50,
-        "voltagem": 220,
+        "cor": "Azul marinho",
+        "potencia": 51,
+        "voltagem": 110,
         "endereco": {
-            "id": 2,
-            "rua": null,
-            "numero": null,
-            "bairro": null,
-            "cidade": null,
-            "estado": null,
-            "cep": null,
-            "usuario": null
+            "id": 2
         }
     },
     {
@@ -500,17 +492,96 @@ curl --location --request GET 'http://localhost:8080/eletrodomesticos/1' \
         "potencia": 90,
         "voltagem": 110,
         "endereco": {
-            "id": 2,
-            "rua": null,
-            "numero": null,
-            "bairro": null,
-            "cidade": null,
-            "estado": null,
-            "cep": null,
-            "usuario": null
+            "id": 2
         }
     }
 ]
+```
+
+500 - _Internal Server Error_
+
+```
+{
+	"code": "tc.homeAppliance.errorToAccessDatabase",
+	"message": "Ocorreu um erro ao acessar o banco de dados."
+}
+```
+</details>
+
+### ``POST``
+
+```
+	/eletrodomesticos/{idEletrodomestico}/consumos
+```
+
+**Body** raw (json)
+
+```
+{
+    "consumo": Double
+}
+```
+
+<details>
+  <summary>Exemplo Request Body:</summary>
+
+
+```
+curl --location 'http://localhost:8080/eletrodomesticos/1/consumos' \
+--header 'Content-Type: application/json' \
+--data '{
+    "consumo": 12.2
+}'
+```
+</details>
+
+<details>
+  <summary>Responses:</summary>
+
+201 - _Created_
+- Será retornado o id do registro criado
+
+```
+1
+```
+
+500 - _Internal Server Error_
+
+```
+{
+	"code": "tc.homeAppliance.errorToAccessDatabase",
+	"message": "Ocorreu um erro ao acessar o banco de dados."
+}
+```
+</details>
+
+### ``GET``
+
+```
+	/eletrodomesticos/{idEletrodomestico}/consumo-total-periodo
+```
+
+**Filtros disponíveis:** dataInicio, dataFim. Ex.:
+>/eletrodomesticos/{idEletrodomestico}/consumo-total-periodo?dataInicio=2023-08-30T22:36:00&dataFim=2023-08-30T22:39:15
+
+<details>
+  <summary>Exemplo Request:</summary>
+
+
+```
+curl --location --request GET 'http://localhost:8080/eletrodomesticos/1/consumo-total-periodo?dataInicio=2023-08-30T22%3A36%3A00&dataFim=2023-08-30T22%3A39%3A15' \
+--header 'Content-Type: application/json' \
+--data ''
+```
+</details>
+
+<details>
+  <summary>Responses:</summary>
+
+200 - _OK_
+
+```
+1.0 kWh
 ```
 
 500 - _Internal Server Error_
@@ -537,6 +608,7 @@ curl --location --request GET 'http://localhost:8080/eletrodomesticos/1' \
 - Boas práticas da Linguagem/Framework
 - Clean architecture
 - Docker
+- Banco de Dados MySQL
 
 <p align="right">(<a href="#readme-top">Ir ao topo</a>)</p>
 
