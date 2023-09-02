@@ -75,7 +75,7 @@ public class UsuarioController {
 	@PutMapping("{id}")
 	public void alterar(
 			@PathVariable(name = "id", required = true) Long id, 
-			@RequestBody(required = true) UsuarioJson usuarioJson) {
+			@Valid @RequestBody(required = true) UsuarioJson usuarioJson) {
 		log.trace("Start usuarioJson={}", usuarioJson);
 		
 		Usuario usuario;
@@ -104,7 +104,7 @@ public class UsuarioController {
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("parentes")
-	public Long criarParentesco(@RequestBody(required = true) UsuarioJson usuarioJson) {
+	public Long criarParentesco(@Valid @RequestBody(required = true) UsuarioJson usuarioJson) {
 		log.trace("Start usuarioJson={}", usuarioJson);
 		
 		Long parenteId = criarAlterarUsuarioUseCase.criar(usuarioJson.mapearParaParenteDomain(null));

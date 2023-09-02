@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.grupo16.techchallenge.endereco.controller.exception.IllegalArgumentParentescoException;
 import com.grupo16.techchallenge.usuario.domain.Genero;
 import com.grupo16.techchallenge.usuario.domain.Parente;
 import com.grupo16.techchallenge.usuario.domain.TipoParentesco;
@@ -24,6 +27,7 @@ import lombok.ToString;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonInclude(Include.NON_NULL)
 public class UsuarioJson {
 	
 	private Long id;
@@ -56,6 +60,11 @@ public class UsuarioJson {
 	}
 	
 	public Usuario mapearParaParenteDomain(Long id) {
+		
+		if(parentesco == null) {
+			throw new IllegalArgumentParentescoException();
+		}
+		
 		return Parente.builder()
 				.id(id != null ? id : this.id)
 				.nome(nome)
