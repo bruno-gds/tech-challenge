@@ -12,8 +12,6 @@ public interface EnderecoRepositoryGateway {
 
 	public Optional<Endereco> obterByIdAndUsuarioId(Long id, Long idUsuario);
 
-	public Optional<Endereco> obter(Long id);
-
 	public void remover(Long id);
 
 	public List<Endereco> pesquisar(PesquisarEnderecoParamsDto paramsDto);

@@ -67,24 +67,6 @@ public class EnderecoMySQLGateway implements EnderecoRepositoryGateway {
 	}
 	
 	@Override
-	public Optional<Endereco> obter(Long id) {
-		try {
-			log.trace("Start id={}", id);
-			
-			Optional<EnderecoEntity> entityOp = enderecoRepository.findById(id);
-			Optional<Endereco> enderecoOp = checarSeEntityExisteMapearParaDomain(entityOp);
-			
-			log.trace("End enderecoOp={}", enderecoOp);
-			return enderecoOp;
-			
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-			throw new ErrorToAccessDatabaseException();
-		}
-		
-	}
-	
-	@Override
 	public void remover(Long id) {
 		try {
 			log.trace("Start id={}", id);
