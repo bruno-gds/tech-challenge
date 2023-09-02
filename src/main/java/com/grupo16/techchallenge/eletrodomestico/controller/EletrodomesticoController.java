@@ -34,7 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/eletrodomesticos")
+@RequestMapping()
 public class EletrodomesticoController {
 
 	@Autowired
@@ -53,7 +53,7 @@ public class EletrodomesticoController {
 	private ObterConsumoUseCase obterConsumoUseCase;
 	
 	@GetMapping
-	@RequestMapping("/{idUsuario}")
+	@RequestMapping("usuarios/{idUsuario}/eletrodomesticos")
 	public List<EletrodomesticoJson> buscaFiltrada(
 			@PathVariable(name = "idUsuario") Long idUsuario,
 			@RequestParam(name = "nome", required = false) String nome,
@@ -70,13 +70,13 @@ public class EletrodomesticoController {
 	}
 
 	@ResponseStatus(HttpStatus.CREATED)
-	@PostMapping
+	@PostMapping("enderecos/{idEndereco}/eletrodomesticos")
 	public Long criar(
-			@Valid
-			@RequestBody(required = true) EletrodomesticoJson eletrodomesticoJson) {
+			@PathVariable(name = "idEndereco", required = true) Long idEndereco,
+			@Valid @RequestBody(required = true) EletrodomesticoJson eletrodomesticoJson) {
 		log.trace("Start eletrodomesticoJson={}", eletrodomesticoJson);
 
-		Eletrodomestico eletrodomestico = eletrodomesticoJson.mapearParaEletrodomesticoDomain(null);
+		Eletrodomestico eletrodomestico = eletrodomesticoJson.mapearParaEletrodomesticoDomain(null, idEndereco);
 		Long eletrodomesticoId = criarAlterarEletrodomesticoUseCase.criar(eletrodomestico);
 
 		log.trace("End eletrodomesticoId={}", eletrodomesticoId);
@@ -84,13 +84,14 @@ public class EletrodomesticoController {
 	}
 
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PutMapping("{id}")
+	@PutMapping("enderecos/{idEndereco}/eletrodomesticos/{id}")
 	public void alterar(
 			@PathVariable(name = "id") Long id,
-			@RequestBody EletrodomesticoJson eletrodomesticoJson) {
+			@PathVariable(name = "idEndereco", required = true) Long idEndereco,
+			@Valid @RequestBody EletrodomesticoJson eletrodomesticoJson) {
 		log.trace("Start eletrodomesticoJson={}", eletrodomesticoJson);
 
-		Eletrodomestico eletrodomestico = eletrodomesticoJson.mapearParaEletrodomesticoDomain(id);
+		Eletrodomestico eletrodomestico = eletrodomesticoJson.mapearParaEletrodomesticoDomain(id,idEndereco);
 
 		criarAlterarEletrodomesticoUseCase.alterar(eletrodomestico);
 

@@ -54,7 +54,7 @@ public class EletrodomesticoJson {
     }
 
 
-    public Eletrodomestico mapearParaEletrodomesticoDomain(Long id) {
+    public Eletrodomestico mapearParaEletrodomesticoDomain(Long id, Long idEndereco) {
         return Eletrodomestico.builder()
                 .id(id != null ? id : this.id)
                 .nome(nome)
@@ -64,7 +64,7 @@ public class EletrodomesticoJson {
                 .potencia(potencia)
                 .voltagem(voltagem)
                 .endereco(Endereco.builder()
-                        .id(this.endereco.getId())
+                        .id(idEndereco != null ? idEndereco : this.endereco.getId())
                         .build())
                 .build();
     }
