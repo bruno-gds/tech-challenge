@@ -41,13 +41,13 @@ public class EnderecoController {
 	private RemoverEnderecoUseCase removerEnderecoUseCase;
 
 	@ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("enderecos")
+    @PostMapping("usuarios/{idUsuario}/enderecos")
     public Long criar(
-    		@Valid  
-    		@RequestBody(required = true) EnderecoJson enderecoJson) {
+    		@PathVariable(name = "idUsuario", required = true) Long idUsuario, 
+    		@Valid @RequestBody(required = true) EnderecoJson enderecoJson) {
     	log.trace("Start enderecoJson={}", enderecoJson);
 
-    	Endereco endereco = enderecoJson.mapearParaEnderecoDomain(null);
+    	Endereco endereco = enderecoJson.mapearParaEnderecoDomain(null, idUsuario);
         Long id = criarAlterarEnderecoUseCase.criar(endereco);
         
         log.trace("End id={}", id);
@@ -55,13 +55,14 @@ public class EnderecoController {
     }
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PutMapping("enderecos/{id}")
+	@PutMapping("usuarios/{idUsuario}/enderecos/{id}")
 	public void alterar(
 			@PathVariable(name = "id", required = true) Long id, 
+			@PathVariable(name = "idUsuario", required = true) Long idUsuario, 
 			@Valid @RequestBody(required = true) EnderecoJson enderecoJson) {
 		log.trace("Start enderecoJson={}", enderecoJson);
 		
-		Endereco endereco = enderecoJson.mapearParaEnderecoDomain(id);
+		Endereco endereco = enderecoJson.mapearParaEnderecoDomain(id, idUsuario);
 		
 		criarAlterarEnderecoUseCase.alterar(endereco);
 		

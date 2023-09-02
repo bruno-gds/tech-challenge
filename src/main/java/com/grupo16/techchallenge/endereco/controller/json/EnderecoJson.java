@@ -48,9 +48,9 @@ public class EnderecoJson {
 	
 	private UsuarioJson usuario;
 	
-    public Endereco mapearParaEnderecoDomain(Long id) {
+    public Endereco mapearParaEnderecoDomain(Long id, Long idUsuario) {
     	Usuario usuario = Usuario.builder()
-    			.id(this.usuario.getId())
+    			.id(idUsuario != null ? idUsuario : this.usuario.getId())
     			.build();
     	
         return Endereco.builder()

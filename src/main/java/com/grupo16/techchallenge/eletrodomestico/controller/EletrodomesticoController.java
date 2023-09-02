@@ -59,8 +59,7 @@ public class EletrodomesticoController {
 			@RequestParam(name = "nome", required = false) String nome,
 			@RequestParam(name = "modelo", required = false) String modelo,
 			@RequestParam(name = "marca", required = false) String marca,
-			@RequestParam(name = "potencia", required = false) Long potencia
-			) {
+			@RequestParam(name = "potencia", required = false) Long potencia) {
 		log.trace("Start idUsuario={}, nome={}, modelo={}, marca={}, potencia={}", idUsuario, nome, modelo, marca, potencia);
 
 		var eletrodomestico = obterEletrodomesticoUseCase.buscaFiltrada(idUsuario, nome, modelo, marca, potencia);
