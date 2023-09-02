@@ -84,14 +84,14 @@ public class EletrodomesticoController {
 	}
 
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PutMapping("enderecos/{idEndereco}/eletrodomesticos/{id}")
+	@PutMapping("usuarios/{idUsuario}/eletrodomesticos/{idEletrodomestico}")
 	public void alterar(
-			@PathVariable(name = "id") Long id,
-			@PathVariable(name = "idEndereco", required = true) Long idEndereco,
+			@PathVariable(name = "idEletrodomestico") Long idEletrodomestico,
+			@PathVariable(name = "idUsuario", required = true) Long idUsuario,
 			@Valid @RequestBody EletrodomesticoJson eletrodomesticoJson) {
 		log.trace("Start eletrodomesticoJson={}", eletrodomesticoJson);
 
-		Eletrodomestico eletrodomestico = eletrodomesticoJson.mapearParaEletrodomesticoDomain(id,idEndereco);
+		Eletrodomestico eletrodomestico = eletrodomesticoJson.mapearParaEletrodomesticoDomain(idEletrodomestico,idUsuario);
 
 		criarAlterarEletrodomesticoUseCase.alterar(eletrodomestico);
 
@@ -99,17 +99,18 @@ public class EletrodomesticoController {
 	}
 
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@DeleteMapping("{id}")
+	@DeleteMapping("usuarios/{idUsuario}/eletrodomesticos/{idEletrodomestico}")
 	public void remover(
-			@PathVariable(name = "id") Long id) {
-		log.trace("Start id={}", id);
+			@PathVariable(name = "idUsuario", required = true) Long idUsuario,
+			@PathVariable(name = "idEletrodomestico") Long idEletrodomestico) {
+		log.trace("Start idUsuario={}, idEletrodomestico={}", idUsuario, idEletrodomestico);
 
-		removerEletrodomesticoUseCase.remover(id);
+		removerEletrodomesticoUseCase.remover(idEletrodomestico, idUsuario);
 
 		log.trace("End");
 	}
 
-	@PostMapping("{id}/consumos")
+	@PostMapping("eletrodomesticos/{id}/consumos")
 	public Long registrarConsumo(
 			@PathVariable(name = "id", required = true) Long eletrodomesticoId,
 			@RequestBody(required = true) LeituraConsumoJson leituraConsumoJson ) {
@@ -127,7 +128,7 @@ public class EletrodomesticoController {
 		return registroId;
 	}
 	
-	@GetMapping("{id}/consumo-total-periodo")
+	@GetMapping("eletrodomesticos/{id}/consumo-total-periodo")
 	public String pesquisarRegistroConsumo(
 			@PathVariable(name = "id", required = true) Long eletrodomesticoId,
 			@DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) @RequestParam(name = "dataInicio", required = false) LocalDateTime dataInicio,

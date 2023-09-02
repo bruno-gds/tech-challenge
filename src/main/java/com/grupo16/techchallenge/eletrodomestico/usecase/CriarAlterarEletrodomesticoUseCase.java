@@ -36,7 +36,8 @@ public class CriarAlterarEletrodomesticoUseCase {
     public void alterar(Eletrodomestico eletrodomestico) {
         log.trace("Start eletrodomestico={}", eletrodomestico);
 
-        var eletrodomesticoEncontrado = obterEletrodomesticoUseCase.obterPeloIdEEnderecoId(eletrodomestico.getId(), eletrodomestico.getEndereco().getId());
+        var eletrodomesticoEncontrado = 
+        		obterEletrodomesticoUseCase.obterPeloIdAndUsuarioId(eletrodomestico.getId(), eletrodomestico.getEndereco().getUsuario().getId());
 
         Eletrodomestico eletrodomesticoToUpdate = Eletrodomestico.builder()
                 .id(eletrodomesticoEncontrado.getId())

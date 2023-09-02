@@ -15,12 +15,6 @@ import com.grupo16.techchallenge.eletrodomestico.usecase.exception.Eletrodomesti
 
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * @author Bruno Gomes Damascena dos santos (bruno-gds) < brunog.damascena@gmail.com >
- * Date: 21/08/2023
- * Project Name: tech-challenge
- */
-
 @Slf4j
 @Service
 public class ObterEletrodomesticoUseCase {
@@ -28,10 +22,10 @@ public class ObterEletrodomesticoUseCase {
     @Autowired
     private EletrodomesticoRepositoryGateway eletrodomesticoRepository;
 
-    public Eletrodomestico obterPeloIdEEnderecoId(Long id, Long idEndereco) {
-        log.trace("Start idEletodomestico={}, idEndereco={}", id, idEndereco);
+    public Eletrodomestico obterPeloIdAndUsuarioId(Long id, Long idUsuario) {
+        log.trace("Start idEletodomestico={}, idEndereco={}", id, idUsuario);
 
-        Optional<Eletrodomestico> eletrodomesticoOp = eletrodomesticoRepository.obterIdEIdEndereco(id, idEndereco);
+        Optional<Eletrodomestico> eletrodomesticoOp = eletrodomesticoRepository.obterIdAndUsuarioId(id, idUsuario);
         checarSeEletrodomesticoFoiEncontrado(eletrodomesticoOp);
 
         log.trace("End eletrodomestico={}", eletrodomesticoOp.get());
@@ -75,10 +69,4 @@ public class ObterEletrodomesticoUseCase {
         }
     }
 
-    private void checarSeListaDeEntityExisteMapearParaDomain(Optional<List<Eletrodomestico>> eletrodomesticoOp) {
-        if(eletrodomesticoOp.isEmpty()) {
-            log.warn("Eletrodomestico não encontrado.");
-            throw new EletrodomesticoNaoEncontradoException();
-        }
-    }
 }

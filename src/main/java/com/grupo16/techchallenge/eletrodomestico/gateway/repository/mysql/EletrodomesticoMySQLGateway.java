@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,7 @@ import com.grupo16.techchallenge.eletrodomestico.gateway.EletrodomesticoReposito
 import com.grupo16.techchallenge.eletrodomestico.gateway.exception.ErrorToAccessDatabaseException;
 import com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.entity.EletrodomesticoEntity;
 import com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.repository.EletrodomesticoRepository;
+import com.grupo16.techchallenge.endereco.gateway.exception.ErroAoExcluirEnderecoException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,11 +44,11 @@ public class EletrodomesticoMySQLGateway implements EletrodomesticoRepositoryGat
     }
 
     @Override
-    public Optional<Eletrodomestico> obterIdEIdEndereco(Long id, Long enderecoId) {
+    public Optional<Eletrodomestico> obterIdAndUsuarioId(Long id, Long usuarioId) {
         try {
-            log.trace("Start eletrodomesticoId={}, enderecoId={}", id, enderecoId);
+            log.trace("Start eletrodomesticoId={}, usuarioId={}", id, usuarioId);
 
-            Optional<EletrodomesticoEntity> entityOp = eletrodomesticoRepository.findByIdAndEnderecoId(id, enderecoId);
+            Optional<EletrodomesticoEntity> entityOp = eletrodomesticoRepository.findByIdAndEnderecoUsuarioId(id, usuarioId);
             Optional<Eletrodomestico> eletrodomesticoOp = checarSeEntityExisteMapearParaDomain(entityOp);
 
             log.trace("End eletrodomesticoOp={}", eletrodomesticoOp);
@@ -112,6 +114,9 @@ public class EletrodomesticoMySQLGateway implements EletrodomesticoRepositoryGat
             eletrodomesticoRepository.deleteById(id);
 
             log.trace("End");
+		} catch (DataIntegrityViolationException e) {
+			log.error(e.getMessage(), e);
+			throw new ErroAoExcluirEnderecoException();
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             throw new ErrorToAccessDatabaseException();

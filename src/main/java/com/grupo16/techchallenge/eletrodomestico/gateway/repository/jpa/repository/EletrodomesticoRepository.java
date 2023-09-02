@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface EletrodomesticoRepository extends JpaRepository<EletrodomesticoEntity, Long> {
 
-    Optional<EletrodomesticoEntity> findByIdAndEnderecoId(Long id, Long idEndereco);
+    Optional<EletrodomesticoEntity> findByIdAndEnderecoUsuarioId(Long id, Long idEndereco);
 
     @Query("SELECT eletrodomestico FROM EletrodomesticoEntity eletrodomestico " +
             "INNER JOIN EnderecoEntity endereco ON eletrodomestico.endereco.id = endereco.id " +

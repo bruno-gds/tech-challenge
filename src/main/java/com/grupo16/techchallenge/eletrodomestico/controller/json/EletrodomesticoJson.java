@@ -3,6 +3,7 @@ package com.grupo16.techchallenge.eletrodomestico.controller.json;
 import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
 import com.grupo16.techchallenge.endereco.controller.json.EnderecoJson;
 import com.grupo16.techchallenge.endereco.domain.Endereco;
+import com.grupo16.techchallenge.usuario.domain.Usuario;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -53,8 +54,7 @@ public class EletrodomesticoJson {
                 .build();
     }
 
-
-    public Eletrodomestico mapearParaEletrodomesticoDomain(Long id, Long idEndereco) {
+    public Eletrodomestico mapearParaEletrodomesticoDomain(Long id, Long idUsuario) {
         return Eletrodomestico.builder()
                 .id(id != null ? id : this.id)
                 .nome(nome)
@@ -64,7 +64,7 @@ public class EletrodomesticoJson {
                 .potencia(potencia)
                 .voltagem(voltagem)
                 .endereco(Endereco.builder()
-                        .id(idEndereco != null ? idEndereco : this.endereco.getId())
+                        .usuario(Usuario.builder().id(idUsuario).build())
                         .build())
                 .build();
     }
