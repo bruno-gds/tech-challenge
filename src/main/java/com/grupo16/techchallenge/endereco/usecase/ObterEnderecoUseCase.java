@@ -30,15 +30,15 @@ public class ObterEnderecoUseCase {
 		return enderecoOp.get();
 	}
 	
-	public Endereco obter(Long id) {
-		log.trace("Start id={}", id);
-		
-		Optional<Endereco> enderecoOp = enderecoRepositoryGateway.obter(id);
-		checarSeEnderecoFoiEncontrado(enderecoOp);
-		
-		log.trace("End endereco={}", enderecoOp.get());
-		return enderecoOp.get();
-	}
+//	public Endereco obter(Long id) {
+//		log.trace("Start id={}", id);
+//		
+//		Optional<Endereco> enderecoOp = enderecoRepositoryGateway.obter(id);
+//		checarSeEnderecoFoiEncontrado(enderecoOp);
+//		
+//		log.trace("End endereco={}", enderecoOp.get());
+//		return enderecoOp.get();
+//	}
 	
 	public List<Endereco> pesquisar(PesquisarEnderecoParamsDto paramsDto) {
 		log.trace("Start paramsDto={}", paramsDto);

@@ -18,10 +18,10 @@ public class RemoverEnderecoUseCase {
 	@Autowired
 	private ObterEnderecoUseCase obterEnderecoUseCase;
 
-	public void remover(Long id) {
+	public void remover(Long id, Long idUsuario) {
 		log.trace("Start id={}", id);
 
-		Endereco endereco = obterEnderecoUseCase.obter(id);
+		Endereco endereco = obterEnderecoUseCase.obterByIdAndUsuarioId(id,idUsuario);
 		
 		enderecoRepository.remover(endereco.getId());
 		

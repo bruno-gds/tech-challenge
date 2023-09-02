@@ -30,30 +30,30 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping()
 public class EnderecoController {
-	
+
 	@Autowired	
-    private CriarAlterarEnderecoUseCase criarAlterarEnderecoUseCase;
+	private CriarAlterarEnderecoUseCase criarAlterarEnderecoUseCase;
 
 	@Autowired	
 	private ObterEnderecoUseCase obterEnderecoUseCase;
-	
+
 	@Autowired	
 	private RemoverEnderecoUseCase removerEnderecoUseCase;
 
 	@ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("usuarios/{idUsuario}/enderecos")
-    public Long criar(
-    		@PathVariable(name = "idUsuario", required = true) Long idUsuario, 
-    		@Valid @RequestBody(required = true) EnderecoJson enderecoJson) {
-    	log.trace("Start enderecoJson={}", enderecoJson);
+	@PostMapping("usuarios/{idUsuario}/enderecos")
+	public Long criar(
+			@PathVariable(name = "idUsuario", required = true) Long idUsuario, 
+			@Valid @RequestBody(required = true) EnderecoJson enderecoJson) {
+		log.trace("Start enderecoJson={}", enderecoJson);
 
-    	Endereco endereco = enderecoJson.mapearParaEnderecoDomain(null, idUsuario);
-        Long id = criarAlterarEnderecoUseCase.criar(endereco);
-        
-        log.trace("End id={}", id);
-        return id;
-    }
-	
+		Endereco endereco = enderecoJson.mapearParaEnderecoDomain(null, idUsuario);
+		Long id = criarAlterarEnderecoUseCase.criar(endereco);
+
+		log.trace("End id={}", id);
+		return id;
+	}
+
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@PutMapping("usuarios/{idUsuario}/enderecos/{id}")
 	public void alterar(
@@ -61,25 +61,26 @@ public class EnderecoController {
 			@PathVariable(name = "idUsuario", required = true) Long idUsuario, 
 			@Valid @RequestBody(required = true) EnderecoJson enderecoJson) {
 		log.trace("Start enderecoJson={}", enderecoJson);
-		
+
 		Endereco endereco = enderecoJson.mapearParaEnderecoDomain(id, idUsuario);
-		
+
 		criarAlterarEnderecoUseCase.alterar(endereco);
-		
+
 		log.trace("End");
 	}
-	
+
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@DeleteMapping("enderecos/{id}")
+	@DeleteMapping("usuarios/{idUsuario}/enderecos/{id}")
 	public void remover(
-			@PathVariable(name = "id", required = true) Long id) {
+			@PathVariable(name = "id", required = true) Long id,
+			@PathVariable(name = "idUsuario", required = true) Long idUsuario) { 
 		log.trace("Start id={}", id);
-		
-		removerEnderecoUseCase.remover(id);
-				
+
+		removerEnderecoUseCase.remover(id, idUsuario);
+
 		log.trace("End");
 	}
-	
+
 	@GetMapping("usuarios/{idUsuario}/enderecos")
 	public List<EnderecoJson> pesquisar(
 			@PathVariable(name = "idUsuario", required = true) Long idUsuario,
@@ -89,23 +90,23 @@ public class EnderecoController {
 			@RequestParam(name = "estado", required = false) String estado,
 			@RequestParam(name = "cep", required = false) String cep){
 		log.trace("Start idUsuario={}, rua={}, bairro={}, cidade={}, estado={}, cep={}", idUsuario, rua, bairro, cidade, estado, cep);
-		
+
 		PesquisarEnderecoParamsDto paramsDto = PesquisarEnderecoParamsDto.builder()
-					.idUsuario(idUsuario)
-					.rua(rua)
-					.bairro(bairro)
-					.cidade(cidade)
-					.estado(estado == null ? null : Estado.valueOf(estado))
-					.cep(cep)
+				.idUsuario(idUsuario)
+				.rua(rua)
+				.bairro(bairro)
+				.cidade(cidade)
+				.estado(estado == null ? null : Estado.valueOf(estado))
+				.cep(cep)
 				.build();
-		
+
 		List<Endereco> enderecos = obterEnderecoUseCase.pesquisar(paramsDto);
-		
+
 		List<EnderecoJson> enderecosJson = enderecos.stream().map(EnderecoJson::new).toList();
-				
+
 		log.trace("End enderecosJson={}", enderecosJson);
-		
+
 		return enderecosJson;
 	}
-	
+
 }
