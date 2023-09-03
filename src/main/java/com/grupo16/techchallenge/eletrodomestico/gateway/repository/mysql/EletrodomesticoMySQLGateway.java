@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
 import com.grupo16.techchallenge.eletrodomestico.gateway.EletrodomesticoRepositoryGateway;
+import com.grupo16.techchallenge.eletrodomestico.gateway.exception.ErroAoExcluirEletrodomesticoException;
 import com.grupo16.techchallenge.eletrodomestico.gateway.exception.ErrorToAccessDatabaseException;
 import com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.entity.EletrodomesticoEntity;
 import com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.repository.EletrodomesticoRepository;
@@ -116,7 +117,7 @@ public class EletrodomesticoMySQLGateway implements EletrodomesticoRepositoryGat
             log.trace("End");
 		} catch (DataIntegrityViolationException e) {
 			log.error(e.getMessage(), e);
-			throw new ErroAoExcluirEnderecoException();
+			throw new ErroAoExcluirEletrodomesticoException();
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             throw new ErrorToAccessDatabaseException();

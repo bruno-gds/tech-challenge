@@ -14,4 +14,6 @@ public interface LeituraConsumoRepositoryGateway {
 
 	Optional<LeituraConsumo> obterUltimaLeituraPorEletrodomesticoId(Long eletrodomesticoId);
 
+	void remover(Long idEletrodomestico);
+
 }

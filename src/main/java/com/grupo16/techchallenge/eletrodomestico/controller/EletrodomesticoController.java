@@ -27,6 +27,7 @@ import com.grupo16.techchallenge.eletrodomestico.usecase.ObterConsumoUseCase;
 import com.grupo16.techchallenge.eletrodomestico.usecase.ObterEletrodomesticoUseCase;
 import com.grupo16.techchallenge.eletrodomestico.usecase.RegistrarConsumoUseCase;
 import com.grupo16.techchallenge.eletrodomestico.usecase.RemoverEletrodomesticoUseCase;
+import com.grupo16.techchallenge.eletrodomestico.usecase.RemoverRegistroConsumoUseCase;
 
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +46,9 @@ public class EletrodomesticoController {
 
 	@Autowired
 	private RegistrarConsumoUseCase registrarConsumoEletrodomesticoUseCase;
+
+	@Autowired
+	private RemoverRegistroConsumoUseCase removerRegistroConsumoUseCase;
 	
 	@Autowired
 	private ObterEletrodomesticoUseCase obterEletrodomesticoUseCase;
@@ -126,6 +130,17 @@ public class EletrodomesticoController {
 
 		log.trace("End registroId={}",registroId);
 		return registroId;
+	}
+	
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@DeleteMapping("usuarios/{idUsuario}/eletrodomesticos/{idEletrodomestico}/consumos")
+	public void removerConsumo(
+			@PathVariable(name = "idUsuario", required = true) Long idUsuario,
+			@PathVariable(name = "idEletrodomestico", required = true) Long eletrodomesticoId) {
+		log.trace("Start idUsuario={}, eletrodomesticoId={}", idUsuario, eletrodomesticoId);
+		
+		removerRegistroConsumoUseCase.remover(eletrodomesticoId, idUsuario);
+		log.trace("End");
 	}
 	
 	@GetMapping("eletrodomesticos/{id}/consumo-total-periodo")

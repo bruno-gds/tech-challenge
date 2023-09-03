@@ -13,6 +13,7 @@ import com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.entity.L
 import com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.repository.LeituraConsumoRepository;
 import com.grupo16.techchallenge.endereco.gateway.exception.ErrorToAccessDatabaseException;
 
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -79,6 +80,22 @@ public class LeituraConsumoMySQLGateway implements LeituraConsumoRepositoryGatew
 			log.error(e.getMessage(), e);
 			throw new ErrorToAccessDatabaseException();			
 		}
+	}
+
+	@Override
+	@Transactional
+	public void remover(Long idEletrodomestico) {
+		try {
+			log.trace("Start idEletrodomestico={}", idEletrodomestico);
+			
+			leituraConsumoRepository.deleteByEletrodomesticoId(idEletrodomestico);
+			
+			log.trace("End");
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			throw new ErrorToAccessDatabaseException();
+		}
+		
 	}
 	
 }

@@ -15,5 +15,7 @@ public interface LeituraConsumoRepository extends JpaRepository<LeituraConsumoEn
 
 	Optional<LeituraConsumoEntity> findFirstByEletrodomesticoIdOrderByDataHoraDesc(Long eletrodomesticoId);
 
+	void deleteByEletrodomesticoId(Long idEletrodomestico);
+
 
 }
