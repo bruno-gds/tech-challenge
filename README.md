@@ -460,7 +460,7 @@ curl --location 'http://localhost:8080/usuarios/23/enderecos' \
 ### ``PUT``
 
 ```
-	usuarios/{idUsuario}/enderecos/{id}
+	usuarios/{idUsuario}/enderecos/{idEndereco}
 ```
 <details>
   <summary>Exemplo Request Body:</summary>
@@ -577,7 +577,7 @@ curl --location 'http://localhost:8080/usuarios/21/enderecos?rua=Travessa&bairro
 ### ``DELETE``
 
 ```
-	usuarios/{idUsuario}/enderecos/{id}
+	usuarios/{idUsuario}/enderecos/{idEndereco}
 ```
 
 <details>

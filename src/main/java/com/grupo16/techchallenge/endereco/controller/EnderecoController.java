@@ -45,7 +45,7 @@ public class EnderecoController {
 	public Long criar(
 			@PathVariable(name = "idUsuario", required = true) Long idUsuario, 
 			@Valid @RequestBody(required = true) EnderecoJson enderecoJson) {
-		log.trace("Start enderecoJson={}", enderecoJson);
+		log.trace("Start idUsuario={}, enderecoJson={}", idUsuario, enderecoJson);
 
 		Endereco endereco = enderecoJson.mapearParaEnderecoDomain(null, idUsuario);
 		Long id = criarAlterarEnderecoUseCase.criar(endereco);
@@ -55,14 +55,14 @@ public class EnderecoController {
 	}
 
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@PutMapping("usuarios/{idUsuario}/enderecos/{id}")
+	@PutMapping("usuarios/{idUsuario}/enderecos/{idEndereco}")
 	public void alterar(
-			@PathVariable(name = "id", required = true) Long id, 
+			@PathVariable(name = "idEndereco", required = true) Long idEndereco, 
 			@PathVariable(name = "idUsuario", required = true) Long idUsuario, 
 			@Valid @RequestBody(required = true) EnderecoJson enderecoJson) {
-		log.trace("Start enderecoJson={}", enderecoJson);
+		log.trace("Start idEndereco={}, idUsuario={}, enderecoJson={}",idEndereco, idUsuario, enderecoJson);
 
-		Endereco endereco = enderecoJson.mapearParaEnderecoDomain(id, idUsuario);
+		Endereco endereco = enderecoJson.mapearParaEnderecoDomain(idEndereco, idUsuario);
 
 		criarAlterarEnderecoUseCase.alterar(endereco);
 
@@ -70,13 +70,13 @@ public class EnderecoController {
 	}
 
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	@DeleteMapping("usuarios/{idUsuario}/enderecos/{id}")
+	@DeleteMapping("usuarios/{idUsuario}/enderecos/{idEndereco}")
 	public void remover(
-			@PathVariable(name = "id", required = true) Long id,
+			@PathVariable(name = "idEndereco", required = true) Long idEndereco,
 			@PathVariable(name = "idUsuario", required = true) Long idUsuario) { 
-		log.trace("Start id={}", id);
+		log.trace("Start idEndereco={}, idUsuario={}", idEndereco, idUsuario);
 
-		removerEnderecoUseCase.remover(id, idUsuario);
+		removerEnderecoUseCase.remover(idEndereco, idUsuario);
 
 		log.trace("End");
 	}
