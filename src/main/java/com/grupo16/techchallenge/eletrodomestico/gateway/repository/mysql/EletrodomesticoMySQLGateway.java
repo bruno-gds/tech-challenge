@@ -5,8 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import com.grupo16.techchallenge.eletrodomestico.domain.Eletrodomestico;
@@ -15,7 +13,6 @@ import com.grupo16.techchallenge.eletrodomestico.gateway.exception.ErroAoExcluir
 import com.grupo16.techchallenge.eletrodomestico.gateway.exception.ErrorToAccessDatabaseException;
 import com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.entity.EletrodomesticoEntity;
 import com.grupo16.techchallenge.eletrodomestico.gateway.repository.jpa.repository.EletrodomesticoRepository;
-import com.grupo16.techchallenge.endereco.gateway.exception.ErroAoExcluirEnderecoException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -70,21 +67,6 @@ public class EletrodomesticoMySQLGateway implements EletrodomesticoRepositoryGat
 
             log.trace("End eletrodomesticoOp={}", eletrodomesticoOp);
             return eletrodomesticoOp;
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            throw new ErrorToAccessDatabaseException();
-        }
-    }
-
-    @Override
-    public Page<Eletrodomestico> obterTodos(PageRequest pageRequest) {
-        try {
-            log.trace("Start pageRequest={}", pageRequest);
-
-            var entity = eletrodomesticoRepository.findAll(pageRequest);
-
-            log.trace("End eletrodomesticos={}", entity);
-            return entity.map(EletrodomesticoEntity::mapToDomain);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             throw new ErrorToAccessDatabaseException();
