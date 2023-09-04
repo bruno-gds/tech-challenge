@@ -924,7 +924,7 @@ curl --location 'http://localhost:8080/eletrodomesticos/27/consumos' \
 `*Para buscar Leitura de Consumo do Eletrodoméstico`
 
 ```
-	eletrodomesticos/{id}/consumo-total-periodo"
+	eletrodomesticos/{id}/consumo-total-periodo
 ```
 
 <details>
